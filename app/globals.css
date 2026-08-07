@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: "";
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+
+  color: #fafafa;
+  background-color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: "";
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* reset styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
