@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Merienda } from "next/font/google";
 import "./globals.css";
 import "./container.css";
 
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
-  weight: ["400", "700", "800"],
+  weight: ["400", "600", "700", "800"],
   display: "swap",
 });
-
+const merienda = Merienda({
+  variable: "--font-merienda",
+  subsets: ["latin"],
+  weight: ["700", "800"],
+  display: "swap",
+});
 export const metadata: Metadata = {
   title: "Harmoniq",
   description:
@@ -32,7 +37,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${manrope.variable}`}>
+    <html
+  lang="en"
+  className={`${manrope.variable} ${merienda.variable}`}
+>
       <body>{children}</body>
     </html>
   );
