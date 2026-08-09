@@ -143,6 +143,7 @@
 
 @media (min-width: 1440px) {
     .card {
+        min-width: 392px;
         max-width: 392px;
     }
         .saveButton {

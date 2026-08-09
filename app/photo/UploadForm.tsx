@@ -65,7 +65,7 @@ export default function UploadForm() {
   return (
     <section className={styles.section}>
       <Toaster position="top-right" />
-      <div className={styles.container}>
+      <div className="container">
         <div className={styles.card}>
           <button
             type="button"
