@@ -5,11 +5,12 @@ import styles from "./AuthorsItem.module.css";
 
 type AuthorsItemProps = {
   author: Author;
+  ref?: React.Ref<HTMLLIElement>;
 };
 
-const AuthorsItem = ({ author }: AuthorsItemProps) => {
+const AuthorsItem = ({ author, ref }: AuthorsItemProps) => {
   return (
-    <li className={styles.item}>
+    <li className={styles.item} ref={ref}>
       <Link href={`/authors/${author._id}`} className={styles.link}>
         <Image
           src={author.avatarUrl}

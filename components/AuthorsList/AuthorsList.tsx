@@ -2,6 +2,7 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useRef } from "react";
 import AuthorsItem from "../AuthorsItem/AuthorsItem";
 import { AuthorsResponse } from "@/types/author";
 import styles from "./AuthorsList.module.css";
@@ -16,7 +17,6 @@ const fetchAuthors = async (page: number): Promise<AuthorsResponse> => {
 };
 
 const AuthorsList = () => {
-
  const newItemsStartRef = useRef<HTMLLIElement | null>(null);
 
  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =

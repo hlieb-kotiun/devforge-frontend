@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import AuthorsList from "@/components/AuthorsList/AuthorsList";
+
+export const metadata: Metadata = {
+  title: "Authors | Harmoniq",
+  description:
+    "Discover the authors behind Harmoniq's articles and explore their work.",
+  openGraph: {
+    title: "Authors | Harmoniq",
+    description:
+      "Discover the authors behind Harmoniq's articles and explore their work.",
+    url: "http://localhost:3000/authors",
+  },
+};
 
 const AuthorsPage = () => {
   return (
