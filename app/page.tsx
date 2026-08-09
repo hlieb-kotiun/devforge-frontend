@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./page.module.css";
+import PopularArticles from "@/components/popularArticles/PopularArticles";
 
 export default function HomePage() {
   return (
@@ -51,6 +52,7 @@ export default function HomePage() {
           />
         </picture>
       </section>
+      <PopularArticles />
     </main>
   );
 }
