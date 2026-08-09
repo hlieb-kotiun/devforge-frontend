@@ -1,10 +1,24 @@
+import type { Metadata } from 'next';
+import UploadForm from './UploadForm';
+
+export const metadata: Metadata = {
+  title: 'Upload Photo | Harmoniq',
+  description: 'Upload your profile photo to complete your Harmoniq profile.',
+  openGraph: {
+    title: 'Upload Photo | Harmoniq',
+    description: 'Upload your profile photo to complete your Harmoniq profile.',
+    type: 'website',
+  },
+};
+
 const UploadPhoto = () => {
   return (
-    <section className="">
-      <div className={`container`}>
-        {/* Test h1 tag, must be deleted */} <h1>UploadPhoto</h1>
+    <section>
+      <div className="container">
+        <UploadForm />
       </div>
     </section>
   );
 };
+
 export default UploadPhoto;
