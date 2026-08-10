@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
-import styles from './UploadPhoto.module.css';
+import styles from './UploadForm.module.css';
 
 interface FormValues {
   file: File | null;
