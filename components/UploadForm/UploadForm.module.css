@@ -145,6 +145,7 @@
     .card {
         min-width: 392px;
         max-width: 392px;
+        margin: 0 auto;
     }
         .saveButton {
             min-width: 328px;
