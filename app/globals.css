@@ -19,13 +19,13 @@ html {
 }
 
 body {
-  min-width: 100vw;
+  width: 100%;
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
   font-family: var(--font-manrope), sans-serif;
   color: var(--black);
-  background-color: var(--whites);
+  background-color: var(--white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
