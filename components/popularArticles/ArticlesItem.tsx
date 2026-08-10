@@ -1,0 +1,33 @@
+import React from 'react';
+import Image from 'next/image';
+import css from './PopularArticles.module.css'
+import type { Article } from '@/types/article';
+
+const ArticlesItem: React.FC<{ article: Article }> = ({ article }) => {
+  return (
+    <li className={css.popularitem}>
+      <Image
+        src={article.img.startsWith('http')
+          ? article.img
+          : `http://localhost:5000${article.img}`}
+        alt={article.title}
+        width={337}
+        height={233}
+        className={css.cardImage}
+      />
+
+      <div className={css.popularCardContent}>
+        <p className={css.author}>
+            {article.ownerId?.name || 'Автор невідомий'}
+        </p>
+        <h3 className={css.title}>{article.title}</h3>
+        <p className={css.desc}>{article.desc}</p>
+      </div>
+      <div>
+        {/* кнопка load more */}
+        </div>
+    </li>
+  );
+};
+
+export default ArticlesItem;

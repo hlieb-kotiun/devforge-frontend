@@ -1,51 +1,25 @@
-"use client";
-import React, { useEffect, useState } from 'react';
-import PopularArticlesItem from './PopularArticlesItem';
+import { getPopularArticles } from '@/lib/api';
+import ArticlesItem from './ArticlesItem';
 import Link from 'next/link';
+import css from './PopularArticles.module.css'
+import type { Article } from '@/types/article';
 
-interface Article {
-  _id: string;
-  image?: string;
-  author: string;
-  title: string;
-  description: string;
-}
-
-const PopularArticles: React.FC = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const res = await fetch('http://localhost:5000/articles?popular=true');
-        const data: Article[] = await res.json();
-        setArticles(data);
-      } catch (error) {
-        console.error('Failed to fetch articles:', error);
-      }
-    };
-    fetchArticles();
-  }, []);
+export default async function PopularArticles() {
+  const data = await getPopularArticles(4);
 
   return (
-    <section className="popular-articles">
-      <div className="container">
-        <div className="popular-header">
-          <h2 className="popular-title">Popular Articles</h2>
-          <Link href="/articles" className="popular-link">
-            Go to all Articles
-          </Link>
-        </div>
-
-        <div className="popular-list">
-          {articles.map(article => (
-            <PopularArticlesItem key={article._id} {...article} />
-          ))}
-        </div>
+    <section className="container">
+      <div className={css.popularcontainer}>
+        <h2 className={css.populartitle}>Popular Articles</h2>
+        {/* тут додати іконку */}
+        <Link className={css.popularlink } href="/articles">Go to all Articles</Link>
       </div>
+
+      <ul className={css.popularlist}>
+        {data.articles.map((article: Article) => (
+          <ArticlesItem key={article._id} article={article} />
+        ))}
+      </ul>
     </section>
   );
-};
-
-export default PopularArticles;
-
+}
