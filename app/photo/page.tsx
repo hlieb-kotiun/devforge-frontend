@@ -1,10 +1,16 @@
-const UploadPhoto = () => {
-  return (
-    <section className="">
-      <div className={`container`}>
-        {/* Test h1 tag, must be deleted */} <h1>UploadPhoto</h1>
-      </div>
-    </section>
-  );
+import type { Metadata } from 'next';
+import UploadPhoto from '../../components/UploadPhoto/UploadPhoto';
+
+export const metadata: Metadata = {
+  title: 'Upload Photo | Harmoniq',
+  description: 'Upload your profile photo to complete your Harmoniq profile.',
+  openGraph: {
+    title: 'Upload Photo | Harmoniq',
+    description: 'Upload your profile photo to complete your Harmoniq profile.',
+    type: 'website',
+  },
 };
-export default UploadPhoto;
+
+export default function UploadPhotoPage() {
+  return <UploadPhoto />;
+}
