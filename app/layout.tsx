@@ -34,9 +34,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${manrope.variable}`}>
-      <TanStackProvider>
-        <body>{children}</body>
-      </TanStackProvider>
+      <body>
+        <TanStackProvider>{children}</TanStackProvider>
+      </body>
     </html>
   );
 }
