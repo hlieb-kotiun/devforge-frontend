@@ -46,17 +46,7 @@ export default function HomePage() {
               media="(min-width: 768px)"
               srcSet="/hero-tablet.png"
             />
-
-<<<<<<< HEAD
-          <img
-            src="/hero-mobile.png"
-            alt="Harmoniq community"
-            className={styles.heroImage}
-          />
-        </picture>
-      </section>
-      <PopularArticles />
-=======
+        
             <img
               src="/hero-mobile.png"
               alt="Harmoniq community"
@@ -66,7 +56,7 @@ export default function HomePage() {
         </section>
       </div>
       <AboutUs />
->>>>>>> main
-    </main>
+      <PopularArticles/>
+    </main>     
   );
 }

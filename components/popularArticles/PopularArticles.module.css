@@ -1,6 +1,12 @@
+.popularsection {
+    padding: 0 16px;
+    width: 100%;
+}
+
 .popularcontainer {
-  width: 361px;
-  padding-bottom: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 auto;
 }
 
 .populartitle {
@@ -14,21 +20,20 @@
     font-weight: 700;
     font-size: 16px;
     color: var(--green-darker);
+    margin-bottom: 16px;
 }
 
 .popularlist {
     display: flex;
     flex-direction: column;
-    gap: 23px;
+    gap: 24px; 
     padding-bottom: 72px;
 }
 
 .popularitem {
     overflow: hidden;
     border-radius: 32px;
-    padding: 12px;
-    width: 361px;
-    height: 492px;
+    padding: 12px;  
     min-width: 320px;
     background: var(--light-green);
 }
@@ -38,11 +43,17 @@
 }
 
 .popularCardContent {
-    width: 337px;
-    padding: 26.5px 12px;
+    width: 100%;
+    padding: 26.5px 0;
 }
 
-.title {
+.popularCardAuthor {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--black);
+}
+
+.popularCardTitle {
     font-weight: 700;
     font-size: 24px;
     color: var(--black);
@@ -55,7 +66,7 @@
     height: 70px;
 }
 
-.desc {
+.popularCardDesc {
     width: 100%;
     height: 50px;
     font-weight: 400;
@@ -67,4 +78,39 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+/* Tablet (768px) */
+@media (min-width: 768px) {
+    .popularsection {
+        padding: 72px 32px;
+    }
+
+    .popularcontainer {
+        width: 100%;
+        padding-bottom: 0;
+    }
+
+    .popularlink {
+        display: none;
+    }
+
+    .popularlist {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0;
+        width: 704px;
+    }
+
+    .popularitem {
+        width: calc((100% - 24px) / 2);
+        width: 340px;
+    }
+}
+
+
+/* Desktop (1440px) */
+@media (min-width: 1440px) {
+
 }

@@ -17,11 +17,11 @@ const ArticlesItem: React.FC<{ article: Article }> = ({ article }) => {
       />
 
       <div className={css.popularCardContent}>
-        <p className={css.author}>
+        <p className={css.popularCardAuthor}>
             {article.ownerId?.name || 'Автор невідомий'}
         </p>
-        <h3 className={css.title}>{article.title}</h3>
-        <p className={css.desc}>{article.desc}</p>
+        <h3 className={css.popularCardTitle}>{article.title}</h3>
+        <p className={css.popularCardDesc}>{article.desc}</p>
       </div>
       <div>
         {/* кнопка load more */}
