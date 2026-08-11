@@ -92,7 +92,7 @@ export default async function ArticlePage({
         <div className={styles.content}>
           <div className={styles.articleText}>
             {article.article
-              .split("/n")
+              .split("\n")
               .map((paragraph, index) => (
                 <p key={index}>{paragraph.trim()}</p>
               ))}
