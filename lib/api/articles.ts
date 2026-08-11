@@ -1,0 +1,46 @@
+const API_URL = "http://localhost:5000";
+
+export type Article = {
+  _id: string;
+  img: string;
+  title: string;
+  desc: string;
+  article: string;
+  rate: number;
+  ownerId: string;
+  date: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type ArticlesResponse = {
+  articles: Article[];
+  total: number;
+  page: number;
+  limit: number;
+};
+
+export async function getArticleById(id: string): Promise<Article> {
+  const response = await fetch(`${API_URL}/articles/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch article");
+  }
+
+  return response.json();
+}
+
+export async function getArticles(
+  page = 1,
+  limit = 20,
+): Promise<ArticlesResponse> {
+  const response = await fetch(
+    `${API_URL}/articles?page=${page}&limit=${limit}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch articles");
+  }
+
+  return response.json();
+}

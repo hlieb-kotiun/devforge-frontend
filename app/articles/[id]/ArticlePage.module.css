@@ -1,0 +1,176 @@
+.infoBlock {
+  width: 704px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 32px 32px 40px;
+  gap: 15px;
+
+  background-color: var(--light-green);
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.infoRow {
+  width: 640px;
+  min-height: 22px;
+
+  margin: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 100%;
+
+  color: var(--black);
+}
+
+.recommendationsTitle {
+  width: 640px;
+  min-height: 33px;
+
+  margin: 0;
+
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 100%;
+
+  color: var(--black);
+}
+
+.recommendations {
+  width: 640px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.recommendationCard {
+  box-sizing: border-box;
+
+  width: 640px;
+  min-height: 105px;
+
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  background-color: var(--white);
+  border-radius: 32px;
+  overflow: hidden;
+
+  color: var(--black);
+}
+
+.cardTop {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 56px;
+}
+
+.cardTop h3 {
+  margin: 0;
+
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 100%;
+
+  color: var(--black);
+}
+
+.recommendationCard p {
+  margin: 0;
+
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 155%;
+
+  color: var(--black);
+}
+
+.arrowButton {
+  box-sizing: border-box;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+
+  border: 1px solid var(--green-darker);
+  border-radius: 64px;
+
+  color: var(--green-darker);
+
+  flex-shrink: 0;
+}
+
+.arrowButton svg {
+  width: 24px;
+  height: 24px;
+
+  display: block;
+}
+
+.saveButton {
+  box-sizing: border-box;
+
+  width: 704px;
+  height: 57px;
+
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  border: none;
+  border-radius: 64px;
+
+  background-color: var(--green);
+  color: var(--white);
+
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 100%;
+}
+
+.bookmarkIcon {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--white);
+
+  flex-shrink: 0;
+}
+
+.bookmarkIcon svg {
+  width: 24px;
+  height: 24px;
+
+  display: block;
+}
