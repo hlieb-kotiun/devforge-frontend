@@ -3,12 +3,6 @@
   padding: 40px 16px;
 }
 
-.container {
-  width: 100%;
-  max-width: 361px;
-  margin: 0 auto;
-}
-
 .headingRow {
   display: flex;
   align-items: center;
@@ -115,10 +109,6 @@
     padding: 60px 32px;
   }
 
-  .container {
-    max-width: 704px;
-  }
-
   .title {
     font-size: 36px;
     line-height: 1.3;
@@ -142,10 +132,6 @@
 @media (min-width: 1440px) {
   .section {
     padding: 80px 108px;
-  }
-
-  .container {
-    max-width: 1224px;
   }
 
   .headingRow {

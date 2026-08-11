@@ -14,7 +14,7 @@ const creators = [
 export const TopCreators = () => {
   return (
     <section className={styles.section} aria-labelledby="top-creators-title">
-      <div className={styles.container}>
+      <div className="container">
         <div className={styles.headingRow}>
           <h2 id="top-creators-title" className={styles.title}>
             Top Creators
