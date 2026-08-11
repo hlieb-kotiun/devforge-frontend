@@ -2,6 +2,7 @@
 
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import { useId, useState } from "react";
+import { useRouter } from "next/navigation";
 import css from "./RegisterForm.module.css";
 import * as Yup from "yup";
 import Link from "next/link";
@@ -13,11 +14,11 @@ interface RegisterFormValues {
   confirmpassword: string;
 }
 
-const initionalValues: RegisterFormValues = {
-  username: "Max",
-  email: "email@gmail.com",
-  password: "*********",
-  confirmpassword: "*********",
+const initialValues: RegisterFormValues = {
+  username: "",
+  email: "",
+  password: "",
+  confirmpassword: "",
 };
 
 const RegisterFormSchema = Yup.object().shape({
@@ -34,8 +35,7 @@ const RegisterFormSchema = Yup.object().shape({
     .max(64, "Password is too long")
     .required("Password is required"),
   confirmpassword: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .max(64, "Password is too long")
+    .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Repeat your password is required"),
 });
 
@@ -43,17 +43,18 @@ export default function RegisterForm() {
   const fieldId = useId();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const router = useRouter();
   const handleSubmit = (
     values: RegisterFormValues,
     actions: FormikHelpers<RegisterFormValues>,
   ) => {
     actions.resetForm();
+    router.push("/photo");
   };
 
   return (
     <Formik
-      initialValues={initionalValues}
+      initialValues={initialValues}
       validationSchema={RegisterFormSchema}
       onSubmit={handleSubmit}
     >
@@ -73,6 +74,7 @@ export default function RegisterForm() {
               name="username"
               id={`${fieldId}-username`}
               className={css.input}
+              placeholder="Max"
             />
             <ErrorMessage
               name="username"
@@ -90,6 +92,7 @@ export default function RegisterForm() {
               name="email"
               id={`${fieldId}-email`}
               className={css.input}
+              placeholder="email@gmail.com"
             />
             <ErrorMessage name="email" component="span" className={css.error} />
           </div>
@@ -104,6 +107,7 @@ export default function RegisterForm() {
                 name="password"
                 id={`${fieldId}-password`}
                 className={css.input}
+                placeholder="*********"
               />
               <button
                 type="button"
@@ -139,6 +143,7 @@ export default function RegisterForm() {
                 name="confirmpassword"
                 id={`${fieldId}-confirmpassword`}
                 className={css.input}
+                placeholder="*********"
               />
               <button
                 type="button"
@@ -173,11 +178,9 @@ export default function RegisterForm() {
 
         <p className={css.loginParagraph}>
           Already have an account?{" "}
-          <span>
-            <Link href="/login" className={css.loginLink}>
-              Log in
-            </Link>
-          </span>
+          <Link href="/login" className={css.loginLink}>
+            Log in
+          </Link>
         </p>
       </div>
     </Formik>
