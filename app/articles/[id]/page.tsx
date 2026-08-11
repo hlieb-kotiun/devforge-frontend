@@ -1,6 +1,15 @@
-import Link from "next/link";
 import Image from "next/image";
-import { getArticleById, getArticles } from "@/lib/api/articles";
+import Link from "next/link";
+import { randomInt } from "node:crypto";
+import SaveArticleButton from "./SaveArticleButton";
+
+import {
+  getArticleById,
+  getArticles,
+  getUserById,
+  type Article,
+} from "@/lib/api/articles";
+
 import styles from "./ArticlePage.module.css";
 
 type ArticlePageProps = {
@@ -9,15 +18,60 @@ type ArticlePageProps = {
   }>;
 };
 
-export default async function ArticlePage({ params }: ArticlePageProps) {
+function getRandomArticles(
+  articles: Article[],
+  currentArticleId: string,
+  amount: number,
+) {
+  const availableArticles = articles.filter(
+    (item) => item._id !== currentArticleId,
+  );
+
+  const result: Article[] = [];
+
+  while (
+    availableArticles.length > 0 &&
+    result.length < amount
+  ) {
+    const randomIndex = randomInt(availableArticles.length);
+
+    result.push(availableArticles[randomIndex]);
+    availableArticles.splice(randomIndex, 1);
+  }
+
+  return result;
+}
+
+function getAuthorName(user: {
+  name?: string;
+  username?: string;
+}) {
+  return user.name || user.username || "Unknown author";
+}
+
+export default async function ArticlePage({
+  params,
+}: ArticlePageProps) {
   const { id } = await params;
 
-  const article = await getArticleById(id);
-  const articlesResponse = await getArticles(1, 20);
+  const [article, articlesResponse] = await Promise.all([
+    getArticleById(id),
+    getArticles(1, 20),
+  ]);
 
-  const recommendedArticles = articlesResponse.articles
-    .filter((item) => item._id !== id)
-    .slice(0, 3);
+  const recommendedArticles = getRandomArticles(
+    articlesResponse.articles,
+    article._id,
+    3,
+  );
+
+  const [author, ...recommendedAuthors] = await Promise.all([
+    getUserById(article.ownerId),
+
+    ...recommendedArticles.map((item) =>
+      getUserById(item.ownerId),
+    ),
+  ]);
 
   return (
     <main className={styles.page}>
@@ -29,7 +83,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             src={article.img}
             alt={article.title}
             fill
-            sizes="(min-width: 1440px) 1224px, (min-width: 768px) 704px, calc(100vw - 32px)"
+            sizes="(min-width: 1440px) 1226px, (min-width: 768px) 704px, 361px"
             priority
             className={styles.image}
           />
@@ -37,15 +91,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         <div className={styles.content}>
           <div className={styles.articleText}>
-            {article.article.split("/n").map((paragraph, index) => (
-              <p key={index}>{paragraph.trim()}</p>
-            ))}
+            {article.article
+              .split("/n")
+              .map((paragraph, index) => (
+                <p key={index}>{paragraph.trim()}</p>
+              ))}
           </div>
 
           <div className={styles.infoBlock}>
             <p className={styles.infoRow}>
               <span>Author</span>
-              <span>{article.ownerId}</span>
+              <span>{getAuthorName(author)}</span>
             </p>
 
             <p className={styles.infoRow}>
@@ -58,7 +114,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </h2>
 
             <div className={styles.recommendations}>
-              {recommendedArticles.map((item) => (
+              {recommendedArticles.map((item, index) => (
                 <Link
                   key={item._id}
                   href={`/articles/${item._id}`}
@@ -87,34 +143,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                     </span>
                   </div>
 
-                  <p>{item.ownerId}</p>
+                  <p>
+                    {getAuthorName(
+                      recommendedAuthors[index],
+                    )}
+                  </p>
                 </Link>
               ))}
             </div>
           </div>
 
-          <button type="button" className={styles.saveButton}>
-            <span>Save</span>
-
-            <span
-              className={styles.bookmarkIcon}
-              aria-hidden="true"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6 4.75C6 3.78 6.78 3 7.75 3H16.25C17.22 3 18 3.78 18 4.75V21L12 17L6 21V4.75Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </button>
+          <SaveArticleButton articleId={article._id} />
         </div>
       </div>
     </main>

@@ -44,3 +44,28 @@ export async function getArticles(
 
   return response.json();
 }
+export type User = {
+  _id: string;
+  name?: string;
+  username?: string;
+  avatarUrl?: string;
+  avatar?: string;
+  articlesAmount?: number;
+};
+
+export async function getUserById(
+  id: string,
+): Promise<User> {
+  const response = await fetch(
+    `http://localhost:5000/users/${id}`,
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch user");
+  }
+
+  return response.json();
+}
