@@ -5,7 +5,7 @@ import type { Article } from '@/types/article';
 
 const ArticlesItem: React.FC<{ article: Article }> = ({ article }) => {
   return (
-    <li className={css.popularitem}>
+    <li className={css.popularItem}>
       <Image
         src={article.img.startsWith('http')
           ? article.img

@@ -4,7 +4,17 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    domains: ['localhost', 'ftp.goit.study'], // дозволяє картинки з цих доменів
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ftp.goit.study',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '5000', 
+      },
+    ],
   },
 };
 
