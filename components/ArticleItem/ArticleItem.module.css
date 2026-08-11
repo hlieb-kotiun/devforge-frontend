@@ -1,0 +1,77 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px 12px 33px 12px;
+  width: 361px;
+  background: #d1e0d8;
+  border-radius: 32px;
+}
+
+.card__image {
+  width: 100%;
+  height: 233px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.card__author {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #070721;
+}
+
+.card__title {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #070721;
+  margin: 0;
+}
+
+.card__description {
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #070721;
+  margin: 0;
+}
+
+.card__actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.card__btn {
+  border: 1px solid #374f42;
+  background: transparent;
+  border-radius: 64px;
+  cursor: pointer;
+}
+
+.card__btn_text {
+  flex: 1;
+  height: 40px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #374f42;
+}
+
+.card__btn_icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #374f42;
+}
