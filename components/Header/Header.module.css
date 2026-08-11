@@ -1,0 +1,14 @@
+.headerContainer {
+  background-color: var(--light-green);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.logo {
+  margin-left: 8px;
+  color: var(--green);
+}
+
+.logoIcon {
+  --color1: currentColor;
+}
