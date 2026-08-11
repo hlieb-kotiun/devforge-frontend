@@ -1,15 +1,41 @@
 .item {
-    /* Add your styles for the item class here */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  width: 100%;
 }
 
 .link {
-    /* Add your styles for the link class here */   
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .avatar {
-/* Add your styles for the avatar class here */   
+  width: 148px !important;
+  height: 148px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: opacity 0.2s ease;
+}
+
+.link:hover .avatar {
+  opacity: 0.85;
 }
 
 .name {
-/* Add your styles for the name class here */   
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  color: var(--black);
+}
+
+@media (min-width: 768px) {
+  .avatar {
+    width: 262px !important;
+    height: 262px !important;
+  }
 }
