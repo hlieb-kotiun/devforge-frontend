@@ -6,6 +6,8 @@ import { useRef } from "react";
 import AuthorsItem from "../AuthorsItem/AuthorsItem";
 import { AuthorsResponse } from "@/types/author";
 import styles from "./AuthorsList.module.css";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const PER_PAGE = 20;
 
@@ -19,7 +21,7 @@ const fetchAuthors = async (page: number): Promise<AuthorsResponse> => {
 const AuthorsList = () => {
  const newItemsStartRef = useRef<HTMLLIElement | null>(null);
 
- const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+ const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage,  isFetchNextPageError } =
     useInfiniteQuery({
       queryKey: ["authors"],
       queryFn: ({ pageParam }) => fetchAuthors(pageParam),
@@ -30,11 +32,17 @@ const AuthorsList = () => {
       },
     });
 
+    useEffect(() => {
+    if (isFetchNextPageError) {
+      toast.error("Не вдалося завантажити ще авторів. Спробуйте ще раз.");
+    }
+  }, [isFetchNextPageError]);
+
   if (isLoading) {
     return <p className={styles.message}>Завантаження...</p>;
   }
 
-  if (isError) {
+  if (isError && !data) {
     return <p className={styles.message}>Не вдалося завантажити авторів</p>;
   }
 
