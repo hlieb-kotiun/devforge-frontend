@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AboutUs } from "../components/AboutUs/AboutUs";
+import { TopCreators } from "../components/TopCreators/TopCreators";
 import styles from "./page.module.css";
 
 export default function HomePage() {
@@ -55,6 +56,7 @@ export default function HomePage() {
         </section>
       </div>
       <AboutUs />
+      <TopCreators />
     </main>
   );
 }

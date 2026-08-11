@@ -1,0 +1,182 @@
+.section {
+  width: 100%;
+  padding: 40px 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 361px;
+  margin: 0 auto;
+}
+
+.headingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.title {
+  flex-shrink: 0;
+  color: var(--black);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.375;
+}
+
+.allCreatorsLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  color: var(--green-darker);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  transition: color 200ms ease;
+}
+
+.allCreatorsLink::after {
+  position: absolute;
+  inset: -8px;
+  content: "";
+}
+
+.linkIcon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: url("/icons/arrow-up-right.svg") center / contain no-repeat;
+  mask: url("/icons/arrow-up-right.svg") center / contain no-repeat;
+  transform: rotate(45deg);
+  transition: transform 200ms ease;
+}
+
+.allCreatorsLink:hover,
+.allCreatorsLink:focus-visible {
+  color: var(--green);
+}
+
+.allCreatorsLink:hover .linkIcon,
+.allCreatorsLink:focus-visible .linkIcon {
+  transform: translate(2px, -2px) rotate(45deg);
+}
+
+.allCreatorsLink:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--green);
+  outline-offset: 4px;
+}
+
+.creatorsList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 24px;
+}
+
+.creatorCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.imageWrapper {
+  position: relative;
+  width: min(160px, 100%);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.creatorImage {
+  object-fit: cover;
+}
+
+.creatorName {
+  margin-top: 16px;
+  overflow-wrap: anywhere;
+  color: var(--black);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.375;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 60px 32px;
+  }
+
+  .container {
+    max-width: 704px;
+  }
+
+  .title {
+    font-size: 36px;
+    line-height: 1.3;
+  }
+
+  .allCreatorsLink {
+    gap: 8px;
+    font-size: 16px;
+  }
+
+  .creatorsList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .creatorName {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section {
+    padding: 80px 108px;
+  }
+
+  .container {
+    max-width: 1224px;
+  }
+
+  .headingRow {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.375;
+  }
+
+  .allCreatorsLink {
+    gap: 8px;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .creatorsList {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .creatorName {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .allCreatorsLink,
+  .linkIcon {
+    transition: none;
+  }
+}
