@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect, type MouseEvent } from 'react';
 import Link from 'next/link';
+
 import css from './ModalErrorSave.module.css';
 
 interface ModalErrorSaveProps {
@@ -8,8 +10,31 @@ interface ModalErrorSaveProps {
 }
 
 const ModalErrorSave = ({ onClose }: ModalErrorSaveProps) => {
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onClose]);
+
+    const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
+        if (event.target === event.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
-        <div className={css.modalErrorSaveBackdrop}>
+        <div
+            className={css.modalErrorSaveBackdrop}
+            onClick={handleBackdropClick}
+        >
             <div
                 className={css.modalErrorSave}
                 role="dialog"
