@@ -1,9 +1,8 @@
 "use client";
 
-import { Article } from "@/types/article.js";
+import { Article } from "@/types/article";
 import css from "./ArticleItem.module.css";
-import { useRouter } from "next/navigation";
-// import { authStore } from "@/lib/store/authStore";
+import AuthStore from "@/lib/store/authStore";
 
 interface ArticleItemProps {
   article: Article;
@@ -11,8 +10,8 @@ interface ArticleItemProps {
 
 const ArticleItem = ({ article }: ArticleItemProps) => {
   // const router = useRouter();
-  // const isAuthenticated = authStore((state) => state.isAuthenticated);
-  // const user = authStore((state) => state.user);
+  const isAuthenticated = AuthStore((state) => state.isAuthenticated);
+  const user = AuthStore((state) => state.user);
 
   return (
     <div className={css.card}>
