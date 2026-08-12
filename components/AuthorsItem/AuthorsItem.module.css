@@ -4,7 +4,8 @@
   align-items: center;
   gap: 16px;
   padding: 12px;
-  width: 100%;
+  width: calc(50% - 8px);
+  max-width: 286px;
 }
 
 .link {
@@ -12,11 +13,13 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  width: 100%;
 }
 
 .avatar {
-  width: 148px !important;
-  height: 148px !important;
+  width: 100%;
+  max-width: 148px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
   transition: opacity 0.2s ease;
@@ -34,8 +37,11 @@
 }
 
 @media (min-width: 768px) {
+  .item {
+    width: 286px;
+  }
+
   .avatar {
-    width: 262px !important;
-    height: 262px !important;
+    max-width: 262px;
   }
 }

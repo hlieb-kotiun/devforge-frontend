@@ -2,7 +2,6 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useRef } from "react";
 import AuthorsItem from "../AuthorsItem/AuthorsItem";
 import { AuthorsResponse } from "@/types/author";
 import styles from "./AuthorsList.module.css";
@@ -19,7 +18,6 @@ const fetchAuthors = async (page: number): Promise<AuthorsResponse> => {
 };
 
 const AuthorsList = () => {
- const newItemsStartRef = useRef<HTMLLIElement | null>(null);
 
  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage,  isFetchNextPageError } =
     useInfiniteQuery({
@@ -52,27 +50,11 @@ const AuthorsList = () => {
     return <p className={styles.message}>Авторів поки немає</p>;
   }
 
-  const currentCount = authors.length;
-
-  const handleLoadMore = async () => {
-    await fetchNextPage();
-    requestAnimationFrame(() => {
-      newItemsStartRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    });
-  };
-
   return (
     <>
       <ul className={styles.list}>
-        {authors.map((author, index) => (
-          <AuthorsItem
-            key={author._id}
-            author={author}
-            ref={index === currentCount ? newItemsStartRef : undefined}
-          />
+        {authors.map((author) => (
+          <AuthorsItem key={author._id} author={author} />
         ))}
       </ul>
 
@@ -80,7 +62,7 @@ const AuthorsList = () => {
         <button
           type="button"
           className={styles.loadMoreButton}
-          onClick={handleLoadMore}
+          onClick={() => fetchNextPage()}
           disabled={isFetchingNextPage}
         >
           {isFetchingNextPage ? "Завантаження..." : "Load More"}

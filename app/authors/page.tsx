@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AuthorsList from "@/components/AuthorsList/AuthorsList";
+import styles from "./AuthorsPage.module.css";
 
 export const metadata: Metadata = {
   title: "Authors | Harmoniq",
@@ -15,11 +16,14 @@ export const metadata: Metadata = {
 
 const AuthorsPage = () => {
   return (
-    <section className="">
-      <div className={`container`}>
-        {/* Test h1 tag, must be deleted */}
-        <h1>Authors</h1>{" "}
-        <AuthorsList />
+    <section className={styles.section}>
+      <div className="container">
+        <div className={styles.content}>
+          <div className={styles.innerWrapper}>
+            <h1 className={styles.title}>Authors</h1>
+            <AuthorsList />
+          </div>
+        </div>
       </div>
     </section>
   );
