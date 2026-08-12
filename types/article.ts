@@ -5,6 +5,9 @@ export interface Article {
   desc: string;
   article: string;
   rate: number;
-  ownerId: { $oid: string };
+  ownerId: {
+    _id: string;
+    name: string;
+  };
   date: string;
 }

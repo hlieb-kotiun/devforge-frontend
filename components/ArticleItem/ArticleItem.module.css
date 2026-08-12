@@ -34,6 +34,13 @@
   font-size: 24px;
   color: #070721;
   margin: 0;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Кількість рядків, після яких буде "..." */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card__description {
@@ -43,6 +50,13 @@
   line-height: 1.55;
   color: #070721;
   margin: 0;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Кількість рядків, після яких буде "..." */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card__actions {
