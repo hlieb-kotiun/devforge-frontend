@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { AboutUs } from "../components/AboutUs/AboutUs";
-import styles from "./page.module.css";
-
+import Hero from "../components/Hero/Hero";
+import styles from "../components/Hero/Hero.module.css";
+import Link from "next/link";
 export default function HomePage() {
   return (
     <main>
@@ -39,6 +39,7 @@ export default function HomePage() {
           </picture>
         </section>
       </div>
+      <Hero />
       <AboutUs />
     </main>
   );
