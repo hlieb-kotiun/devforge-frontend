@@ -1,8 +1,20 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '5000',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ftp.goit.study',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
