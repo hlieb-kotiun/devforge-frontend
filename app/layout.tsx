@@ -45,8 +45,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} ${merienda.variable}`}>
       <body>
-        <TanStackProvider>{children}</TanStackProvider>
-         <Toaster position="top-right" />
+        <TanStackProvider>
+          <Toaster position="top-right" reverseOrder={false} />
+          {children}
+        </TanStackProvider>
       </body>
     </html>
   );
