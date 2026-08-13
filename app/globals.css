@@ -5,6 +5,7 @@
 :root {
   --green: #649179;
   --black: #070721;
+  --heading-black: #000;
   --light-green: #d1e0d8;
   --red: #ad6a6c;
   --purple: #7678ed;
@@ -12,6 +13,7 @@
   --green-darker: #374f42;
   --gray: #595d62;
   --light-gray: #9f9f9f;
+  --focus-shadow: rgba(78, 70, 180, 0.12);
 }
 
 html {
