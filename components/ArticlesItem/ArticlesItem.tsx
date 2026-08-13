@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import css from './PopularArticles.module.css'
+import css from './ArticlesItem.module.css'
 import type { Article } from '@/types/article';
 
 const ArticlesItem: React.FC<{ article: Article }> = ({ article }) => {
@@ -9,8 +9,9 @@ const ArticlesItem: React.FC<{ article: Article }> = ({ article }) => {
       <Image
         src={article.img.startsWith('http')
           ? article.img
-          : `http://localhost:5000${article.img}`}
+          : `${process.env.NEXT_PUBLIC_API_URL}${article.img}`}
         alt={article.title}
+        unoptimized
         width={337}
         height={233}
         className={css.cardImage}

@@ -1,5 +1,5 @@
 import { getPopularArticles } from '@/lib/api';
-import ArticlesItem from './ArticlesItem';
+import ArticlesItem from '../ArticlesItem/ArticlesItem';
 import Link from 'next/link';
 import css from './PopularArticles.module.css'
 import type { Article } from '@/types/article';
@@ -9,11 +9,14 @@ export default async function PopularArticles() {
 
   return (
     <section className={css.popularSection}>
-      <div className={css.popularContainer}>
+      <div className="container">
         <div className={css.popularContent}>
         <h2 className={css.popularTitle}>Popular Articles</h2>
-        {/* тут додати іконку */}
-        <Link className={css.popularLink } href="/articles">Go to all Articles</Link>   
+          <Link className={css.popularLink} href="/articles">Go to all Articles
+          <svg className={css.linkIcon} width={19} height={19}>
+              <use href="/symbol-defs.svg#icon-top-right" />
+          </svg>
+          </Link>   
         </div>
 
       <ul className={css.popularList}>
