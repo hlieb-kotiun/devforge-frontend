@@ -52,10 +52,12 @@ export default function RootLayout({
     >
       <body>
         <TanStackProvider>
-          <Header />
-          <Toaster position="top-right" reverseOrder={false} />
-          {children}
-          <Footer />
+          <div className="appShell">
+            <Header />
+            <Toaster position="top-right" reverseOrder={false} />
+            <main>{children}</main>
+            <Footer />
+          </div>
         </TanStackProvider>
       </body>
     </html>
