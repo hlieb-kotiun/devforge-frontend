@@ -3,7 +3,7 @@ import { Manrope, Merienda } from "next/font/google";
 import "./globals.css";
 import "./container.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-
+import { Toaster } from "react-hot-toast";
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
@@ -44,7 +44,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} ${merienda.variable}`}>
       <body>
-        <TanStackProvider>{children}</TanStackProvider>
+        <TanStackProvider>
+          {children}
+          <Toaster position="top-right" />
+        </TanStackProvider>
       </body>
     </html>
   );
