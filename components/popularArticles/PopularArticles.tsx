@@ -22,9 +22,9 @@ export default function PopularArticles() {
   }, []);
 
   const handleSave = (id: string) => {
-  setBookmarks((prev) => [...prev, id]);
-  router.push("/articles?filter=bookmarks");
-};
+    setBookmarks((prev) => [...prev, id]);
+    router.push("/articles?filter=bookmarks");
+  };
 
   const handleLoadMore = (id: string) => {
     router.push(`/articles/${id}`);
@@ -32,7 +32,7 @@ export default function PopularArticles() {
 
   return (
     <section className={css.popularSection}>
-      <div className="container">
+      <div className={`container ${css.popularArticlesContainer}`}>
         <div className={css.popularContent}>
           <h2 className={css.popularTitle}>Popular Articles</h2>
           <Link className={css.popularLink} href="/articles">

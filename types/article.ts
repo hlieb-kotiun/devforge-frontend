@@ -6,18 +6,9 @@ export interface Article {
   article: string;
   rate: number;
   ownerId: {
-<<<<<<< HEAD
-   _id: string;
-   name: string;
-  }; 
-  date: string;
-  author: string
-}
-=======
     _id: string;
     name: string;
   };
   date: string;
   author: string;
 }
->>>>>>> main

@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-export async function getPopularArticles(limit: number = 4) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/articles?page=1&limit=${limit}`
-  );
-
-  if (!res.ok) throw new Error('Failed to fetch articles');
-  return res.json();
-}       
-=======
 import type { Article } from "@/types/article";
 
 export interface ArticlesResponse {
@@ -43,4 +33,9 @@ export async function getArticles(
 
   return response.json();
 }
->>>>>>> main
+
+export function getPopularArticles(
+  limit: number = 4,
+): Promise<ArticlesResponse> {
+  return getArticles(1, limit);
+}
