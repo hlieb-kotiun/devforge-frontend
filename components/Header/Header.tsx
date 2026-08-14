@@ -80,7 +80,7 @@ const Header = () => {
             )}
           </ul>
           {isAuthorized ? (
-            <Link className={`${css.link} ${css.createArticleLink}`} href="*">
+            <Link className={`${css.link} ${css.createArticleLink}`} href="/articles/create">
               Create an article
             </Link>
           ) : (
