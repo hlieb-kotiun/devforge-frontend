@@ -33,3 +33,9 @@ export async function getArticles(
 
   return response.json();
 }
+
+export function getPopularArticles(
+  limit: number = 4,
+): Promise<ArticlesResponse> {
+  return getArticles(1, limit);
+}
