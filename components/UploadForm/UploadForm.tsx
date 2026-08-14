@@ -64,6 +64,7 @@ export default function UploadForm() {
   };
 
   return (
+    <div className={styles.wrapper}>
     <div className={styles.card}>
       <button
         type="button"
@@ -72,7 +73,7 @@ export default function UploadForm() {
         aria-label="Close"
       >
         <svg className={styles.closeIcon}>
-          <use href="/sprite.svg#icon-close" />
+          <use href="/sprite.svg#Controls=close, Type=stroke, Size=32px" />
         </svg>
       </button>
 
@@ -127,7 +128,7 @@ export default function UploadForm() {
                 ) : (
                   <div className={styles.cameraCircle}>
                     <svg className={styles.cameraIcon}>
-                      <use href="/sprite.svg#icon-camera" />
+                      <use href="/sprite.svg#cameraIcon" />
                     </svg>
                   </div>
                 )}
@@ -150,6 +151,7 @@ export default function UploadForm() {
           );
         }}
       </Formik>
-    </div>
+      </div>
+      </div>
   );
 }
