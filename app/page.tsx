@@ -1,6 +1,6 @@
 import { AboutUs } from "../components/AboutUs/AboutUs";         
 import styles from "./page.module.css";
-import PopularArticles from "@/components/PopularArticles/PopularArticles";
+import PopularArticles from "@/components/popularArticles/PopularArticles";
 import Hero from "../components/Hero/Hero";
 
 export default function HomePage() {

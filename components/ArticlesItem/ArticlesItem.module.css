@@ -50,6 +50,35 @@
     overflow: hidden;
 }
 
+.buttonsContainer {
+    padding: 0 12px 12px 12px;
+    width: 100%;
+    height: 40px;
+    gap: 8px;
+    display: flex;
+}
+
+.loadMore {
+    border: 1px solid var(--green-darker);
+    border-radius: 64px;
+    padding: 8px;
+    height: 40px;
+    background-color: var(--light-green);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--green-darker);
+    width: 100%;
+}
+
+.save {
+    border: 1px solid var(--green-darker);
+    border-radius: 64px;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--light-green);
+}
+
 /* Tablet (768px) */
 @media (min-width: 768px) {
     .popularItem {
