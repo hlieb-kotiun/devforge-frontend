@@ -16,6 +16,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           alt={article.title}
           width={337}
           height={233}
+          unoptimized
           className={css.image}
         />
       </div>

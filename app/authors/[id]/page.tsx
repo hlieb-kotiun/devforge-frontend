@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
-import ArticlesList from "@/components/ArticlesList/ArticlesList";
+import AuthorArticles from "@/components/AuthorArticles/AuthorArticles";
 import styles from "./AuthorPage.module.css";
 
 type Author = {
@@ -79,7 +79,7 @@ const AuthorPage = async ({ params }: Props) => {
             </div>
           </div>
 
-          <ArticlesList ownerId={id} />
+          <AuthorArticles ownerId={id} />
           </div>
         </div>
     </section>
