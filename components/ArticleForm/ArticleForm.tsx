@@ -1,46 +1,48 @@
 "use client";
 
-import { useEffect, useRef, useState, type ChangeEvent } from "react";
+import { useState, useRef, type ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { Form, Formik, type FormikHelpers } from "formik";
-import toast from "react-hot-toast";
+import { Formik, Form, type FormikHelpers } from "formik";
 import * as Yup from "yup";
-import styles from './ArticleForm.module.css';
+import toast from "react-hot-toast";    
 import Image from "next/image";
+import styles from "./ArticleForm.module.css";
 
-interface ArticleFormValues {     
+interface ArticleFormValues {
   image: File | null;
   title: string;
-  text: string;
+  desc: string;
 }
 
-const initialValues: ArticleFormValues = { image: null, title: "", text: "" };
+const initialValues: ArticleFormValues = {
+  image: null,
+  title: "",
+  desc: "",
+};
 
 const validationSchema = Yup.object({
   image: Yup.mixed<File>()
     .nullable()
     .required("Please upload an image")
-    .test("fileType", "Use a JPEG, PNG, or WebP image", (file) =>
+    .test("fileType", "Use JPEG, PNG, or WebP", (file) =>
       !file || ["image/jpeg", "image/png", "image/webp"].includes(file.type),
+    )
+    .test("fileSize", "File too large (max 1Mb)", (file) =>
+      !file || file.size <= 1024 * 1024,
     ),
-  title: Yup.string().trim().required("Title is required"),
-  text: Yup.string().trim().required("Article text is required"),
+  title: Yup.string().trim().min(3).max(48).required("Title is required"),
+  desc: Yup.string().trim().min(100).max(4000).required("Description is required"),
 });
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
-class ApiError extends Error {
-  constructor(message: string, readonly status: number) {
-    super(message);
-  }
-}
-
 async function createArticle(values: ArticleFormValues) {
   const formData = new FormData();
-  formData.append("image", values.image as File);
+  formData.append("image", values.image as File); // multer чекає 'image'
   formData.append("title", values.title.trim());
-  formData.append("text", values.text.trim());
+  formData.append("desc", values.desc.trim());  
+  formData.append("date", new Date().toISOString().slice(0, 10)); // YYYY-MM-DD
 
   const response = await fetch(`${apiUrl}/articles`, {
     method: "POST",
@@ -50,48 +52,14 @@ async function createArticle(values: ArticleFormValues) {
 
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
-    throw new ApiError(
-      typeof data.message === "string"
-        ? data.message
-        : response.status === 401
-        ? "Please log in to publish an article"
-        : "Unable to publish the article. Please try again.",
-      response.status,
-    );
+    throw new Error(data.message || "Unable to publish article");
   }
 }
 
-const AddArticleForm = () => {
+export default function AddArticleForm() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [isAuthorizing, setIsAuthorizing] = useState<boolean>(true);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    fetch(`${apiUrl}/users/me`, { credentials: "include", signal: controller.signal })
-      .then((response) => {
-        if (!response.ok) {
-          router.replace("/login");
-          return;
-        }
-        setIsAuthorizing(false);
-      })
-      .catch((error: unknown) => {
-        if (error instanceof DOMException && error.name === "AbortError") return;
-        toast.error("Unable to verify your authorization");
-        router.replace("/login");
-      });
-
-    return () => controller.abort();
-  }, [router]);
-
-  useEffect(() => {
-    return () => {
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-    };
-  }, [previewUrl]);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null); 
 
   const mutation = useMutation({
     mutationFn: createArticle,
@@ -99,16 +67,10 @@ const AddArticleForm = () => {
       toast.success("Article published successfully!");
       router.push("/articles");
     },
-    onError: (error: ApiError) => {
-      if (error.status === 401 || error.status === 403) {
-        router.replace("/login");
-        return;
-      }
+    onError: (error: Error) => {
       toast.error(error.message);
     },
   });
-
-  const handlePhotoClick = () => fileInputRef.current?.click();
 
   const handleFileChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -126,45 +88,37 @@ const AddArticleForm = () => {
     { setSubmitting }: FormikHelpers<ArticleFormValues>,
   ) => mutation.mutate(values, { onSettled: () => setSubmitting(false) });
 
-  if (isAuthorizing) {
-    return <p aria-live="polite">Checking authorization...</p>;
-  }
-
   return (
     <Formik<ArticleFormValues>
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
+      validateOnChange
+      validateOnBlur
     >
-      {({ errors, touched, values, setFieldValue, setFieldTouched, handleBlur, isSubmitting }) => (
+      {({ errors, touched, values, setFieldValue, handleBlur, isSubmitting }) => (
         <Form className={styles.createArticleForm}>
           {/* Image upload */}
           <input
             ref={fileInputRef}
             type="file"
             accept="image/jpeg,image/png,image/webp"
-            aria-label="Upload article photo"
             className={styles.createArticleHiddenInput}
-            onChange={(event) => {
-              handleFileChange(event, setFieldValue);
-              setFieldTouched("image", true);
-            }}
+            onChange={(event) => handleFileChange(event, setFieldValue)}
           />
-
           <div className={styles.createArticlePhotoField}>
             <div
               className={styles.createArticlePhotoBox}
-              onClick={handlePhotoClick}
+              onClick={() => fileInputRef.current?.click()}
               role="button"
               tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") handlePhotoClick();
-              }}
             >
               {previewUrl ? (
                 <Image
                   src={previewUrl}
                   alt="Article preview"
+                  width={343}
+                  height={222}
                   className={styles.createArticlePreviewImage}
                 />
               ) : (
@@ -195,9 +149,8 @@ const AddArticleForm = () => {
               placeholder="Enter the title"
               className={styles.createArticleInput}
               value={values.title}
-              onChange={(event) => setFieldValue("title", event.target.value)}
+              onChange={(e) => setFieldValue("title", e.target.value)}
               onBlur={handleBlur}
-              aria-invalid={touched.title && !!errors.title}
             />
             {touched.title && errors.title && (
               <p className={styles.createArticleError}>{errors.title}</p>
@@ -207,20 +160,18 @@ const AddArticleForm = () => {
           {/* Text */}
           <div className={styles.createArticleTextField}>
             <textarea
-              name="text"
+              name="desc"
               placeholder="Enter a text"
               className={styles.createArticleTextarea}
-              value={values.text}
-              onChange={(event) => setFieldValue("text", event.target.value)}
+              value={values.desc}
+              onChange={(e) => setFieldValue("desc", e.target.value)}
               onBlur={handleBlur}
-              aria-invalid={touched.text && !!errors.text}
             />
-            {touched.text && errors.text && (
-              <p className={styles.createArticleError}>{errors.text}</p>
+            {touched.desc && errors.desc && (
+              <p className={styles.createArticleError}>{errors.desc}</p>
             )}
           </div>
-
-          {/* Submit */}
+      
           {/* Submit */}
           <button
             type="submit"
@@ -233,6 +184,4 @@ const AddArticleForm = () => {
       )}
     </Formik>
   );
-};
-
-export default AddArticleForm;
+}
