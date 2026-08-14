@@ -172,3 +172,5 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
 };
 
 export default ArticleItem;
+
+// комент для коміту
