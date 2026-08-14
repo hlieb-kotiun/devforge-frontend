@@ -11,51 +11,50 @@ interface ArticleItemProps {
   article: Article;
 }
 
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://devforge-backend-l7uv.onrender.com";
+
 const ArticleItem = ({ article }: ArticleItemProps) => {
   const router = useRouter();
 
-  // 1. Отримуємо дані та методи з AuthStore
-  // const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const isAuthenticated = true; // Для тестування, поки не підключено авторизацію
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
-  const toggleSaveInStore = useAuthStore((state) => state.toggleSaveArticle);
+  const setUser = useAuthStore((state) => state.setUser);
 
-  // 2. Локальний стан завантаження для кнопок
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  // 3. Обчислювані значення
   const authorName = article.ownerId?.name
     ? article.ownerId.name.trim().split(" ")[0]
     : "Author";
 
-  // const isOwner =
-  //   isAuthenticated &&
-  //   Boolean(user?._id?.$oid && user._id.$oid === article.ownerId?._id);
-  const isOwner = true; // Для тестування, поки не підключено авторизацію
+  const isOwner =
+    isAuthenticated &&
+    Boolean(user?._id?.$oid && user._id.$oid === article.ownerId?._id);
 
   const isSaved = Boolean(user?.savedArticles?.includes(article._id.$oid));
 
-  // --- ВНУТРІШНЯ ЛОГІКА ДІЙ ---
-
-  // Тогл збереження (Bookmark)
   const handleToggleSave = async () => {
-    if (!isAuthenticated || isSaving) return;
+    if (isSaving) return;
+    if (!isAuthenticated) {
+      router.push("/login");
+      return;
+    }
 
     setIsSaving(true);
     try {
-      // Запит на бекенд
-      const response = await fetch(`/api/articles/${article._id.$oid}/save`, {
-        method: isSaved ? "DELETE" : "POST",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/saved-articles/${article._id.$oid}`,
+        {
+          method: isSaved ? "DELETE" : "POST",
+        },
+      );
 
       if (!response.ok) throw new Error("Помилка збереження");
+      const updateUser = await response.json();
 
-      // Оновлюємо стан у Zustand (щоб іконка миттєво змінилася скрізь)
-      if (toggleSaveInStore) {
-        toggleSaveInStore(article._id.$oid);
-      }
+      setUser(updateUser);
     } catch (error) {
       console.error("Помилка при збереженні статті:", error);
     } finally {
@@ -63,23 +62,25 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
     }
   };
 
-  // Видалення статті
   const handleDelete = async () => {
     const isConfirmed = window.confirm("Ви дійсно хочете видалити цю статтю?");
     if (!isConfirmed || isDeleting) return;
 
     setIsDeleting(true);
     try {
-      const response = await fetch(`/api/articles/${article._id.$oid}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/articles/${article._id.$oid}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       if (!response.ok) throw new Error("Не вдалося видалити статтю");
 
-      // Оновлюємо поточну сторінку Next.js, щоб видалена стаття зникла зі списку
       router.refresh();
     } catch (error) {
       console.error("Помилка при видаленні:", error);
+    } finally {
       setIsDeleting(false);
     }
   };
@@ -108,33 +109,8 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
           Learn more
         </Link>
 
-        {/* Кнопка "Зберегти" (тільки для авторизованих) */}
-        {isAuthenticated && (
-          <button
-            onClick={handleToggleSave}
-            disabled={isSaving}
-            className={`${css.card__btn} ${css.card__btn_icon}`}
-            aria-label={isSaved ? "Remove from saved" : "Save article"}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill={isSaved ? "currentColor" : "none"}
-            >
-              <path
-                d="M5 3h14a2 2 0 0 1 2 2v16l-9-4-9 4V5a2 2 0 0 1 2 2z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        )}
-
-        {/* Кнопки Edit / Delete (тільки для автора) */}
-        {isOwner && (
+        {/* Кнопка "Зберегти"  */}
+        {isOwner ? (
           <>
             <button
               onClick={handleEdit}
@@ -173,6 +149,22 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
               </svg>
             </button>
           </>
+        ) : (
+          <button
+            onClick={handleToggleSave}
+            disabled={isSaving}
+            className={`${css.card__btn} ${css.card__btn_icon} ${isSaved ? css.saved : ""}`}
+            aria-label={isSaved ? "Remove from saved" : "Save article"}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 32 32"
+              fill={isSaved ? "#ffffff" : "none"}
+            >
+              <use href="/sprite.svg#Generic=bookmark-alternative,%20Size=32px" />
+            </svg>
+          </button>
         )}
       </div>
     </div>

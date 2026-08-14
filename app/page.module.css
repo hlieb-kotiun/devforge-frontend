@@ -1,0 +1,365 @@
+/* ==================================================
+   MOBILE
+   Figma:
+   Banner: 393 × 633
+   Union: X16 / Y15.66 / 361 × 321.68
+   Tagline: X16 / Y337.34 / 361 × 280
+   Text: 372 × 112
+   ================================================== */
+
+.hero {
+  position: relative;
+
+  width: 393px;
+  height: 633px;
+
+  margin: 0 auto;
+  padding: 0;
+
+  overflow: visible;
+}
+
+.imageWrapper {
+  position: absolute;
+  top: 15.66px;
+  left: 16px;
+
+  display: block;
+
+  width: 361px;
+  height: 321.68px;
+}
+
+.heroImage {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+.content {
+  position: absolute;
+  top: 337.34px;
+  left: 16px;
+
+  width: 361px;
+  height: 280px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 0;
+}
+
+.title {
+  width: 372px;
+  height: 112px;
+
+  margin: 0;
+
+  color: var(--green-darker);
+
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+
+.title span {
+  font-family: var(--font-merienda), cursive;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0;
+}
+
+.desktopBreak {
+  display: none;
+}
+
+.mobileTabletBreak {
+  display: block;
+}
+
+.actions {
+  width: 361px;
+  height: 138px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+
+  padding: 0;
+}
+
+.primaryButton,
+.secondaryButton {
+  box-sizing: border-box;
+
+  width: 361px;
+  height: 57px;
+
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 64px;
+
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.primaryButton {
+  border: none;
+
+  color: var(--white);
+  background-color: var(--green);
+}
+
+.secondaryButton {
+  color: var(--green-darker);
+  background-color: transparent;
+
+  border: 1px solid var(--green-darker);
+}
+
+
+/* ==================================================
+   TABLET
+   Figma:
+   Banner: 768 × 427
+   Padding horizontal: 32
+   Gap: -160
+   Tagline: X32 / Y22 / 434 × 383
+   Buttons: X0 / Y245 / 249 × 138
+   Button: 249 × 57
+   Image: 430 × 383.16
+   ================================================== */
+
+@media screen and (min-width: 768px) {
+  .hero {
+    position: relative;
+
+    width: 768px;
+    height: 427px;
+
+    margin: 0 auto;
+    padding: 0 32px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    overflow: hidden;
+  }
+
+  .content {
+    position: static;
+
+    width: 434px;
+    height: 383px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 0;
+
+    flex-shrink: 0;
+    z-index: 2;
+  }
+
+  .title {
+    width: 372px;
+    height: 112px;
+
+    margin: 0;
+
+    font-family: var(--font-manrope), sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+
+  .title span {
+    font-family: var(--font-merienda), cursive;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
+  }
+
+  .desktopBreak {
+    display: none;
+  }
+
+  .mobileTabletBreak {
+    display: block;
+  }
+
+  .actions {
+    width: 249px;
+    height: 138px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+
+    padding: 0;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 249px;
+    height: 57px;
+
+    padding: 16px;
+
+    border-radius: 64px;
+  }
+
+  .imageWrapper {
+    position: static;
+
+    width: 430px;
+    height: 383.16px;
+
+    margin-left: -160px;
+
+    flex-shrink: 0;
+    z-index: 1;
+  }
+}
+
+
+/* ==================================================
+   DESKTOP
+   Figma:
+   Banner: 1440 × 609.9
+   Tagline: X108 / Y48 / 599 × 389
+   Text: 599 × 276
+   Buttons: 392 × 57 / gap 24
+   Each button: 184 × 57
+   Image: X529 / Y48 / 805.75 × 561.9
+   ================================================== */
+
+@media screen and (min-width: 1440px) {
+  .hero {
+    position: relative;
+
+    width: 1440px;
+    height: 609.9px;
+
+    margin: 0 auto;
+    padding: 0;
+
+    display: block;
+
+    overflow: hidden;
+  }
+
+  .content {
+    position: absolute;
+    top: 48px;
+    left: 108px;
+
+    width: 599px;
+    height: 389px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 56px;
+    justify-content: initial;
+
+    padding: 0;
+
+    z-index: 2;
+  }
+
+  .title {
+    width: 599px;
+    height: 276px;
+
+    margin: 0;
+
+    color: var(--green-darker);
+
+    font-family: var(--font-manrope), sans-serif;
+    font-size: 92px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+
+  .title span {
+    font-family: var(--font-merienda), cursive;
+    font-size: 92px;
+    font-weight: 800;
+    line-height: 100%;
+    letter-spacing: -0.02em;
+  }
+
+  .desktopBreak {
+    display: block;
+  }
+
+  .mobileTabletBreak {
+    display: none;
+  }
+
+  .actions {
+    width: 392px;
+    height: 57px;
+
+    display: flex;
+    flex-direction: row;
+
+    gap: 24px;
+
+    padding: 0;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 184px;
+    height: 57px;
+
+    padding: 16px;
+
+    flex-shrink: 0;
+
+    border-radius: 64px;
+  }
+
+  .imageWrapper {
+    position: absolute;
+    top: 48px;
+    left: 529px;
+
+    width: 805.75px;
+    height: 561.9px;
+
+    margin: 0;
+
+    z-index: 1;
+  }
+}
+
+.heroWrapper {
+  width: 100%;
+  overflow: hidden;
+}

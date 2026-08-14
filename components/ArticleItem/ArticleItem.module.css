@@ -3,7 +3,8 @@
   flex-direction: column;
   gap: 16px;
   padding: 12px 12px 33px 12px;
-  width: 361px;
+  width: 100%;
+  max-width: 361px;
   background: #d1e0d8;
   border-radius: 32px;
 }
@@ -70,6 +71,9 @@
   background: transparent;
   border-radius: 64px;
   cursor: pointer;
+
+  display: inline-grid;
+  place-items: center;
 }
 
 .card__btn_text {
@@ -79,6 +83,8 @@
   font-weight: 700;
   font-size: 16px;
   color: #374f42;
+  text-align: center;
+  align-items: center;
 }
 
 .card__btn_icon {
@@ -88,4 +94,16 @@
   align-items: center;
   justify-content: center;
   color: #374f42;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card__btn_icon.saved {
+  color: #ffffff;
+  background: #374f42;
+}
+
+.card__btn_icon:not(.saved) {
+  color: #070721;
 }
