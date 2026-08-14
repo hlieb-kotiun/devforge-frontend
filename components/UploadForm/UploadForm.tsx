@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useRef, ChangeEvent } from 'react';
-import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import toast from 'react-hot-toast';
-import styles from './UploadForm.module.css';
+import { useState, useRef, ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import toast from "react-hot-toast";
+import styles from "./UploadForm.module.css";
 
 interface FormValues {
   file: File | null;
@@ -14,26 +14,26 @@ interface FormValues {
 
 const validationSchema = Yup.object({
   file: Yup.mixed<File>()
-    .required('Photo is required')
-    .test('fileType', 'Unsupported file format', (value) => {
+    .required("Photo is required")
+    .test("fileType", "Unsupported file format", (value) => {
       if (!value) return false;
-      return ['image/jpeg', 'image/png', 'image/webp'].includes(value.type);
+      return ["image/jpeg", "image/png", "image/webp"].includes(value.type);
     }),
 });
 
 async function uploadAvatarApi(file: File) {
   const formData = new FormData();
-  formData.append('avatar', file);
+  formData.append("avatar", file);
 
-  const response = await fetch('http://localhost:5000/users/me/avatar', {
-    method: 'PATCH',
+  const response = await fetch("http://localhost:5000/users/me/avatar", {
+    method: "PATCH",
     body: formData,
-    credentials: 'include',
+    credentials: "include",
   });
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || 'Failed to upload image');
+    throw new Error(errorData.message || "Failed to upload image");
   }
 
   return response.json();
@@ -47,11 +47,11 @@ export default function UploadForm() {
   const mutation = useMutation({
     mutationFn: uploadAvatarApi,
     onSuccess: () => {
-      toast.success('Photo uploaded successfully!');
-      router.push('/articles');
+      toast.success("Photo uploaded successfully!");
+      router.push("/articles");
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Something went wrong');
+      toast.error(error.message || "Something went wrong");
     },
   });
 
@@ -91,7 +91,7 @@ export default function UploadForm() {
           const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
             const selectedFile = e.target.files?.[0];
             if (selectedFile) {
-              setFieldValue('file', selectedFile);
+              setFieldValue("file", selectedFile);
               setPreviewUrl(URL.createObjectURL(selectedFile));
             }
           };
@@ -109,13 +109,13 @@ export default function UploadForm() {
 
               <div
                 className={`${styles.avatarContainer} ${
-                  previewUrl ? styles.avatarContainerFilled : ''
+                  previewUrl ? styles.avatarContainerFilled : ""
                 }`}
                 onClick={handleCircleClick}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') handleCircleClick();
+                  if (e.key === "Enter" || e.key === " ") handleCircleClick();
                 }}
               >
                 {previewUrl ? (
@@ -141,10 +141,10 @@ export default function UploadForm() {
                 type="submit"
                 disabled={!values.file || mutation.isPending}
                 className={`${styles.saveButton} ${
-                  values.file ? styles.saveButtonActive : ''
+                  values.file ? styles.saveButtonActive : ""
                 }`}
               >
-                {mutation.isPending ? 'Saving...' : 'Save'}
+                {mutation.isPending ? "Saving..." : "Save"}
               </button>
             </Form>
           );
