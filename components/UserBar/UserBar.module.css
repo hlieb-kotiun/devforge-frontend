@@ -1,58 +1,11 @@
-.loggedInUserContainer {
-  display: none;
-}
+.loggedInUserContainer { display: flex; align-items: center; gap: 24px; margin-top: auto; padding-top: 40px; }
+.loggedInUserAvatarContainer { display: flex; align-items: center; gap: 8px; }
+.loggedInUserAvatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.loggedInUserName { color: var(--green-darker); font-size: 12px; font-weight: 700; }
+.logoutBtn { display: flex; align-items: center; justify-content: center; width: 24px; height: 32px; padding: 0 0 0 16px; border: 0; border-left: 1px solid var(--green-darker); background: transparent; }
+.logoutIcon { fill: transparent; stroke: var(--green); }
+.logoutBtn:focus-visible { outline: 1px solid var(--green); outline-offset: 3px; }
 
 @media screen and (min-width: 1440px) {
-  .loggedInUserContainer {
-    display: flex;
-    align-items: center;
-    gap: 33px;
-  }
-
-  .loggedInUserAvatarContainer {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .loggedInUserAvatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: none;
-    width: 32px;
-    height: 32px;
-  }
-  .loggedInUserName {
-    position: relative;
-    font-size: 12px;
-    color: var(--green-darker);
-  }
-
-  .loggedInUserName::after {
-    content: "";
-    position: absolute;
-    right: -16px;
-    bottom: -50%;
-    width: 1px;
-    height: 33px;
-    background: var(--green-darker);
-  }
-
-  .logoutBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    width: 24px;
-    height: 24px;
-    border: none;
-    background-color: transparent;
-  }
-
-  .logoutIcon {
-    fill: transparent;
-    stroke: var(--green);
-  }
+  .loggedInUserContainer { gap: 16px; margin: 0 0 0 32px; padding: 0; }
 }

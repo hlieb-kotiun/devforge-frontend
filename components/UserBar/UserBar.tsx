@@ -1,24 +1,28 @@
-"use client";
-import css from "./UserBar.module.css";
 import Image from "next/image";
+import css from "./UserBar.module.css";
 
-const UserBar = () => {
+type UserBarProps = {
+  name: string;
+  avatar: string;
+  onLogout: () => void;
+};
+
+const UserBar = ({ name, avatar, onLogout }: UserBarProps) => {
   return (
     <div className={css.loggedInUserContainer}>
       <div className={css.loggedInUserAvatarContainer}>
-        {/* В Image потрібно буде додати аватара для залогіниного користувача */}
         <Image
           className={css.loggedInUserAvatar}
-          src="/images/test-avatar.png"
-          alt="User avatar"
-          width="32"
-          height="32"
+          src={avatar}
+          alt={`${name}'s avatar`}
+          width={32}
+          height={32}
         />
-        <p className={css.loggedInUserName}>Test</p>
+        <p className={css.loggedInUserName}>{name}</p>
       </div>
 
-      <button className={css.logoutBtn}>
-        <svg className={css.logoutIcon} width="16" height="15">
+      <button className={css.logoutBtn} type="button" onClick={onLogout} aria-label="Log out">
+        <svg className={css.logoutIcon} width="16" height="15" aria-hidden="true">
           <use href="/sprite.svg#icon-logout" />
         </svg>
       </button>
