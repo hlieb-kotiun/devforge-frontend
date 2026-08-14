@@ -16,19 +16,31 @@ export async function GET(
       params: { page, limit },
     });
 
+    if (Array.isArray(res.data)) {
+      return NextResponse.json(
+        {
+          articles: res.data,
+          total: res.data.length,
+          page: 1,
+          limit: res.data.length,
+        },
+        { status: res.status },
+      );
+    }
+
     return NextResponse.json(res.data, { status: res.status });
   } catch (error) {
     if (isAxiosError(error)) {
       logErrorResponse(error.response?.data);
       return NextResponse.json(
         { error: error.message, response: error.response?.data },
-        { status: error.status ?? 500 }
+        { status: error.status ?? 500 },
       );
     }
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
