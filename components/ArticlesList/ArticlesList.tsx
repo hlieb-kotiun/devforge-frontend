@@ -1,10 +1,23 @@
-// TODO: тимчасова заглушка, видалити коли колега зробить реальний компонент
-type ArticlesListProps = {
-  ownerId: string;
-};
+import type { Article } from "@/types/article";
+import ArticleCard from "@/components/ArticleCard/ArticleCard";
+import css from "./ArticlesList.module.css";
 
-const ArticlesList = ({ ownerId }: ArticlesListProps) => {
-  return <p>TODO: articles list for author {ownerId}</p>;
+interface ArticlesListProps {
+  articles: Article[];
+}
+
+const ArticlesList = ({ articles }: ArticlesListProps) => {
+  if (articles.length === 0) {
+    return <p className={css.empty}>No articles found.</p>;
+  }
+
+  return (
+    <ul className={css.list}>
+      {articles.map((article) => (
+        <ArticleCard key={article._id} article={article} />
+      ))}
+    </ul>
+  );
 };
 
 export default ArticlesList;
