@@ -1,0 +1,53 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 16px;
+  margin: 0 0 24px;
+}
+
+.message {
+  font-size: 18px;
+  color: var(--black);
+  text-align: center;
+  padding: 40px 0;
+}
+
+.loadMoreButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 auto;
+  border-radius: 64px;
+  padding: 16px;
+  width: 100%;
+  max-width: 340px;
+  height: 57px;
+  background: var(--green);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.loadMoreButton:hover:not(:disabled) {
+  background: var(--green-darker);
+}
+
+.loadMoreButton:focus-visible {
+  box-shadow: 0 0 0 6px var(--focus-shadow), 0 0 2px var(--white);
+}
+
+.loadMoreButton:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (min-width: 768px) {
+  .list {
+    gap: 24px;
+  }
+}
+
