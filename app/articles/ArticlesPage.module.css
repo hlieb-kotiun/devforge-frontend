@@ -1,0 +1,36 @@
+.page {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter,
+.activeFilter,
+.loadMore {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.activeFilter {
+  font-weight: 700;
+}
+
+.loadMore {
+  display: block;
+  margin: 32px auto 0;
+}

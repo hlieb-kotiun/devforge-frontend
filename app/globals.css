@@ -32,6 +32,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.appShell {
+  min-height: 100vh;
+}
+
+.appShell > main {
+  flex: 1;
+}
+
+.appShell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.appShell > main {
+  flex: 1;
+}
+
 /* reset styles */
 h1,
 h2,
