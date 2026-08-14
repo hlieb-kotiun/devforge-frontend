@@ -4,6 +4,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import css from './ArticleForm.module.css'
 
 interface ArticleFormValues {
   title: string;
@@ -39,8 +40,7 @@ const ArticleForm: React.FC = () => {
       formData.append("title", values.title);
       formData.append("content", values.content);
       if (values.image) formData.append("image", values.image);
-
-      // додаємо поточну дату без поля у формі
+       
       formData.append("date", new Date().toISOString());
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles`, {
@@ -69,22 +69,21 @@ const ArticleForm: React.FC = () => {
       onSubmit={handleSubmit}
     >
       {({ setFieldValue }) => (
-        <Form>
-          <div>
-            <label htmlFor="title">Заголовок</label>
-            <Field id="title" name="title" />
-            <ErrorMessage name="title" component="div" className="error" />
+        <Form className={css.createArticleForm}>
+          <div className={css.createArticleTitleField}>
+            <label htmlFor="title" className={css.createArticleLabel}>Title</label>
+            <Field className={css.createArticleInput} id="title" name="title" />
+            <ErrorMessage className={css.createArticleError} name="title" component="div" />
           </div>
 
-          <div>
-            <label htmlFor="content">Текст</label>
+          <div className={css.createArticleTextField}>
             <Field as="textarea" id="content" name="content" />
-            <ErrorMessage name="content" component="div" className="error" />
+            <ErrorMessage name="content" component="div" className={css.createArticleError} />
           </div>
 
           <div>
             <label htmlFor="image">Фото</label>
-            <input
+                      <input className={css.createArticleHiddenInput}
               id="image"
               name="image"
               type="file"
@@ -97,7 +96,7 @@ const ArticleForm: React.FC = () => {
             <ErrorMessage name="image" component="div" className="error" />
           </div>
 
-          <button type="submit">Publish</button>
+          <button type="submit" className={css.createArticleSubmitButton}>Publish</button>
         </Form>
       )}
     </Formik>
