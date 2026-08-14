@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { randomInt } from "node:crypto";
-import SaveArticleButton from "./SaveArticleButton";
+import SaveArticleButton from "@/components/SaveArticleButton/SaveArticleButton";
 
 import {
   getArticleById,
@@ -85,6 +85,7 @@ export default async function ArticlePage({
             fill
             sizes="(min-width: 1440px) 1226px, (min-width: 768px) 704px, 361px"
             priority
+            unoptimized
             className={styles.image}
           />
         </div>

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_URL = "http://localhost:5000";
+const API_URL = process.env.BACKEND_URL;
 
 type RouteContext = {
   params: Promise<{

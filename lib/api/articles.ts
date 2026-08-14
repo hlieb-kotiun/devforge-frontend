@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = process.env.BACKEND_URL;
 
 export type Article = {
   _id: string;
@@ -57,7 +57,7 @@ export async function getUserById(
   id: string,
 ): Promise<User> {
   const response = await fetch(
-    `http://localhost:5000/users/${id}`,
+    `${API_URL}/users/${id}`,
     {
       cache: "no-store",
     },

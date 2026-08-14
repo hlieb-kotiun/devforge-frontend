@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./ArticlePage.module.css";
+import styles from "./SaveArticleButton.module.css";
 
 type SaveArticleButtonProps = {
   articleId: string;
