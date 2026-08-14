@@ -1,5 +1,16 @@
 const API_URL = process.env.BACKEND_URL;
 
+export type User = {
+  _id: string;
+  name?: string;
+  username?: string;
+  avatarUrl?: string;
+  avatar?: string;
+  articlesAmount?: number;
+};
+
+type ArticleOwner = string | Pick<User, "_id" | "name" | "username">;
+
 export type Article = {
   _id: string;
   img: string;
@@ -7,7 +18,7 @@ export type Article = {
   desc: string;
   article: string;
   rate: number;
-  ownerId: string;
+  ownerId: ArticleOwner;
   date: string;
   createdAt: string;
   updatedAt: string;
@@ -44,18 +55,11 @@ export async function getArticles(
 
   return response.json();
 }
-export type User = {
-  _id: string;
-  name?: string;
-  username?: string;
-  avatarUrl?: string;
-  avatar?: string;
-  articlesAmount?: number;
-};
-
 export async function getUserById(
-  id: string,
+  owner: ArticleOwner,
 ): Promise<User> {
+  const id = typeof owner === "string" ? owner : owner._id;
+
   const response = await fetch(
     `${API_URL}/users/${id}`,
     {
