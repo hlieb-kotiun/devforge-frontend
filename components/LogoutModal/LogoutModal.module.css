@@ -1,0 +1,146 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: color-mix(in srgb, var(--black) 60%, transparent);
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 361px;
+  padding: 60px 16px 32px;
+  border-radius: 32px;
+  color: var(--black);
+  text-align: center;
+  background-color: var(--light-green);
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  color: var(--black);
+  background-color: transparent;
+  place-items: center;
+}
+
+.closeIcon {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.title {
+  margin-bottom: 16px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.375;
+}
+
+.description {
+  margin-bottom: 24px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.375;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.logoutButton,
+.cancelButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 24px;
+  border: 1px solid transparent;
+  border-radius: 64px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.375;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.logoutButton {
+  color: var(--white);
+  background-color: var(--green);
+}
+
+.cancelButton {
+  color: var(--black);
+  border-color: var(--black);
+  background-color: transparent;
+}
+
+.closeButton:hover {
+  opacity: 0.7;
+}
+
+.logoutButton:hover {
+  background-color: var(--green-darker);
+}
+
+.cancelButton:hover {
+  color: var(--white);
+  border-color: var(--green-darker);
+  background-color: var(--green-darker);
+}
+
+.closeButton:disabled,
+.logoutButton:disabled,
+.cancelButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.closeButton:focus-visible,
+.logoutButton:focus-visible,
+.cancelButton:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    max-width: 420px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .actions {
+    flex-direction: row;
+    gap: 26px;
+  }
+
+  .logoutButton,
+  .cancelButton {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoutButton,
+  .cancelButton {
+    transition: none;
+  }
+}

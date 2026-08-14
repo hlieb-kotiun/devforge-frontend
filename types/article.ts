@@ -1,5 +1,5 @@
 export interface Article {
-  _id: { $oid: string };
+  _id: string;
   img: string;
   title: string;
   desc: string;
@@ -10,4 +10,5 @@ export interface Article {
     name: string;
   };
   date: string;
+  author: string;
 }

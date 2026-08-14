@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import styles from "./UploadForm.module.css";
 
 interface FormValues {
@@ -65,7 +65,6 @@ export default function UploadForm() {
 
   return (
     <div className={styles.card}>
-      <Toaster position="top-right" />
       <button
         type="button"
         className={styles.closeButton}
