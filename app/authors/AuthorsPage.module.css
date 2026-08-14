@@ -1,0 +1,41 @@
+.section {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.content {
+  padding: 0 16px;
+}
+
+.innerWrapper {
+  margin: 0 auto;
+}
+
+.title {
+  width: 100%;
+  margin: 0 0 16px;
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--heading-black);
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding: 0 32px;
+  }
+
+  .innerWrapper {
+    max-width: 596px; 
+  }
+}
+
+@media (min-width: 1440px) {
+  .content {
+    padding: 0;
+  }
+
+  .innerWrapper {
+    max-width: 1216px;
+  }
+}

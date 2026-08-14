@@ -6,9 +6,17 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "http",
+        hostname: "localhost",
+        port: "5000",
+      },
+      {
         protocol: "https",
         hostname: "ftp.goit.study",
-        pathname: "/img/harmoniq/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
       },
     ],
   },
