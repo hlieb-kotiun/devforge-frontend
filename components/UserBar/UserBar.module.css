@@ -1,8 +1,8 @@
 .loggedInUserContainer { display: flex; align-items: center; gap: 24px; margin-top: auto; padding-top: 40px; }
 .loggedInUserAvatarContainer { display: flex; align-items: center; gap: 8px; }
-.loggedInUserAvatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
-.loggedInUserName { color: var(--green-darker); font-size: 12px; font-weight: 700; }
-.logoutBtn { display: flex; align-items: center; justify-content: center; width: 24px; height: 32px; padding: 0 0 0 16px; border: 0; border-left: 1px solid var(--green-darker); background: transparent; }
+.loggedInUserAvatar { width: 40px; height: 40px; border-radius: 256px; object-fit: cover; }
+.loggedInUserName { color: var(--green-darker); font-family: var(--font-family); font-size: 12px; font-weight: 700; }
+.logoutBtn { display: flex; align-items: center; justify-content: center; width: 40px; height: 39px; padding: 0 0 0 16px; border: 0; border-left: 1px solid var(--green-darker); background: transparent; }
 .logoutIcon { fill: transparent; stroke: var(--green); }
 .logoutBtn:focus-visible { outline: 1px solid var(--green); outline-offset: 3px; }
 

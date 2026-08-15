@@ -39,6 +39,7 @@ const Header = ({
   const action = isAuthorized
     ? { href: "/articles/new", label: "Create an article" }
     : { href: "/register", label: "Join now" };
+  const actionClass = isAuthorized ? css.createArticleLink : css.joinLink;
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -54,7 +55,9 @@ const Header = ({
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className={`${css.headerSection} ${isMenuOpen ? css.menuOpen : ""}`}>
+    <header
+      className={`${css.headerSection} ${isAuthorized ? css.authorizedHeader : css.guestHeader} ${isMenuOpen ? css.menuOpen : ""}`}
+    >
       <div className={`container ${css.headerContainer}`}>
         <Link href="/" className={css.logoLink} aria-label="Harmoniq home">
           <svg className={css.logo} width="149" height="35" aria-hidden="true">
@@ -63,11 +66,11 @@ const Header = ({
         </Link>
 
         <div className={css.headerActions}>
-          <Link href={action.href} className={`${css.actionLink} ${css.headerAction}`}>
+          <Link href={action.href} className={`${css.actionLink} ${css.headerAction} ${actionClass}`}>
             {action.label}
           </Link>
           <button
-            className={css.menuButton}
+            className={`${css.menuButton} ${isMenuOpen ? css.closeButton : ""}`}
             type="button"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
@@ -108,7 +111,7 @@ const Header = ({
 
           <Link
             href={action.href}
-            className={`${css.actionLink} ${css.menuAction}`}
+            className={`${css.actionLink} ${css.menuAction} ${actionClass}`}
             onClick={closeMenu}
           >
             {action.label}

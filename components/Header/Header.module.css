@@ -1,6 +1,7 @@
 .headerSection {
   position: relative;
   z-index: 20;
+  --font-family: var(--font-manrope), sans-serif;
   background-color: var(--light-green);
 }
 
@@ -9,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 393px;
   padding: 14px 16px;
 }
 
@@ -20,11 +22,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 46px;
+  height: 46px;
   padding: 12px 16px;
   border-radius: 64px;
-  background-color: var(--green);
+  background: var(--green);
   color: var(--white);
+  font-family: var(--font-family);
   font-size: 16px;
   font-weight: 700;
   line-height: 1.38;
@@ -34,7 +37,10 @@
 
 .headerAction { display: none; }
 .menuOpen .headerAction { display: inline-flex; }
-.menuButton { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 0; background: transparent; }
+.joinLink { width: 100px; }
+.createArticleLink { width: 161px; }
+.menuButton { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 37px; padding: 0; border: 0; background: transparent; }
+.closeButton { height: 32px; }
 .menuIcon { fill: none; stroke: var(--green-darker); stroke-width: 2.4; }
 .closeIcon { fill: none; }
 
@@ -44,32 +50,34 @@
   right: 0;
   left: 0;
   display: none;
-  min-height: calc(100vh - 74px);
+  height: 302px;
   padding: 48px 16px 32px;
   background-color: var(--light-green);
 }
 
+.authorizedHeader .menuPanel { height: 374px; }
 .menuPanelOpen { display: flex; flex-direction: column; }
 .nav { display: flex; flex-direction: column; align-items: center; gap: 28px; }
-.navLink { color: var(--green-darker); font-size: 14px; font-weight: 700; line-height: 1.4; }
+.navLink { color: var(--green-darker); font-family: var(--font-family); font-size: 12px; font-weight: 700; line-height: 1.4; }
 .activeLink { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .menuAction { display: none; }
 .actionLink:hover, .actionLink:focus-visible { background-color: var(--green-darker); }
 .navLink:hover, .navLink:focus-visible, .menuButton:focus-visible { color: var(--green); outline: none; }
 
 @media screen and (min-width: 768px) {
-  .headerContainer { padding: 14px 32px; }
+  .headerContainer { max-width: 768px; padding: 14px 32px; }
   .headerAction { display: inline-flex; }
-  .menuPanel { min-height: calc(100vh - 74px); padding: 92px 32px 40px; }
+  .menuPanel { height: 224px; padding: 32px 32px 16px; }
+  .authorizedHeader .menuPanel { height: 295px; }
 }
 
 @media screen and (min-width: 1440px) {
-  .headerContainer { padding: 14px 108px; }
+  .headerContainer { max-width: 1440px; padding: 14px 108px; }
   .headerActions { display: none; }
-  .menuPanel { position: static; display: flex; flex-direction: row; align-items: center; min-height: auto; margin-left: auto; padding: 0; background: transparent; }
+  .menuPanel { position: static; display: flex; flex-direction: row; align-items: center; height: auto; margin-left: auto; padding: 0; background: transparent; }
   .menuPanel nav { margin-left: auto; }
   .nav { flex-direction: row; gap: 32px; }
-  .navLink { position: relative; font-size: 12px; }
+  .navLink { position: relative; }
   .activeLink { text-decoration: none; }
   .activeLink::after { position: absolute; right: 0; bottom: -5px; left: 0; height: 1px; content: ""; background-color: currentColor; }
   .menuAction { display: inline-flex; margin-left: 32px; }
