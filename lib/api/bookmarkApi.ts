@@ -1,6 +1,6 @@
 async function addArticleToSavedArticles(articleId: string) {
   const response = await fetch(
-    `http://localhost:5000/user/saved-articles/${articleId}`,
+    `${process.env.BACKEND_URL}/user/saved-articles/${articleId}`,
     { method: 'POST', credentials: 'include' },
   );
   if (!response.ok) {
@@ -11,7 +11,7 @@ async function addArticleToSavedArticles(articleId: string) {
 }
 async function removeArticleFromSavedArticles(articleId: string) {
   const response = await fetch(
-    `http://localhost:5000/user/saved-articles/${articleId}`,
+    `${process.env.BACKEND_URL}/user/saved-articles/${articleId}`,
     { method: 'DELETE', credentials: 'include' },
   );
   if (!response.ok) {
