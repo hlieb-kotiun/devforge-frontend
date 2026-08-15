@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .card__actions {
   display: flex;
   flex-direction: row;
@@ -60,3 +61,30 @@
   /* color: var(--white) !important; */
   outline: none;
 }
+=======
+.buttonAddToBookmarks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid var(--green-darker);
+    border-radius: 64px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.icon {
+    stroke-width: 0.50px;
+    stroke: var(--green-darker);
+}
+
+.active {
+    background: var(--green);
+}
+
+.active .icon {
+    color: var(--light-green);
+}
+>>>>>>> main
