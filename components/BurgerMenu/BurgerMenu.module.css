@@ -1,0 +1,66 @@
+css .menuWrapper {
+  width: 100%;
+  background-color: var(--light-green);
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.navLink {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--green-darker);
+}
+
+.activeLink {
+  color: var(--green);
+}
+
+.primaryBtn {
+  display: block;
+  padding: 12px 20px;
+  background-color: var(--green);
+  color: var(--white);
+  text-align: center;
+  border-radius: 64px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.userBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoutBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logoutIcon {
+  width: 32px;
+  height: 32px;
+  fill: var(--green-darker);
+}
+
+@media screen and (min-width: 1440px) {
+  .menuWrapper {
+    display: none;
+  }
+}
