@@ -6,20 +6,26 @@ import { useRouter } from "next/navigation";
 import css from "./LoginForm.module.css";
 import Link from "next/link";
 import * as Yup from "yup";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { login, LoginRequest } from "@/lib/api";
 
 interface LoginFormValues {
   email: string;
   password: string;
 }
+
 const initialValues: LoginFormValues = {
   email: "",
   password: "",
 };
+
 const LoginFormSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email format")
     .max(64, "Email is too long")
     .required("Email is required"),
+
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .max(64, "Password is too long")
@@ -29,13 +35,32 @@ const LoginFormSchema = Yup.object({
 export default function LoginForm() {
   const fieldId = useId();
   const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
-  const handleSubmit = (
+
+  const handleSubmit = async (
     values: LoginFormValues,
     actions: FormikHelpers<LoginFormValues>,
   ) => {
-    actions.resetForm();
-    router.push("/profile");
+    try {
+      const data: LoginRequest = {
+        email: values.email,
+        password: values.password,
+      };
+      await login(data);
+      actions.resetForm();
+      router.push("/profile");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message = error.response?.data?.message ?? "Login failed";
+
+        toast.error(message);
+      } else {
+        toast.error("Something went wrong");
+      }
+    } finally {
+      actions.setSubmitting(false);
+    }
   };
 
   return (
@@ -44,70 +69,89 @@ export default function LoginForm() {
       validationSchema={LoginFormSchema}
       onSubmit={handleSubmit}
     >
-      <div className={css.conteinerform}>
-        <h2 className={css.title}>Login</h2>
-        <Form>
-          <div className={css.fieldGroup}>
-            <label htmlFor={`${fieldId}-email`} className={css.label}>
-              Enter your email address
-            </label>
-            <Field
-              type="email"
-              name="email"
-              id={`${fieldId}-email`}
-              className={css.input}
-              autoComplete="email"
-              placeholder="email@gmail.com"
-            />
-            <ErrorMessage name="email" component="span" className={css.error} />
-          </div>
-          <div className={css.fieldGroup}>
-            <label htmlFor={`${fieldId}-password`} className={css.label}>
-              Enter a password
-            </label>
-            <div className={css.inputWrapper}>
+      {({ isSubmitting }) => (
+        <div className={css.conteinerform}>
+          <h2 className={css.title}>Login</h2>
+
+          <Form>
+            <div className={css.fieldGroup}>
+              <label htmlFor={`${fieldId}-email`} className={css.label}>
+                Enter your email address
+              </label>
+
               <Field
-                type={showPassword ? "text" : "password"}
-                name="password"
-                id={`${fieldId}-password`}
+                type="email"
+                name="email"
+                id={`${fieldId}-email`}
                 className={css.input}
-                autoComplete="current-password"
-                placeholder="*********"
+                autoComplete="email"
+                placeholder="email@gmail.com"
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
-                aria-label={showPassword ? "Hide password" : "Show password"}
-                className={css.iconButton}
-              >
-                <svg className={css.icon}>
-                  <use
-                    href={
-                      showPassword
-                        ? "/sprite.svg#Controls=eye-crossed, Type=stroke, Size=32px"
-                        : "/sprite.svg#Controls=eye, Type=stroke, Size=32px"
-                    }
-                  />
-                </svg>
-              </button>
+
+              <ErrorMessage
+                name="email"
+                component="span"
+                className={css.error}
+              />
             </div>
-            <ErrorMessage
-              name="password"
-              component="span"
-              className={css.error}
-            />
-            <button type="submit" className={css.submitButton}>
-              Login
-            </button>
-            <p className={css.loginParagraph}>
-              Don’t have an account?{" "}
-              <Link href={"/register"} className={css.loginLink}>
-                Register
-              </Link>
-            </p>
-          </div>
-        </Form>
-      </div>
+
+            <div className={css.fieldGroup}>
+              <label htmlFor={`${fieldId}-password`} className={css.label}>
+                Enter a password
+              </label>
+
+              <div className={css.inputWrapper}>
+                <Field
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  id={`${fieldId}-password`}
+                  className={css.input}
+                  autoComplete="current-password"
+                  placeholder="*********"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  className={css.iconButton}
+                >
+                  <svg className={css.icon}>
+                    <use
+                      href={
+                        showPassword
+                          ? "/sprite.svg#Controls=eye-crossed, Type=stroke, Size=32px"
+                          : "/sprite.svg#Controls=eye, Type=stroke, Size=32px"
+                      }
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <ErrorMessage
+                name="password"
+                component="span"
+                className={css.error}
+              />
+
+              <button
+                type="submit"
+                className={css.submitButton}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Logging in..." : "Login"}
+              </button>
+
+              <p className={css.loginParagraph}>
+                Don’t have an account?{" "}
+                <Link href="/register" className={css.loginLink}>
+                  Register
+                </Link>
+              </p>
+            </div>
+          </Form>
+        </div>
+      )}
     </Formik>
   );
 }

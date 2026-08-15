@@ -1,4 +1,30 @@
 import type { Article } from "@/types/article";
+import axios from "axios";
+
+const nextServer = axios.create({
+  baseURL: "/api",
+  withCredentials: true,
+});
+
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
+
+export type User = {
+  id: string;
+  email: string;
+  userName?: string;
+  photoUrl?: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export const login = async (data: LoginRequest) => {
+  const res = await nextServer.post<User>("/auth/login", data);
+
+  return res.data;
+};
 
 export interface ArticlesResponse {
   articles: Article[];
