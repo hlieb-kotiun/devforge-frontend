@@ -1,89 +1,89 @@
 .popularSection {
-    padding: 0 16px;
-    width: 100%;
-}      
+  padding: 0 16px;
+  width: 100%;
+}
 
 .popularContent {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
 }
 
 .popularTitle {
-    font-weight: 700;
-    font-size: 32px;
-    color: var(--black);
-    margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--black);
+  margin-bottom: 16px;
 }
 
 .popularLink {
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--green-darker);  
-    height: 28px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--green-darker);
+  height: 28px;
 }
 
 .linkIcon {
-    fill: currentColor;
-    margin-left: 12px;
+  fill: currentColor;
+  margin-left: 12px;
 }
 
 .popularList {
-    display: flex;
-    flex-direction: column;
-    gap: 24px; 
-    padding-bottom: 72px;
-}      
-
-/* Tablet (768px) */
-@media (min-width: 768px) {
-    .popularSection {
-        padding: 72px 32px;
-    }      
-
-    .popularLink {
-        display: none;
-    }
-
-    .popularList {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding: 0;
-        width: 704px;
-    }       
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 72px;
 }
 
+/* Tablet (768px) */
+@media (min-width: 768px) {   
+
+  .popularSection {
+    padding: 72px 32px;
+  }
+
+  .popularLink {
+    display: none;
+  }
+
+  .popularList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0;
+    width: 704px;
+  }
+}
 
 /* Desktop (1440px) */
 @media (min-width: 1440px) {
-    .popularSection {
-        padding: 72px 107.5px;
-    }    
+  .popularSection {
+    padding: 72px 107.5px;
+  }   
 
-    .popularContent {
-        display: flex;
-        flex-direction: row;
-        height: 55px;
-        margin-bottom: 16px;
-    }
+  .popularContent {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin-bottom: 16px;
+  }
 
-    .popularTitle {
-        font-size: 40px;
-        margin-bottom: 0;
-    }
+  .popularTitle {
+    font-size: 40px;
+    margin-bottom: 0;
+  }
 
-    .popularLink {
-        display: flex;
-        margin-left: 756px;
-        padding: 13.5px 0;
-    }
+  .popularLink {
+    display: flex;
+    margin-left: 756px;
+    padding: 13.5px 0;
+  }
 
-    .popularList {
-        display: flex;
-        flex-direction: row;
-        gap: 24px;
-        padding-bottom: 0;
-        width: 1225px;
-    }    
+  .popularList {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding-bottom: 0;
+    width: 1225px;
+  }
 }

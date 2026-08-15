@@ -2,16 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+
   images: {
     remotePatterns: [
-<<<<<<< HEAD
-      {   
-        protocol: "https",
-        hostname: "ftp.goit.study",
-      },
-       { protocol: "https",          
-         hostname: "res.cloudinary.com"    
-=======
       {
         protocol: "http",
         hostname: "localhost",
@@ -24,7 +17,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
->>>>>>> main
       },
     ],
   },

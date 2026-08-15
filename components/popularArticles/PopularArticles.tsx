@@ -10,7 +10,6 @@ import Link from "next/link";
 
 export default function PopularArticles() {
   const [articles, setArticles] = React.useState<Article[]>([]);
-  const [bookmarks, setBookmarks] = React.useState<string[]>([]);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -19,12 +18,7 @@ export default function PopularArticles() {
       setArticles(res.articles || res);
     };
     fetchData();
-  }, []);
-
-  const handleSave = (id: string) => {
-  setBookmarks((prev) => [...prev, id]);
-  router.push("/articles?filter=bookmarks");
-};
+  }, []);    
 
   const handleLoadMore = (id: string) => {
     router.push(`/articles/${id}`);
@@ -32,7 +26,7 @@ export default function PopularArticles() {
 
   return (
     <section className={css.popularSection}>
-      <div className="container">
+      <div className={`container ${css.popularArticlesContainer}`}>
         <div className={css.popularContent}>
           <h2 className={css.popularTitle}>Popular Articles</h2>
           <Link className={css.popularLink} href="/articles">
@@ -49,8 +43,8 @@ export default function PopularArticles() {
               <ArticlesItem
                 key={article._id}
                 article={article}
-                onLoadMore={handleLoadMore}
-                onSave={handleSave}
+                onLoadMore={handleLoadMore} 
+                isAuthenticated={true}
               />
             ))}
         </ul>
