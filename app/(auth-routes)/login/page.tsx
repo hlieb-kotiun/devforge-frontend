@@ -1,8 +1,10 @@
+import LoginForm from "@/components/LoginForm/LoginFormgit";
+import css from "@/app/(auth-routes)/login/LoginPage.module.css";
 const LoginPage = () => {
   return (
-    <section className="">
+    <section className={css.login_section}>
       <div className={`container`}>
-        {/* Test h1 tag, must be deleted */} <h1>LoginPage </h1>
+        <LoginForm />
       </div>
     </section>
   );
