@@ -1,4 +1,6 @@
 import { AboutUs } from "../components/AboutUs/AboutUs";
+import PopularArticles from "@/components/popularArticles/PopularArticles";
+import { TopCreators } from "../components/TopCreators/TopCreators";
 import Hero from "../components/Hero/Hero";
 import styles from "../components/Hero/Hero.module.css";
 import Link from "next/link";
@@ -41,6 +43,8 @@ export default function HomePage() {
       </div>
       <Hero />
       <AboutUs />
+      <PopularArticles />
+      <TopCreators />
     </main>
   );
 }

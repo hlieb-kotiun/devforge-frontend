@@ -5,6 +5,8 @@ import "./container.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/Footer/Footer";
+import { GlobalLoader } from "@/components/GlobalLoader/GlobalLoader";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -44,12 +46,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${manrope.variable} ${merienda.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${manrope.variable} ${merienda.variable}`}
+    >
       <body>
         <TanStackProvider>
-          <Header />
-          <Toaster position="top-right" reverseOrder={false} />
-          {children}
+          <div className="appShell">
+            <Header />
+            <Toaster position="top-right" reverseOrder={false} />
+            <main>{children}</main>
+            <Footer />
+          </div>
+          <GlobalLoader />
         </TanStackProvider>
       </body>
     </html>
