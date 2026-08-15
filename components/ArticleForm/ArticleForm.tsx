@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, type ChangeEvent } from "react";
+import { useEffect ,useState, useRef, type ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { Formik, Form, type FormikHelpers } from "formik";
@@ -10,19 +10,19 @@ import Image from "next/image";
 import styles from "./ArticleForm.module.css";
 
 interface ArticleFormValues {
-  image: File | null;
+  img: File | null;
   title: string;
   desc: string;
 }
 
 const initialValues: ArticleFormValues = {
-  image: null,
+  img: null,
   title: "",
   desc: "",
 };
 
 const validationSchema = Yup.object({
-  image: Yup.mixed<File>()
+  img: Yup.mixed<File>()
     .nullable()
     .required("Please upload an image")
     .test("fileType", "Use JPEG, PNG, or WebP", (file) =>
@@ -39,10 +39,10 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 async function createArticle(values: ArticleFormValues) {
   const formData = new FormData();
-  formData.append("image", values.image as File); // multer чекає 'image'
+  formData.append("img", values.img as File);
   formData.append("title", values.title.trim());
   formData.append("desc", values.desc.trim());  
-  formData.append("date", new Date().toISOString().slice(0, 10)); // YYYY-MM-DD
+  formData.append("date", new Date().toISOString().slice(0, 10)); 
 
   const response = await fetch(`${apiUrl}/articles`, {
     method: "POST",
@@ -60,6 +60,27 @@ export default function AddArticleForm() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null); 
+  // const [isAuthorizing, setIsAuthorizing] = useState(true);
+
+  //  useEffect(() => {
+  //   const controller = new AbortController();
+
+  //   fetch(`${apiUrl}/users/me`, { credentials: "include", signal: controller.signal })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         router.replace("/login");
+  //         return;
+  //       }
+  //       setIsAuthorizing(false);
+  //     })
+  //     .catch((error: unknown) => {
+  //       if (error instanceof DOMException && error.name === "AbortError") return;
+  //       toast.error("Unable to verify your authorization");
+  //       router.replace("/login");
+  //     });
+
+  //   return () => controller.abort();
+  // }, [router]);
 
   const mutation = useMutation({
     mutationFn: createArticle,
@@ -78,7 +99,7 @@ export default function AddArticleForm() {
   ) => {
     const file = event.target.files?.[0];
     if (file) {
-      setFieldValue("image", file);
+      setFieldValue("img", file);
       setPreviewUrl(URL.createObjectURL(file));
     }
   };
@@ -87,6 +108,10 @@ export default function AddArticleForm() {
     values: ArticleFormValues,
     { setSubmitting }: FormikHelpers<ArticleFormValues>,
   ) => mutation.mutate(values, { onSettled: () => setSubmitting(false) });
+
+  // if (isAuthorizing) {
+  //   return <p aria-live="polite">Checking authorization...</p>;
+  // }
 
   return (
     <Formik<ArticleFormValues>
@@ -132,8 +157,8 @@ export default function AddArticleForm() {
                 </svg>
               )}
             </div>
-            {touched.image && errors.image && (
-              <p className={styles.createArticleError}>{errors.image}</p>
+            {touched.img && errors.img && (
+              <p className={styles.createArticleError}>{errors.img}</p>
             )}
           </div>
 
