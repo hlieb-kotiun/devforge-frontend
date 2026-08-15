@@ -3,7 +3,7 @@
 import Link from "next/link";
 import css from "./Header.module.css";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
+import UserBar from "../UserBar/UserBar";
 
 const Header = () => {
   const pathname = usePathname();
@@ -88,27 +88,7 @@ const Header = () => {
               Join now
             </Link>
           )}
-          {isAuthorized && (
-            <div className={css.loggedInUserContainer}>
-              <div className={css.loggedInUserAvatarContainer}>
-                {/* В Image потрібно буде додати аватара для залогіниного користувача */}
-                <Image
-                  className={css.loggedInUserAvatar}
-                  src="/images/test-avatar.png"
-                  alt="User avatar"
-                  width="32"
-                  height="32"
-                />
-                <p className={css.loggedInUserName}>Test</p>
-              </div>
-
-              <button className={css.logoutBtn}>
-                <svg className={css.logoutIcon} width="16" height="15">
-                  <use href="/sprite.svg#icon-logout" />
-                </svg>
-              </button>
-            </div>
-          )}
+          {isAuthorized && <UserBar />}
           <button className={css.burgerBtn} onClick={handleLogoutClick}>
             <svg height="12" width="17">
               <use
