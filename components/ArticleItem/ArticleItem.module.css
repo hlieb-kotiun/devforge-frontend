@@ -1,11 +1,12 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 12px 12px 33px 12px;
+  gap: 26.5px;
+  padding: 12px 12px 12px 12px;
   width: 100%;
+  min-width: 320px;
   max-width: 361px;
-  background: #d1e0d8;
+  background: var(--light-green);
   border-radius: 32px;
 }
 
@@ -26,15 +27,16 @@
   font-family: "Manrope", sans-serif;
   font-weight: 700;
   font-size: 16px;
-  color: #070721;
+  color: var(--black);
 }
 
 .card__title {
   font-family: "Manrope", sans-serif;
   font-weight: 700;
   font-size: 24px;
-  color: #070721;
+  color: var(--black);
   margin: 0;
+  line-height: 1.45;
 
   display: -webkit-box;
   -webkit-line-clamp: 2; /* Кількість рядків, після яких буде "..." */
@@ -49,7 +51,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.55;
-  color: #070721;
+  color: var(--black);
   margin: 0;
 
   display: -webkit-box;
@@ -67,13 +69,18 @@
 }
 
 .card__btn {
-  border: 1px solid #374f42;
+  border: 1px solid var(--green-darker);
   background: transparent;
   border-radius: 64px;
   cursor: pointer;
 
   display: inline-grid;
   place-items: center;
+}
+.card__btn:focus .card__btn:hover {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--green-darker);
+  background: var(--white);
 }
 
 .card__btn_text {
@@ -82,7 +89,7 @@
   font-family: "Manrope", sans-serif;
   font-weight: 700;
   font-size: 16px;
-  color: #374f42;
+  color: var(--green-darker);
   text-align: center;
   align-items: center;
 }
@@ -93,17 +100,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #374f42;
+  color: var(--green-darker);
   transition:
     color 0.2s ease,
     transform 0.2s ease;
 }
 
 .card__btn_icon.saved {
-  color: #ffffff;
-  background: #374f42;
+  color: var(--white);
+  background: var(--green-darker);
 }
 
 .card__btn_icon:not(.saved) {
-  color: #070721;
+  color: var(--black);
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    max-width: 340px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .card {
+    max-width: 392px;
+  }
 }

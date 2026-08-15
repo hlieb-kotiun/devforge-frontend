@@ -1,0 +1,62 @@
+.card__actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.card__btn {
+  border: 1px solid var(--green-darker);
+  background: transparent;
+  border-radius: 64px;
+  cursor: pointer;
+
+  display: inline-grid;
+  place-items: center;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.card__btn_text {
+  flex: 1;
+  height: 40px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--green-darker);
+  text-align: center;
+  align-items: center;
+}
+
+.card__btn_icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-darker);
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card__btn_icon.saved {
+  color: var(--white);
+  background: var(--green-darker);
+}
+.card__btn_icon.saved:hover,
+.card__btn_icon.saved:focus-visible {
+  color: var(--green-darker);
+}
+
+.card__btn_icon:not(.saved) {
+  color: var(--black);
+}
+.card__btn:hover,
+.card__btn:focus-visible {
+  background-color: var(--white);
+  /* color: var(--white) !important; */
+  outline: none;
+}
