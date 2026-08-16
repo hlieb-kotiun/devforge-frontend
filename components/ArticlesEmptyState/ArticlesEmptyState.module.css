@@ -1,0 +1,80 @@
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 299px;
+  padding: 24px 12px 12px;
+  border-radius: 32px;
+  background-color: var(--light-green);
+}
+
+.icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  margin-left: 12px;
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  color: var(--black);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  place-items: center;
+}
+
+.message {
+  margin-top: 30px;
+}
+
+.title {
+  margin-bottom: 16px;
+  color: var(--black);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.description {
+  color: var(--black);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin-top: auto;
+  border: 1px solid var(--green-darker);
+  border-radius: 64px;
+  color: var(--green-darker);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.link:hover {
+  background-color: var(--green-darker);
+  color: var(--white);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--green-darker);
+  outline-offset: 2px;
+}
+
+@media only screen and (min-width: 768px) {
+  .emptyState {
+    width: 522px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .emptyState {
+    width: 497px;
+  }
+}
