@@ -1,8 +1,10 @@
+import RegisterForm from "@/components/RegisterForm/RegisterForm";
+import css from "./RegisterPage.module.css";
 const RegisterPage = () => {
   return (
-    <section className="">
+    <section className={css.register_section}>
       <div className={`container`}>
-        {/* Test h1 tag, must be deleted */} <h1> RegisterPage </h1>
+        <RegisterForm />
       </div>
     </section>
   );
