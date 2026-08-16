@@ -2,14 +2,16 @@ import React from 'react';
 import Image from 'next/image';
 import css from './ArticlesItem.module.css'
 import type { Article } from '@/types/article';
+import ButtonAddToBookmarks from '../ButtonAddToBookmarks/ButtonAddToBookmarks';
 
 interface ArticlesItemProps {
   article: Article;
-  onLoadMore: (id: string) => void;
-  onSave: (id: string) => void;
+  onLoadMore: (id: string) => void; 
+  isAuthenticated: boolean;
+
 }
 
-const ArticlesItem: React.FC<ArticlesItemProps> = ({ article, onLoadMore, onSave }) => {
+const ArticlesItem: React.FC<ArticlesItemProps> = ({ article, onLoadMore, isAuthenticated }) => {
   return (
     <li className={css.popularItem}>
       <Image
@@ -37,14 +39,11 @@ const ArticlesItem: React.FC<ArticlesItemProps> = ({ article, onLoadMore, onSave
         >
           Load more
         </button>
-        <button
-          className={css.save}
-          onClick={() => onSave(article._id)}
-        >
-          <svg width={13.5} height={18}>
-            <use href='/symbol-defs.svg#icon-Vector-5'></use>
-          </svg>
-        </button>
+         <ButtonAddToBookmarks
+  articleId={article._id}
+  isAuthenticated={isAuthenticated}
+  active={false} 
+/>
         </div>
     </li>
   );

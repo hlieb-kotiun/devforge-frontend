@@ -4,9 +4,11 @@ import { api } from "../../api";
 
 export async function GET() {
   try {
-    const response = await api.get("/users/top-creators");
+    const response = await api.get("/users", {
+      params: { page: 1, perPage: 6 },
+    });
 
-    return NextResponse.json(response.data, {
+    return NextResponse.json({ creators: response.data.authors }, {
       status: response.status,
     });
   } catch (error) {

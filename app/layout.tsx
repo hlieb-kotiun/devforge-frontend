@@ -6,6 +6,7 @@ import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/Footer/Footer";
+import { GlobalLoader } from "@/components/GlobalLoader/GlobalLoader";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -58,6 +59,7 @@ export default function RootLayout({
             <main>{children}</main>
             <Footer />
           </div>
+          <GlobalLoader />
         </TanStackProvider>
       </body>
     </html>
