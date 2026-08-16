@@ -1,4 +1,4 @@
-.loggedInUserContainer { display: flex; align-items: center; gap: 24px; margin-top: auto; padding-top: 40px; }
+.loggedInUserContainer { display: flex; align-self: center; align-items: center; gap: 24px; margin-top: auto; padding-top: 40px; }
 .loggedInUserAvatarContainer { display: flex; align-items: center; gap: 8px; }
 .loggedInUserAvatar { width: 40px; height: 40px; border-radius: 256px; object-fit: cover; }
 .loggedInUserName { color: var(--green-darker); font-family: var(--font-family); font-size: 12px; font-weight: 700; }

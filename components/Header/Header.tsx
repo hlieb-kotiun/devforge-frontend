@@ -13,6 +13,37 @@ type HeaderProps = {
   userAvatar?: string;
 };
 
+type CurrentUser = {
+  name?: string;
+  username?: string;
+  avatarUrl?: string;
+  avatar?: string;
+};
+
+type AuthState = {
+  isAuthorized: boolean;
+  userName: string;
+  userAvatar: string;
+};
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+const DEFAULT_AVATAR = "/images/test-avatar.png";
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null;
+
+const getCurrentUser = (data: unknown): CurrentUser | null => {
+  if (!isRecord(data)) return null;
+
+  if (isRecord(data.user)) return data.user as CurrentUser;
+  if (isRecord(data.data) && isRecord(data.data.user)) {
+    return data.data.user as CurrentUser;
+  }
+  if (isRecord(data.data)) return data.data as CurrentUser;
+
+  return data as CurrentUser;
+};
+
 const publicNavigation = [
   { href: "/", label: "Home" },
   { href: "/articles", label: "Articles" },
@@ -28,18 +59,65 @@ const privateNavigation = [
 ];
 
 const Header = ({
-  isAuthorized = false,
-  userName = "Naomi",
-  userAvatar = "/images/test-avatar.png",
+  isAuthorized,
+  userName,
+  userAvatar,
 }: HeaderProps) => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const navigation = isAuthorized ? privateNavigation : publicNavigation;
-  const action = isAuthorized
+  const [authState, setAuthState] = useState<AuthState>({
+    isAuthorized: isAuthorized ?? false,
+    userName: userName ?? "User",
+    userAvatar: userAvatar ?? DEFAULT_AVATAR,
+  });
+  const isAuthControlled = typeof isAuthorized === "boolean";
+  const currentAuthState = isAuthControlled
+    ? {
+        isAuthorized,
+        userName: userName ?? "User",
+        userAvatar: userAvatar ?? DEFAULT_AVATAR,
+      }
+    : authState;
+  const navigation = currentAuthState.isAuthorized ? privateNavigation : publicNavigation;
+  const action = currentAuthState.isAuthorized
     ? { href: "/articles/new", label: "Create an article" }
     : { href: "/register", label: "Join now" };
-  const actionClass = isAuthorized ? css.createArticleLink : css.joinLink;
+  const actionClass = currentAuthState.isAuthorized ? css.createArticleLink : css.joinLink;
+
+  useEffect(() => {
+    if (isAuthControlled) return;
+
+    const controller = new AbortController();
+
+    const loadCurrentUser = async () => {
+      try {
+        const response = await fetch(`${API_URL}/users/me`, {
+          credentials: "include",
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          setAuthState((state) => ({ ...state, isAuthorized: false }));
+          return;
+        }
+
+        const user = getCurrentUser(await response.json());
+        setAuthState({
+          isAuthorized: true,
+          userName: user?.name ?? user?.username ?? "User",
+          userAvatar: user?.avatarUrl ?? user?.avatar ?? DEFAULT_AVATAR,
+        });
+      } catch (error) {
+        if (!(error instanceof DOMException && error.name === "AbortError")) {
+          setAuthState((state) => ({ ...state, isAuthorized: false }));
+        }
+      }
+    };
+
+    void loadCurrentUser();
+    return () => controller.abort();
+  }, [isAuthControlled, pathname]);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -56,7 +134,7 @@ const Header = ({
 
   return (
     <header
-      className={`${css.headerSection} ${isAuthorized ? css.authorizedHeader : css.guestHeader} ${isMenuOpen ? css.menuOpen : ""}`}
+      className={`${css.headerSection} ${currentAuthState.isAuthorized ? css.authorizedHeader : css.guestHeader} ${isMenuOpen ? css.menuOpen : ""}`}
     >
       <div className={`container ${css.headerContainer}`}>
         <Link href="/" className={css.logoLink} aria-label="Harmoniq home">
@@ -117,10 +195,10 @@ const Header = ({
             {action.label}
           </Link>
 
-          {isAuthorized && (
+          {currentAuthState.isAuthorized && (
             <UserBar
-              name={userName}
-              avatar={userAvatar}
+              name={currentAuthState.userName}
+              avatar={currentAuthState.userAvatar}
               onLogout={() => setIsLogoutModalOpen(true)}
             />
           )}

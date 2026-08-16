@@ -36,7 +36,6 @@
 }
 
 .headerAction { display: none; }
-.menuOpen .headerAction { display: inline-flex; }
 .joinLink { width: 100px; }
 .createArticleLink { width: 161px; }
 .menuButton { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 37px; padding: 0; border: 0; background: transparent; }
@@ -55,24 +54,35 @@
   background-color: var(--light-green);
 }
 
-.authorizedHeader .menuPanel { height: 374px; }
+.authorizedHeader .menuPanel { height: 383px; }
 .menuPanelOpen { display: flex; flex-direction: column; }
 .nav { display: flex; flex-direction: column; align-items: center; gap: 28px; }
 .navLink { color: var(--green-darker); font-family: var(--font-family); font-size: 12px; font-weight: 700; line-height: 1.4; }
 .activeLink { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
-.menuAction { display: none; }
+.menuAction { display: inline-flex; align-self: center; margin-top: 24px; }
 .actionLink:hover, .actionLink:focus-visible { background-color: var(--green-darker); }
 .navLink:hover, .navLink:focus-visible, .menuButton:focus-visible { color: var(--green); outline: none; }
 
+@media screen and (max-width: 767px) {
+  .menuPanel {
+    right: auto;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+  }
+}
+
 @media screen and (min-width: 768px) {
-  .headerContainer { max-width: 768px; padding: 14px 32px; }
+  .headerContainer { width: 100%; max-width: none; padding: 14px 32px; }
   .headerAction { display: inline-flex; }
-  .menuPanel { height: 224px; padding: 32px 32px 16px; }
+  .menuPanel { right: 0; left: 0; width: auto; height: 295px; padding: 32px 32px 16px; transform: none; }
   .authorizedHeader .menuPanel { height: 295px; }
+  .menuAction { display: none; }
 }
 
 @media screen and (min-width: 1440px) {
-  .headerContainer { max-width: 1440px; padding: 14px 108px; }
+  .headerSection { height: 74px; }
+  .headerContainer { height: 74px; max-width: 1440px; padding: 14px 108px; }
   .headerActions { display: none; }
   .menuPanel { position: static; display: flex; flex-direction: row; align-items: center; height: auto; margin-left: auto; padding: 0; background: transparent; }
   .menuPanel nav { margin-left: auto; }
@@ -80,5 +90,5 @@
   .navLink { position: relative; }
   .activeLink { text-decoration: none; }
   .activeLink::after { position: absolute; right: 0; bottom: -5px; left: 0; height: 1px; content: ""; background-color: currentColor; }
-  .menuAction { display: inline-flex; margin-left: 32px; }
+  .menuAction { display: inline-flex; margin: 0 0 0 32px; }
 }
