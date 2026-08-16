@@ -1,11 +1,12 @@
-import RegisterForm from "@/components/RegisterForm/RegisterForm";
-import css from "@/app/(auth-routes)/register/RegisterPage.module.css";
-
 const RegisterPage = () => {
   return (
+
     <section className={css.register_section}>
-      <div>
+        <div className={`container`} >
         <RegisterForm />
+   
+  
+ 
       </div>
     </section>
   );
