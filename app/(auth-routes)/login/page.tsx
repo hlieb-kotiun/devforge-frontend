@@ -1,9 +1,10 @@
+import css from "@/app/(auth-routes)/login/LoginPage.module.css";
+import LoginForm from "@/components/LoginForm/LoginForm";
 const LoginPage = () => {
   return (
-    <section className="">
+    <section className={css.login_section}>
       <div className={`container`}>
-        {/* Тимчасова заглушка: очікується сторінка входу. */}
-        <h1>LoginPage </h1>
+        <LoginForm />
       </div>
     </section>
   );

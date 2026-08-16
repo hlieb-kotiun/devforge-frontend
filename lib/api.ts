@@ -19,12 +19,22 @@ export type User = {
   createdAt: Date;
   updatedAt: Date;
 };
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
+
 const nextServer = axios.create({
   baseURL: "http://localhost:3000/api",
   withCredentials: true,
 });
 export const register = async (data: RegisterRequest) => {
   const res = await nextServer.post<User>("/auth/register", data);
+  return res.data;
+};
+export const login = async (data: LoginRequest) => {
+  const res = await nextServer.post<User>("/auth/login", data);
+
   return res.data;
 };
 
