@@ -1,8 +1,5 @@
-import axios, { AxiosError } from "axios";
-
-export type ApiError = AxiosError<{ error: string }>;
+import axios from "axios";
 
 export const api = axios.create({
-  baseURL: process.env.BACKEND_URL,
-  withCredentials: true,
+    baseURL: process.env.BACKEND_URL,
 });

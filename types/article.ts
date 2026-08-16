@@ -5,10 +5,10 @@ export interface Article {
   desc: string;
   article: string;
   rate: number;
-  ownerId: {
+  ownerId: {  
     _id: string;
     name: string;
   };
   date: string;
-  author: string;
+  author: string; 
 }

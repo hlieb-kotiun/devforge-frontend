@@ -1,9 +1,11 @@
+import type { Article } from "@/types/article";
 import axios from "axios";
-
-const nextServer = axios.create({
-  baseURL: "http://localhost:3000/api",
-  withCredentials: true,
-});
+export interface ArticlesResponse {
+  articles: Article[];
+  total: number;
+  page: number;
+  limit: number;
+}
 export type RegisterRequest = {
   email: string;
   password: string;
@@ -17,19 +19,24 @@ export type User = {
   createdAt: Date;
   updatedAt: Date;
 };
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
 
+const nextServer = axios.create({
+  baseURL: "http://localhost:3000/api",
+  withCredentials: true,
+});
 export const register = async (data: RegisterRequest) => {
   const res = await nextServer.post<User>("/auth/register", data);
   return res.data;
 };
-import type { Article } from "@/types/article";
+export const login = async (data: LoginRequest) => {
+  const res = await nextServer.post<User>("/auth/login", data);
 
-export interface ArticlesResponse {
-  articles: Article[];
-  total: number;
-  page: number;
-  limit: number;
-}
+  return res.data;
+};
 
 export type ArticlesFilter = "all" | "popular";
 

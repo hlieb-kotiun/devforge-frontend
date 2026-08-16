@@ -1,5 +1,5 @@
-import LoginForm from "@/components/LoginForm/LoginFormgit";
 import css from "@/app/(auth-routes)/login/LoginPage.module.css";
+import LoginForm from "@/components/LoginForm/LoginForm";
 const LoginPage = () => {
   return (
     <section className={css.login_section}>
