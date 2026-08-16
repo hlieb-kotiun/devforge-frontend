@@ -52,7 +52,9 @@ export default function LoginForm() {
       router.push("/profile");
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        const message = error.response?.data?.message ?? "Login failed";
+        const message =
+          error.response?.data?.message ??
+          `Login failed${error.response?.status ? ` (${error.response.status})` : ""}`;
 
         toast.error(message);
       } else {
