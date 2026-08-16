@@ -5,6 +5,7 @@ import css from "./Footer.module.css";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   //Для зручності константа імітація залогованого користувача
+  // Тимчасова заглушка: замінити на реальний стан авторизації.
   const isAuthorized = false;
 
   return (
