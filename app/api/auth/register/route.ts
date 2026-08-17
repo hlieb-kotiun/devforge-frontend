@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { api } from "../../api";
+import { forwardSetCookie } from "../../_utils/utils";
 import axios from "axios";
 
 export async function POST(req: NextRequest) {
@@ -7,20 +8,11 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     const apiRes = await api.post("/auth/register", body);
-    const setCookie = apiRes.headers["set-cookie"];
-    const response = NextResponse.json(apiRes.data, {
-      status: apiRes.status,
-    });
 
-    if (setCookie) {
-      const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
-
-      for (const cookieStr of cookieArray) {
-        response.headers.append("set-cookie", cookieStr);
-      }
-    }
-
-    return response;
+    return forwardSetCookie(
+      NextResponse.json(apiRes.data, { status: apiRes.status }),
+      apiRes.headers["set-cookie"],
+    );
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const data = error.response?.data as {

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { AVATAR_PLACEHOLDER } from "@/lib/utils/avatar";
 import css from "./UserBar.module.css";
 
 type UserBarProps = {
@@ -17,6 +18,7 @@ const UserBar = ({ name, avatar, onLogout }: UserBarProps) => {
           alt={`${name}'s avatar`}
           width={32}
           height={32}
+          unoptimized={avatar === AVATAR_PLACEHOLDER}
         />
         <p className={css.loggedInUserName}>{name}</p>
       </div>
