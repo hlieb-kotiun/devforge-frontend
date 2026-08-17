@@ -41,14 +41,14 @@ const AuthorsList = () => {
   const authors = data?.pages.flatMap((page) => page.authors) ?? [];
 
    useEffect(() => {
-    if (firstNewItemRef.current) {
+    if (prevLength > 0 && firstNewItemRef.current) {
       const node = firstNewItemRef.current;
       requestAnimationFrame(() => { 
       node.scrollIntoView({ behavior: "smooth", block: "start" });
       });
       firstNewItemRef.current = null; 
     }
-  }, [authors.length]);
+  }, [authors.length, prevLength]);
 
   const handleLoadMore = () => {
     setPrevLength(authors.length);
