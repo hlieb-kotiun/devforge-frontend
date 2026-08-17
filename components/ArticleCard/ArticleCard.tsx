@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Article } from "@/types/article";
+import { getAuthorName } from "@/lib/utils/article";
 import css from "./ArticleCard.module.css";
 
 interface ArticleCardProps {
@@ -22,9 +23,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
       </div>
 
       <div className={css.content}>
-        <p className={css.author}>
-          {article.ownerId?.name || "Unknown author"}
-        </p>
+        <p className={css.author}>{getAuthorName(article)}</p>
 
         <h2 className={css.title}>{article.title}</h2>
 
