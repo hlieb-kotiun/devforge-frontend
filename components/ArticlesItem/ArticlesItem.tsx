@@ -37,7 +37,7 @@ const ArticlesItem: React.FC<ArticlesItemProps> = ({ article, onLoadMore, isAuth
           className={css.loadMore}
           onClick={() => onLoadMore(article._id)}
         >
-          Load more
+          Learn more
         </button>
          <ButtonAddToBookmarks
   articleId={article._id}
