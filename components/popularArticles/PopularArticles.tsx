@@ -31,9 +31,7 @@ export default function PopularArticles() {
           <h2 className={css.popularTitle}>Popular Articles</h2>
           <Link className={css.popularLink} href="/articles">
             Go to all Articles
-            <svg className={css.linkIcon} width={19} height={19}>
-              <use href="/symbol-defs.svg#icon-top-right" />
-            </svg>
+            <span aria-hidden="true" className={css.linkIcon} />
           </Link>
         </div>
 

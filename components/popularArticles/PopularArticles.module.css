@@ -22,15 +22,47 @@
 }
 
 .popularLink {
+  position: relative;
+  display: flex;
   font-weight: 700;
   font-size: 16px;
   color: var(--green-darker);
   height: 28px;
+  gap: 10px;
+}
+
+.popularLink::after {
+  position: absolute;
+    inset: -8px;
+    content: "";
+}
+
+.popularLink:hover,
+.popularLink:focus-visible {
+  color: var(--green);
+}
+
+.popularLink:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--green);
+  outline-offset: 4px;
+}
+
+.popularLink:hover .linkIcon,
+.popularLink:focus-visible .linkIcon {
+  transform: translate(2px, -2px) rotate(45deg);
 }
 
 .linkIcon {
-  fill: currentColor;
-  margin-left: 12px;
+  display: block;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask: url("/icons/arrow-up-right.svg") center / contain no-repeat;
+    mask: url("/icons/arrow-up-right.svg") center / contain no-repeat;
+    transform: rotate(45deg);
+    transition: transform 200ms ease;
 }
 
 .popularList {
