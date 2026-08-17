@@ -29,15 +29,15 @@ const RegisterFormSchema = Yup.object().shape({
   username: Yup.string()
     .min(2, "Name must be at least 2 characters")
     .max(32, "Name is too long")
-    .required("Name is required"),
+    .required("Please enter valid name"),
   email: Yup.string()
     .email("Invalid email format")
     .max(64, "Email is too long")
-    .required("Email is required"),
+    .required("Please enter valid email"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .max(64, "Password is too long")
-    .required("Password is required"),
+    .required("Please enter valid password"),
   confirmpassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Repeat your password is required"),

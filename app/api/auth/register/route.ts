@@ -15,27 +15,23 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const data = error.response?.data as {
-        message?: string;
-      };
+      const status = error.response?.status;
+
+      if (status === 409) {
+        return NextResponse.json(
+          { message: "User with this email already exists" },
+          { status: 409 },
+        );
+      }
 
       return NextResponse.json(
         {
-          message: data?.message ?? "Registration failed",
+          message: "Something went wrong",
         },
         {
-          status: error.response?.status ?? 500,
+          status: 500,
         },
       );
     }
-
-    return NextResponse.json(
-      {
-        message: "Something went wrong",
-      },
-      {
-        status: 500,
-      },
-    );
   }
 }
