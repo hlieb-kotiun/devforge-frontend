@@ -14,9 +14,9 @@ export default function Hero() {
           </h1>
 
           <div className={styles.actions}>
-            <a href="#popular-articles" className={styles.primaryButton}>
+            <Link href="/articles" className={styles.primaryButton}>
               Go to Articles
-            </a>
+            </Link>
 
             <Link href="/register" className={styles.secondaryButton}>
               Register
