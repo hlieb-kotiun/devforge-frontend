@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import SectionTitle from "@/components/SectionTitle/SectionTitle";
-import UserProfileInfo from "@/components/UserProfileInfo/UserProfileInfo";
-import ProfileTabs from "./_components/ProfileTabs";
-import css from "./Profile.module.css";
+import ProfileShell from "./_components/ProfileShell";
 
 export const metadata: Metadata = {
   title: "My Profile | Harmoniq",
@@ -18,32 +15,8 @@ interface ProfileLayoutProps {
   articles: React.ReactNode;
 }
 
-const previewProfile = {
-  name: "Naomi",
-  avatarUrl: "/images/creators/naomi.jpg",
-  articlesCount: 96,
-};
-
 const ProfileLayout = ({ children, articles }: ProfileLayoutProps) => {
-  return (
-    <section className={css.section}>
-      <div className="container">
-        <div className={css.content}>
-          <div className={css.title}>
-            <SectionTitle>My Profile</SectionTitle>
-          </div>
-
-          <div className={css.profileInfo}>
-            <UserProfileInfo {...previewProfile} />
-          </div>
-
-          <ProfileTabs />
-          {children}
-          {articles}
-        </div>
-      </div>
-    </section>
-  );
+  return <ProfileShell articles={articles}>{children}</ProfileShell>;
 };
 
 export default ProfileLayout;

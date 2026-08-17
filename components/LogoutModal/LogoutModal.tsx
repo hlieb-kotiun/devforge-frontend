@@ -5,8 +5,10 @@ import { createPortal } from "react-dom";
 import css from "./LogoutModal.module.css";
 import { logout } from "@/lib/api/auth";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Loader } from "@/components/Loader/Loader";
+import { CURRENT_USER_QUERY_KEY } from "@/lib/hooks/useCurrentUser";
 
 interface LogoutModalProps {
   onClose: () => void;
@@ -14,6 +16,7 @@ interface LogoutModalProps {
 
 export const LogoutModal = ({ onClose }: LogoutModalProps) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = async () => {
@@ -26,7 +29,8 @@ export const LogoutModal = ({ onClose }: LogoutModalProps) => {
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Failed to log out");
     } finally {
-      // Тут пізніше буде clearAuth() і очищення store
+      // Без цього Header далі малює залогіненого користувача з кешу.
+      queryClient.removeQueries({ queryKey: CURRENT_USER_QUERY_KEY });
 
       onClose();
       router.replace("/");
