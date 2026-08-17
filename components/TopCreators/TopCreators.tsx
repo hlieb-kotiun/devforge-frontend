@@ -50,6 +50,7 @@ export const TopCreators = () => {
                       src={avatarUrl}
                       alt={`${name}, Harmoniq creator`}
                       fill
+                      unoptimized
                       sizes="(min-width: 375px) 160px, calc((100vw - 48px) / 2)"
                       className={styles.creatorImage}
                     />
