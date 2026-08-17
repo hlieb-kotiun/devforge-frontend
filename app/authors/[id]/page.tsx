@@ -12,6 +12,13 @@ type Author = {
   articlesAmount?: number;
 };
 
+type ArticlesResponse = {
+  articles: unknown[];
+  total: number;
+  page: number;
+  limit: number;
+};
+
 async function fetchAuthor(id: string): Promise<Author | null> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/authors/${id}`, {
     cache: "no-store",
@@ -21,6 +28,21 @@ async function fetchAuthor(id: string): Promise<Author | null> {
   if (!res.ok) throw new Error("Failed to fetch author");
 
   return res.json();
+}
+
+async function fetchAuthorArticlesTotal(id: string): Promise<number | null> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/author/${id}?page=1&limit=1`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return null;
+
+    const data: ArticlesResponse = await res.json();
+    return data.total; 
+  } catch {
+    return null;
+  }
 }
 
 type Props = {
@@ -53,8 +75,9 @@ const AuthorPage = async ({ params }: Props) => {
     notFound();
   }
 
+  const realTotal = await fetchAuthorArticlesTotal(id);
+  const articlesCount = realTotal ?? author.articlesAmount ?? 0;
   const avatarSrc = getAvatarUrl(author.avatarUrl);
-  const articlesCount = author.articlesAmount ?? 0;
   const name = author.name?.split(" ")[0] ?? "Unknown";
 
   return (
