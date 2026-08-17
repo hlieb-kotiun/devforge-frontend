@@ -36,12 +36,14 @@
 }
 
 /* Tablet (768px) */
-@media (min-width: 768px) {   
-
+@media (min-width: 768px) {
   .popularSection {
     padding: 72px 32px;
   }
 
+  .popularArticlesContainer {
+    padding: 14px 32px;
+  }
   .popularLink {
     display: none;
   }
@@ -59,7 +61,11 @@
 @media (min-width: 1440px) {
   .popularSection {
     padding: 72px 107.5px;
-  }   
+  }
+
+  .popularArticlesContainer {
+    padding: 14px 108px;
+  }
 
   .popularContent {
     display: flex;
