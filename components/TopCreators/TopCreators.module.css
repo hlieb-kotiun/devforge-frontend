@@ -109,6 +109,10 @@
     padding: 60px 32px;
   }
 
+  .topCreatorsContainer {
+    padding: 0 32px;
+  }
+
   .title {
     font-size: 36px;
     line-height: 1.3;
@@ -132,6 +136,10 @@
 @media (min-width: 1440px) {
   .section {
     padding: 80px 108px;
+  }
+
+  .topCreatorsContainer {
+    padding: 0 108px;
   }
 
   .headingRow {

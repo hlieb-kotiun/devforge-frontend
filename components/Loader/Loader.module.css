@@ -8,6 +8,13 @@
   place-items: center;
 }
 
+.inline {
+  display: grid;
+  min-height: 200px;
+  padding: 32px 0;
+  place-items: center;
+}
+
 .spinner {
   display: grid;
   width: 72px;

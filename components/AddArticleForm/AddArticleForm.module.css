@@ -1,0 +1,147 @@
+.createArticleHiddenInput {
+    display: none;
+}
+
+.createArticleForm {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "photo" "title" "textarea" "button";
+}
+
+.createArticlePhotoField {
+    grid-area: photo;
+}
+
+.createArticlePhotoBox {
+    aspect-ratio: 343 / 222;
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: opacity 0.2s ease;
+}
+
+.createArticlePhotoBox:hover {
+    opacity: 0.85;
+}
+
+.createArticleCameraIcon {
+    width: 98px;
+    height: 82px;
+    fill: none;
+}
+
+.createArticlePreviewImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.createArticleTitleField {
+    grid-area: title;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.createArticleTextField {
+    grid-area: textarea;
+}
+
+.createArticleLabel {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--black);
+}
+
+.createArticleInput,
+.createArticleTextarea {
+    width: 100%;
+    font: inherit;
+    font-size: 18px;
+    border: 1px solid var(--light-gray);
+    border-radius: 6px;
+    background-color: var(--white);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.createArticleInput {
+    min-height: 48px;
+    padding: 10px 16px;
+}
+
+.createArticleTextarea {
+    min-height: 374px;
+    padding: 12px 10px;
+    resize: vertical;
+}
+
+.createArticleInput:focus,
+.createArticleTextarea:focus {
+    border-color: var(--green);
+}
+
+.createArticleError {
+    margin: 4px 0 0;
+    color: var(--red);
+    font-size: 12px;
+}
+
+.createArticleSubmitButton {
+    grid-area: button;
+    font: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--white);
+    background-color: var(--green);
+    border: 0;
+    border-radius: 999px;
+    padding: 14px 24px;
+    transition: background-color 0.2s ease;
+}
+
+.createArticleSubmitButton:hover {
+    background-color: var(--green-darker);
+}
+
+.createArticleSubmitButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+@media (min-width: 768px) {
+    .createArticleForm {
+        column-gap: 24px;
+        row-gap: 16px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "photo title" "textarea textarea" "button button";
+    }
+
+    .createArticleTextarea {
+        min-height: 374px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .createArticleForm {
+        max-width: 1200px;
+        column-gap: 24px;
+        row-gap: 16px;
+        grid-template-columns: minmax(0, 792px) 384px;
+        grid-template-areas: "title photo" "textarea photo" "button .";
+    }
+
+    .createArticlePhotoBox {
+        height: auto;
+        aspect-ratio: 384 / 276;
+    }
+
+    .createArticleTextarea {
+        min-height: 384px;
+    }
+}
