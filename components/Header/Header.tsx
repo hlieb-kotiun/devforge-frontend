@@ -26,7 +26,6 @@ type AuthState = {
   userAvatar: string;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 const DEFAULT_AVATAR = "/images/test-avatar.png";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -92,7 +91,7 @@ const Header = ({
 
     const loadCurrentUser = async () => {
       try {
-        const response = await fetch(`${API_URL}/users/me`, {
+        const response = await fetch("/api/users/me", {
           credentials: "include",
           signal: controller.signal,
         });
