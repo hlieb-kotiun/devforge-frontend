@@ -1,7 +1,5 @@
-import ProfileArticlesView from "../_components/ProfileArticlesView";
+import ProfileArticles from "../_components/ProfileArticles";
 
-const MyArticlesSlot = () => {
-  return <ProfileArticlesView articles={[]} variant="created" />;
-};
+const MyArticlesSlot = () => <ProfileArticles kind="created" />;
 
 export default MyArticlesSlot;

@@ -1,7 +1,5 @@
-import ProfileArticlesView from "../../_components/ProfileArticlesView";
+import ProfileArticles from "../../_components/ProfileArticles";
 
-const SavedArticlesSlot = () => {
-  return <ProfileArticlesView articles={[]} variant="saved" />;
-};
+const SavedArticlesSlot = () => <ProfileArticles kind="saved" />;
 
 export default SavedArticlesSlot;
