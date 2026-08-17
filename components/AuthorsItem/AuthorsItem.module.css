@@ -34,6 +34,7 @@
   font-size: 24px;
   text-align: center;
   color: var(--black);
+  overflow-wrap: anywhere;
 }
 
 @media (min-width: 768px) {

@@ -1,6 +1,11 @@
 .popularSection {
-  padding: 0 16px;
+  padding: 40px 16px;
   width: 100%;
+}
+
+.popularArticlesContainer {
+  width: 100%;
+  margin: 0 auto;
 }
 
 .popularContent {
@@ -37,14 +42,14 @@
 
 /* Tablet (768px) */
 @media (min-width: 768px) {
-  .popularArticlesContainer {
-    padding: 0 32px;
-  }
-
   .popularSection {
-    padding: 72px 32px;
+    padding: 60px 32px;
   }
 
+  .popularArticlesContainer {
+    max-width: 704px;
+    padding: 0;
+  }
   .popularLink {
     display: none;
   }
@@ -54,17 +59,19 @@
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0;
-    width: 704px;
+    width: 100%;
   }
 }
 
 /* Desktop (1440px) */
 @media (min-width: 1440px) {
   .popularSection {
-    padding: 72px 107.5px;
+    padding: 80px 108px;
   }
+
   .popularArticlesContainer {
-    padding: 0 108px;
+    max-width: 1224px;
+    padding: 0;
   }
 
   .popularContent {
@@ -81,7 +88,7 @@
 
   .popularLink {
     display: flex;
-    margin-left: 756px;
+    margin-left: auto;
     padding: 13.5px 0;
   }
 
@@ -90,6 +97,6 @@
     flex-direction: row;
     gap: 24px;
     padding-bottom: 0;
-    width: 1225px;
+    width: 100%;
   }
 }

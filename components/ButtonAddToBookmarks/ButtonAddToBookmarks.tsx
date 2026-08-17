@@ -34,11 +34,10 @@ const ButtonAddToBookmarks = ({
 
   const addMutation = useMutation({
     mutationFn: () => addArticleToSavedArticles(articleId),
-
     onSuccess: () => {
       setIsSaved(true);
+      onSuccess?.();
     },
-
     onError: error => {
       toast.error(error.message || "Failed to add article to bookmarks");
     },
@@ -47,11 +46,11 @@ const ButtonAddToBookmarks = ({
   const removeMutation = useMutation({
     mutationFn: () => removeArticleFromSavedArticles(articleId),
 
+
     onSuccess: () => {
       setIsSaved(false);
       onSuccess?.();
     },
-
     onError: error => {
       toast.error(error.message || "Failed to remove article from bookmarks");
     },
