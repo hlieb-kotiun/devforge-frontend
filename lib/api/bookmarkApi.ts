@@ -7,6 +7,9 @@ async function addArticleToSavedArticles(articleId: string) {
     credentials: 'include',
   });
   if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('Please log in to continue.');
+    }
     const errorData = await response.json().catch(() => ({}));
     throw new Error(errorData.message || 'Failed to add article to bookmarks');
   }
