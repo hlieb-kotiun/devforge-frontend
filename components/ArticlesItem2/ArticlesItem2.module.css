@@ -1,0 +1,119 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 26.5px;
+  padding: 12px;
+  width: 100%;
+  min-width: 320px;
+  max-width: 361px;
+  background: var(--light-green);
+  border-radius: 32px;
+}
+
+.card__image {
+  width: 100%;
+  height: 233px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.card__author {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--black);
+}
+
+.card__title {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--black);
+  margin: 0;
+  line-height: 1.45;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__description {
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--black);
+  margin: 0;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.card__btn {
+  border: 1px solid var(--green-darker);
+  background: transparent;
+  border-radius: 64px;
+  cursor: pointer;
+  display: inline-grid;
+  place-items: center;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card__btn_text {
+  flex: 1;
+  height: 40px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--green-darker);
+  text-align: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.card__btn:hover,
+.card__btn:focus-visible {
+  background-color: var(--white);
+  color: var(--green-darker);
+  border-color: var(--green-darker);
+  outline: none;
+}
+
+.card__btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--green-darker);
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    max-width: 340px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .card {
+    max-width: 392px;
+  }
+}
