@@ -26,8 +26,7 @@ const ButtonAddToBookmarks = ({ article }: ArticleItemProps) => {
   const ownerId =
     typeof article.ownerId === "string" ? article.ownerId : article.ownerId._id;
 
-  const isOwner = true;
-  //isAuthenticated && Boolean(user?._id && user._id === ownerId);
+  const isOwner = isAuthenticated && Boolean(user?._id && user._id === ownerId);
 
   const isSaved = Boolean(user?.savedArticles?.includes(article._id));
 
