@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQueries, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import ButtonAddToBookmarks from "@/components/ButtonAddToBookmarks/ButtonAddToBookmarks";
 import LoadMoreButton from "@/components/LoadMoreButton/LoadMoreButton";
 import { Loader } from "@/components/Loader/Loader";
 import { getMyArticles, getSavedArticles } from "@/lib/api/profile";
@@ -106,9 +107,31 @@ const ProfileArticles = ({ kind }: ProfileArticlesProps) => {
     return <Loader label="Loading articles" />;
   }
 
+  // На табі Saved усе за визначенням збережене, тож клік означає видалення.
+  // Після нього інвалідація перемальовує список, і картка зникає.
+  const renderAction =
+    kind === "saved"
+      ? (article: Article) => (
+          <ButtonAddToBookmarks
+            articleId={article._id}
+            isAuthenticated
+            active
+            onSuccess={() =>
+              queryClient.invalidateQueries({
+                queryKey: ["profile-articles", "saved"],
+              })
+            }
+          />
+        )
+      : undefined;
+
   return (
     <div ref={listRef}>
-      <ProfileArticlesView articles={items} variant={kind} />
+      <ProfileArticlesView
+        articles={items}
+        variant={kind}
+        renderAction={renderAction}
+      />
 
       {hasMore && (
         <LoadMoreButton

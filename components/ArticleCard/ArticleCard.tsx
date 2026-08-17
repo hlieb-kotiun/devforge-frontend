@@ -6,9 +6,11 @@ import css from "./ArticleCard.module.css";
 
 interface ArticleCardProps {
   article: Article;
+  /** Опційний екшен у футері картки (напр. кнопка закладок). */
+  action?: React.ReactNode;
 }
 
-const ArticleCard = ({ article }: ArticleCardProps) => {
+const ArticleCard = ({ article, action }: ArticleCardProps) => {
   return (
     <li className={css.card}>
       <div className={css.imageWrapper}>
@@ -34,7 +36,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             Learn more
           </Link>
 
-          {/* ButtonAddToBookmarks буде підключено після merge відповідної feature */}
+          {action}
         </div>
       </div>
     </li>
