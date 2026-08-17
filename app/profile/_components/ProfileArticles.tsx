@@ -104,7 +104,7 @@ const ProfileArticles = ({ kind }: ProfileArticlesProps) => {
   }, [items]);
 
   if (results[0]?.isPending) {
-    return <Loader label="Loading articles" />;
+    return <Loader inline label="Loading articles" />;
   }
 
   // На табі Saved усе за визначенням збережене, тож клік означає видалення.

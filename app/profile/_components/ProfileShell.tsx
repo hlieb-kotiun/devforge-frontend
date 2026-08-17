@@ -8,10 +8,9 @@ import UserProfileInfo from "@/components/UserProfileInfo/UserProfileInfo";
 import { Loader } from "@/components/Loader/Loader";
 import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 import { isUnauthorizedError } from "@/lib/api/apiError";
+import { getAvatarUrl } from "@/lib/utils/avatar";
 import ProfileTabs from "./ProfileTabs";
 import css from "../Profile.module.css";
-
-const FALLBACK_AVATAR = "/images/test-avatar.png";
 
 interface ProfileShellProps {
   children: React.ReactNode;
@@ -54,7 +53,7 @@ const ProfileShell = ({ children, articles }: ProfileShellProps) => {
               <div className={css.profileInfo}>
                 <UserProfileInfo
                   name={user.name || user.username || "User"}
-                  avatarUrl={user.avatarUrl || user.avatar || FALLBACK_AVATAR}
+                  avatarUrl={getAvatarUrl(user.avatarUrl, user.avatar)}
                   articlesCount={user.articlesAmount}
                 />
               </div>

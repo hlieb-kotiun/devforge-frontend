@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import AuthorArticles from "@/components/AuthorArticles/AuthorArticles";
 import UserProfileInfo from "@/components/UserProfileInfo/UserProfileInfo";
+import { getAvatarUrl } from "@/lib/utils/avatar";
 import styles from "./AuthorPage.module.css";
 
 type Author = {
@@ -10,8 +11,6 @@ type Author = {
   avatarUrl?: string;
   articlesAmount?: number;
 };
-
-const FALLBACK_AVATAR = "/images/test-avatar.png";
 
 async function fetchAuthor(id: string): Promise<Author | null> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/authors/${id}`, {
@@ -54,7 +53,7 @@ const AuthorPage = async ({ params }: Props) => {
     notFound();
   }
 
-  const avatarSrc = author.avatarUrl?.trim() ? author.avatarUrl : FALLBACK_AVATAR;
+  const avatarSrc = getAvatarUrl(author.avatarUrl);
   const articlesCount = author.articlesAmount ?? 0;
   const name = author.name?.split(" ")[0] ?? "Unknown";
 

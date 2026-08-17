@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import UserBar from "../UserBar/UserBar";
 import { LogoutModal } from "../LogoutModal/LogoutModal";
 import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
+import { getAvatarUrl } from "@/lib/utils/avatar";
 import css from "./Header.module.css";
 
 type HeaderProps = {
@@ -13,8 +14,6 @@ type HeaderProps = {
   userName?: string;
   userAvatar?: string;
 };
-
-const DEFAULT_AVATAR = "/images/test-avatar.png";
 
 const publicNavigation = [
   { href: "/", label: "Home" },
@@ -45,12 +44,12 @@ const Header = ({
     ? {
         isAuthorized,
         userName: userName ?? "User",
-        userAvatar: userAvatar ?? DEFAULT_AVATAR,
+        userAvatar: getAvatarUrl(userAvatar),
       }
     : {
         isAuthorized: Boolean(user),
         userName: user?.name || user?.username || "User",
-        userAvatar: user?.avatarUrl || user?.avatar || DEFAULT_AVATAR,
+        userAvatar: getAvatarUrl(user?.avatarUrl, user?.avatar),
       };
   const navigation = currentAuthState.isAuthorized ? privateNavigation : publicNavigation;
   const action = currentAuthState.isAuthorized

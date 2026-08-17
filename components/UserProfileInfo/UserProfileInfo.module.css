@@ -17,6 +17,9 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
+  /* без цього флекс-айтем не стискається вужче за контент,
+     і довге ім'я одним словом розпирає сторінку */
+  min-width: 0;
 }
 
 .name,
@@ -28,6 +31,7 @@
 .name {
   font-size: 32px;
   line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .count {
