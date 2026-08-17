@@ -4,6 +4,7 @@ const SAVED_ARTICLES_URL = "/api/saved-articles";
 async function addArticleToSavedArticles(articleId: string) {
   const response = await fetch(`${SAVED_ARTICLES_URL}/${articleId}`, {
     method: 'POST',
+    credentials: 'include',
   });
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
@@ -14,6 +15,7 @@ async function addArticleToSavedArticles(articleId: string) {
 async function removeArticleFromSavedArticles(articleId: string) {
   const response = await fetch(`${SAVED_ARTICLES_URL}/${articleId}`, {
     method: 'DELETE',
+    credentials: 'include',
   });
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
