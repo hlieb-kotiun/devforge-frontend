@@ -25,7 +25,7 @@ export type LoginRequest = {
 };
 
 const nextServer = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "/api",
   withCredentials: true,
 });
 export const register = async (data: RegisterRequest) => {

@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation";
 import AddArticleForm from "@/components/AddArticleForm/AddArticleForm";
 import styles from "./CreateArticlePage.module.css";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
-
 const CreateArticlePage = () => {
   const router = useRouter();
   const [isAuthorizing, setIsAuthorizing] = useState(true);
@@ -14,7 +12,7 @@ const CreateArticlePage = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch(`${apiUrl}/users/me`, {
+    fetch("/api/users/me", {
       credentials: "include",
       signal: controller.signal,
     })
