@@ -19,14 +19,16 @@ const ArticlesItem2 = ({ article }: ArticlesItem2Props) => {
 
   return (
     <div className={css.card}>
-      <Image
-        src={imageSrc}
-        alt={article.title}
-        width={361}
-        height={233}
-        unoptimized
-        className={css.card__image}
-      />
+      <div className={css.card__imageWrapper}>
+        <Image
+          src={imageSrc}
+          alt={article.title}
+          fill
+          sizes="(max-width: 375px) 100vw, 361px"
+          unoptimized
+          className={css.card__image}
+        />
+      </div>
 
       <div className={css.card__content}>
         <span className={css.card__author}>{authorName}</span>

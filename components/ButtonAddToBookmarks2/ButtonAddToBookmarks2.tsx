@@ -2,22 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { type ArticleOwner } from "@/types/article";
+import { type Article, type ArticleOwner } from "@/types/article";
 import css from "./ButtonAddToBookmarks2.module.css";
 import { useAuthStore } from "@/lib/store/authStore";
-
-type Article = {
-  _id: string;
-  img: string;
-  title: string;
-  desc: string;
-  article: string;
-  rate: number;
-  ownerId: ArticleOwner;
-  date: string;
-  createdAt?: string;
-  updatedAt?: string;
-};
 
 interface ArticleItemProps {
   article: Article;
@@ -96,7 +83,7 @@ const ButtonAddToBookmarks = ({ article }: ArticleItemProps) => {
     router.push(`/articles/${article._id}/edit`);
   };
   return (
-    <div>
+    <div className={css.root}>
       {/* Кнопка "Зберегти"  */}
       {isOwner ? (
         <>
