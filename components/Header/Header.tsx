@@ -16,8 +16,10 @@ type HeaderProps = {
 type CurrentUser = {
   name?: string;
   username?: string;
+  userName?: string;
   avatarUrl?: string;
   avatar?: string;
+  photoUrl?: string;
 };
 
 type AuthState = {
@@ -26,7 +28,6 @@ type AuthState = {
   userAvatar: string;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 const DEFAULT_AVATAR = "/images/test-avatar.png";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -92,9 +93,10 @@ const Header = ({
 
     const loadCurrentUser = async () => {
       try {
-        const response = await fetch(`${API_URL}/users/me`, {
+        const response = await fetch("/api/auth/me", {
           credentials: "include",
           signal: controller.signal,
+          cache: "no-store",
         });
 
         if (!response.ok) {
@@ -105,8 +107,9 @@ const Header = ({
         const user = getCurrentUser(await response.json());
         setAuthState({
           isAuthorized: true,
-          userName: user?.name ?? user?.username ?? "User",
-          userAvatar: user?.avatarUrl ?? user?.avatar ?? DEFAULT_AVATAR,
+          userName: user?.name ?? user?.username ?? user?.userName ?? "User",
+          userAvatar:
+            user?.avatarUrl ?? user?.avatar ?? user?.photoUrl ?? DEFAULT_AVATAR,
         });
       } catch (error) {
         if (!(error instanceof DOMException && error.name === "AbortError")) {

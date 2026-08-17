@@ -25,7 +25,7 @@ async function uploadAvatarApi(file: File) {
   const formData = new FormData();
   formData.append('avatar', file);
 
-  const response = await fetch('http://localhost:5000/users/me/avatar', {
+  const response = await fetch('/api/auth/avatar', {
     method: 'PATCH',
     body: formData,
     credentials: 'include',
