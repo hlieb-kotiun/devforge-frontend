@@ -26,15 +26,15 @@ export const LogoutModal = ({ onClose }: LogoutModalProps) => {
 
     try {
       await logout();
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to log out");
-    } finally {
       // Без цього Header далі малює залогіненого користувача з кешу.
       queryClient.removeQueries({ queryKey: CURRENT_USER_QUERY_KEY });
 
       onClose();
       router.replace("/");
       router.refresh();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to log out");
+      setIsLoading(false);
     }
   };
 

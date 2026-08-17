@@ -1,7 +1,6 @@
+import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
-import { isAxiosError } from "axios";
 import { api } from "../../api";
-import { logErrorResponse } from "../../_utils/utils";
 
 type ApiErrorResponse = {
   message?: string;
@@ -9,28 +8,23 @@ type ApiErrorResponse = {
 
 export async function GET(request: NextRequest) {
   try {
-    const res = await api.get("/users/me", {
-      headers: { cookie: request.headers.get("cookie") ?? "" },
+    const response = await api.get("/users/me", {
+      headers: {
+        cookie: request.headers.get("cookie") ?? "",
+      },
     });
 
-    return NextResponse.json(res.data, { status: res.status });
+    return NextResponse.json(response.data, { status: response.status });
   } catch (error) {
-    if (isAxiosError<ApiErrorResponse>(error)) {
-      logErrorResponse(error.response?.data);
-
+    if (axios.isAxiosError<ApiErrorResponse>(error)) {
       return NextResponse.json(
-        {
-          message:
-            error.response?.data?.message ?? "Failed to load current user",
-        },
+        error.response?.data ?? { message: "Failed to get current user" },
         { status: error.response?.status ?? 500 },
       );
     }
 
-    logErrorResponse({ message: (error as Error).message });
-
     return NextResponse.json(
-      { message: "Internal Server Error" },
+      { message: "Something went wrong" },
       { status: 500 },
     );
   }
