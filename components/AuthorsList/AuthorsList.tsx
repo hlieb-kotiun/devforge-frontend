@@ -86,7 +86,7 @@ const AuthorsList = () => {
           onClick={handleLoadMore}
           disabled={isFetchingNextPage}
         >
-          {isFetchingNextPage ? "Завантаження..." : "Load More"}
+          {isFetchingNextPage ? "Loading..." : "Load More"}
         </button>
       )}
     </>
