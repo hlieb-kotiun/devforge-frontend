@@ -9,6 +9,8 @@ import Link from "next/link";
 import { register, RegisterRequest } from "@/lib/api";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { CURRENT_USER_QUERY_KEY } from "@/lib/hooks/useCurrentUser";
 interface RegisterFormValues {
   username: string;
   email: string;
@@ -46,6 +48,7 @@ export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
+  const queryClient = useQueryClient();
   const handleSubmit = async (
     values: RegisterFormValues,
     actions: FormikHelpers<RegisterFormValues>,
@@ -57,6 +60,7 @@ export default function RegisterForm() {
         password: values.password,
       };
       await register(data);
+      await queryClient.invalidateQueries({ queryKey: CURRENT_USER_QUERY_KEY });
       actions.resetForm();
       router.push("/photo");
     } catch (error) {

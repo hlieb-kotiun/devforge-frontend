@@ -8,7 +8,9 @@ import Link from "next/link";
 import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 import { login, LoginRequest } from "@/lib/api";
+import { CURRENT_USER_QUERY_KEY } from "@/lib/hooks/useCurrentUser";
 
 interface LoginFormValues {
   email: string;
@@ -37,6 +39,7 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const handleSubmit = async (
     values: LoginFormValues,
@@ -48,6 +51,7 @@ export default function LoginForm() {
         password: values.password,
       };
       await login(data);
+      await queryClient.invalidateQueries({ queryKey: CURRENT_USER_QUERY_KEY });
       actions.resetForm();
       router.push("/profile");
     } catch (error) {
