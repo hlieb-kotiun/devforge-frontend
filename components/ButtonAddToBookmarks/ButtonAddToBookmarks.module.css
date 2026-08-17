@@ -13,11 +13,12 @@
 
 .icon {
     stroke-width: 0.50px;
-    stroke: var(--green-darker);
+    color: var(--green-darker);
 }
 
 .active {
     background: var(--green);
+    border-color: var(--green)
 }
 
 .active .icon {

@@ -10,12 +10,21 @@ interface ArticleCardProps {
   action?: React.ReactNode;
 }
 
+const getArticleImageSrc = (image: string) => {
+  if (image.startsWith('http')) return image;
+
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '') ?? '';
+  const imagePath = image.replace(/\\/g, '/').replace(/^\/+/, '');
+
+  return `${backendUrl}/${imagePath}`;
+};
+
 const ArticleCard = ({ article, action }: ArticleCardProps) => {
   return (
     <li className={css.card}>
       <div className={css.imageWrapper}>
         <Image
-          src={article.img}
+          src={getArticleImageSrc(article.img)}
           alt={article.title}
           width={337}
           height={233}
