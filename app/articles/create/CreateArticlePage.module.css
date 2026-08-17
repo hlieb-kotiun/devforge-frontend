@@ -1,0 +1,32 @@
+.createArticleContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 32px;
+  padding-bottom: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.createArticleTitle {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.2;
+  color: var(--black);
+  margin: 0 0 24px;
+}
+
+@media (min-width: 768px) {
+  .createArticleContainer {
+    padding: 48px 32px 64px;
+  }
+
+  .createArticleTitle { margin-bottom: 32px; }
+}
+
+@media (min-width: 1440px) {
+  .createArticleContainer {
+    padding: 80px;
+  }
+
+  .createArticleTitle { margin-bottom: 32px; }
+}

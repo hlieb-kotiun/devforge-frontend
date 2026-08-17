@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Image from "next/image";
-import ArticlesList from "@/components/ArticlesList/ArticlesList";
+import AuthorArticles from "@/components/AuthorArticles/AuthorArticles";
+import UserProfileInfo from "@/components/UserProfileInfo/UserProfileInfo";
+import { getAvatarUrl } from "@/lib/utils/avatar";
 import styles from "./AuthorPage.module.css";
 
 type Author = {
@@ -10,8 +11,6 @@ type Author = {
   avatarUrl?: string;
   articlesAmount?: number;
 };
-
-const FALLBACK_AVATAR = "/images/default-avatar.png";
 
 async function fetchAuthor(id: string): Promise<Author | null> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/authors/${id}`, {
@@ -54,7 +53,7 @@ const AuthorPage = async ({ params }: Props) => {
     notFound();
   }
 
-  const avatarSrc = author.avatarUrl?.trim() ? author.avatarUrl : FALLBACK_AVATAR;
+  const avatarSrc = getAvatarUrl(author.avatarUrl);
   const articlesCount = author.articlesAmount ?? 0;
   const name = author.name?.split(" ")[0] ?? "Unknown";
 
@@ -62,26 +61,17 @@ const AuthorPage = async ({ params }: Props) => {
     <section className={styles.section}>
       <div className="container">
         <div className={styles.content}>
-          <div className={styles.header}>
-            <Image
-            src={avatarSrc}
-            alt={author.name}
-            width={137}
-            height={137}
-            className={styles.avatar}
-            unoptimized
+          <div className={styles.profileInfo}>
+            <UserProfileInfo
+              name={name}
+              avatarUrl={avatarSrc}
+              articlesCount={articlesCount}
             />
-            <div className={styles.info}>
-              <p className={styles.name}>{name}</p>
-              <p className={styles.count}>
-                {articlesCount} {articlesCount === 1 ? "article" : "articles"}
-              </p>
-            </div>
           </div>
 
-          <ArticlesList ownerId={id} />
-          </div>
+          <AuthorArticles ownerId={id} />
         </div>
+      </div>
     </section>
   );
 };

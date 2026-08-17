@@ -2,10 +2,11 @@
 
 import { useState, useRef, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
+import { CURRENT_USER_QUERY_KEY } from '@/lib/hooks/useCurrentUser';
 import styles from './UploadForm.module.css';
 
 interface FormValues {
@@ -21,11 +22,11 @@ const validationSchema = Yup.object({
     }),
 });
 
-async function uploadAvatarApi(file: File) {
+async function uploadAvatarApi(file: File): Promise<unknown> {
   const formData = new FormData();
   formData.append('avatar', file);
 
-  const response = await fetch('http://localhost:5000/users/me/avatar', {
+  const response = await fetch('/api/users/me/avatar', {
     method: 'PATCH',
     body: formData,
     credentials: 'include',
@@ -36,17 +37,25 @@ async function uploadAvatarApi(file: File) {
     throw new Error(errorData.message || 'Failed to upload image');
   }
 
-  return response.json();
+  if (response.status === 204) {
+    return null;
+  }
+
+  const contentType = response.headers.get('content-type') ?? '';
+
+  return contentType.includes('application/json') ? response.json() : null;
 }
 
 export default function UploadForm() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const mutation = useMutation({
     mutationFn: uploadAvatarApi,
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: CURRENT_USER_QUERY_KEY });
       toast.success('Photo uploaded successfully!');
       router.push('/articles');
     },

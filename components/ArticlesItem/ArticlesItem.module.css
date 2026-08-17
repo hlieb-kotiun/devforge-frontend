@@ -1,0 +1,100 @@
+.popularItem {
+    overflow: hidden;
+    border-radius: 32px;
+    padding: 12px;
+    min-width: 320px;
+    background: var(--light-green);
+}
+
+.cardImage {
+    border-radius: 24px;
+    width: 100%;
+    height: auto;
+}
+
+.popularCardContent {
+    width: 100%;
+    padding: 26.5px 0;
+}
+
+.popularCardAuthor {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--black);
+}
+
+.popularCardTitle {
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--black);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 264px;
+    height: 70px;
+}
+
+.popularCardDesc {
+    width: 100%;
+    height: 50px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 155%;
+    color: var(--black);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.buttonsContainer {
+    padding: 0 12px 12px 12px;
+    width: 100%;
+    height: 40px;
+    gap: 8px;
+    display: flex;
+}
+
+.loadMore {
+    border: 1px solid var(--green-darker);
+    border-radius: 64px;
+    padding: 8px;
+    height: 40px;
+    background-color: var(--light-green);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--green-darker);
+    width: 100%;
+}
+
+.save {
+    border: 1px solid var(--green-darker);
+    border-radius: 64px;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--light-green);
+}
+
+/* Tablet (768px) */
+@media (min-width: 768px) {
+    .popularItem {
+        width: calc((100% - 24px) / 2);
+        width: 340px;
+    }
+}
+
+/* Desktop (1440px) */
+@media (min-width: 1440px) {
+    .popularItem {
+        min-width: 392px;
+        width: calc((100% - 48px) / 3);
+    }
+    
+    .popularItem:last-child {
+        display: none;
+    }
+}
