@@ -14,23 +14,28 @@ interface ButtonAddToBookmarksProps {
   articleId: string;
   isAuthenticated: boolean;
   active?: boolean;
+  /** Викликається після успішного додавання чи видалення. */
+  onSuccess?: () => void;
 }
 
 const ButtonAddToBookmarks = ({
   articleId,
   isAuthenticated,
   active = false,
+  onSuccess,
 }: ButtonAddToBookmarksProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const addMutation = useMutation({
     mutationFn: () => addArticleToSavedArticles(articleId),
+    onSuccess,
     onError: error => {
       toast.error(error.message || 'Failed to add article to bookmarks');
     },
   });
   const removeMutation = useMutation({
     mutationFn: () => removeArticleFromSavedArticles(articleId),
+    onSuccess,
     onError: error => {
       toast.error(error.message || 'Failed to remove article from bookmarks');
     },

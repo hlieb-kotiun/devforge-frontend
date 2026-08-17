@@ -5,11 +5,17 @@ import css from "./Loader.module.css";
 
 interface LoaderProps {
   label?: string;
+  /** Вбудований лоадер замість фулскрін-оверлея — коли вантажиться лише секція. */
+  inline?: boolean;
 }
 
-export const Loader = ({ label = "Loading" }: LoaderProps) => {
+export const Loader = ({ label = "Loading", inline = false }: LoaderProps) => {
   return (
-    <div className={css.overlay} role="status" aria-live="polite">
+    <div
+      className={inline ? css.inline : css.overlay}
+      role="status"
+      aria-live="polite"
+    >
       <Oval
         visible
         height={48}

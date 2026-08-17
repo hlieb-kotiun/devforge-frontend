@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Author } from "@/types/author";
+import { getAvatarUrl } from "@/lib/utils/avatar";
 import styles from "./AuthorsItem.module.css";
 
 type AuthorsItemProps = {
@@ -8,11 +9,9 @@ type AuthorsItemProps = {
   ref?: React.Ref<HTMLLIElement>;
 };
 
-const FALLBACK_AVATAR = "/images/default-avatar.png";
-
 const AuthorsItem = ({ author, ref }: AuthorsItemProps) => {
   const name = author.name?.split(" ")[0] ?? "Unknown";
-  const avatarSrc = author.avatarUrl?.trim() ? author.avatarUrl : FALLBACK_AVATAR;
+  const avatarSrc = getAvatarUrl(author.avatarUrl);
 
   return (
     <li className={styles.item} ref={ref}>

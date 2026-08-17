@@ -5,44 +5,14 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import UserBar from "../UserBar/UserBar";
 import { LogoutModal } from "../LogoutModal/LogoutModal";
+import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
+import { getAvatarUrl } from "@/lib/utils/avatar";
 import css from "./Header.module.css";
 
 type HeaderProps = {
   isAuthorized?: boolean;
   userName?: string;
   userAvatar?: string;
-};
-
-type CurrentUser = {
-  name?: string;
-  username?: string;
-  userName?: string;
-  avatarUrl?: string;
-  avatar?: string;
-  photoUrl?: string;
-};
-
-type AuthState = {
-  isAuthorized: boolean;
-  userName: string;
-  userAvatar: string;
-};
-
-const DEFAULT_AVATAR = "/images/test-avatar.png";
-
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null;
-
-const getCurrentUser = (data: unknown): CurrentUser | null => {
-  if (!isRecord(data)) return null;
-
-  if (isRecord(data.user)) return data.user as CurrentUser;
-  if (isRecord(data.data) && isRecord(data.data.user)) {
-    return data.data.user as CurrentUser;
-  }
-  if (isRecord(data.data)) return data.data as CurrentUser;
-
-  return data as CurrentUser;
 };
 
 const publicNavigation = [
@@ -67,60 +37,25 @@ const Header = ({
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const [authState, setAuthState] = useState<AuthState>({
-    isAuthorized: isAuthorized ?? false,
-    userName: userName ?? "User",
-    userAvatar: userAvatar ?? DEFAULT_AVATAR,
-  });
+  const { data: user } = useCurrentUser();
+
   const isAuthControlled = typeof isAuthorized === "boolean";
   const currentAuthState = isAuthControlled
     ? {
         isAuthorized,
         userName: userName ?? "User",
-        userAvatar: userAvatar ?? DEFAULT_AVATAR,
+        userAvatar: getAvatarUrl(userAvatar),
       }
-    : authState;
+    : {
+        isAuthorized: Boolean(user),
+        userName: user?.name || user?.username || "User",
+        userAvatar: getAvatarUrl(user?.avatarUrl, user?.avatar),
+      };
   const navigation = currentAuthState.isAuthorized ? privateNavigation : publicNavigation;
   const action = currentAuthState.isAuthorized
     ? { href: "/articles/new", label: "Create an article" }
     : { href: "/register", label: "Join now" };
   const actionClass = currentAuthState.isAuthorized ? css.createArticleLink : css.joinLink;
-
-  useEffect(() => {
-    if (isAuthControlled) return;
-
-    const controller = new AbortController();
-
-    const loadCurrentUser = async () => {
-      try {
-        const response = await fetch("/api/auth/me", {
-          credentials: "include",
-          signal: controller.signal,
-          cache: "no-store",
-        });
-
-        if (!response.ok) {
-          setAuthState((state) => ({ ...state, isAuthorized: false }));
-          return;
-        }
-
-        const user = getCurrentUser(await response.json());
-        setAuthState({
-          isAuthorized: true,
-          userName: user?.name ?? user?.username ?? user?.userName ?? "User",
-          userAvatar:
-            user?.avatarUrl ?? user?.avatar ?? user?.photoUrl ?? DEFAULT_AVATAR,
-        });
-      } catch (error) {
-        if (!(error instanceof DOMException && error.name === "AbortError")) {
-          setAuthState((state) => ({ ...state, isAuthorized: false }));
-        }
-      }
-    };
-
-    void loadCurrentUser();
-    return () => controller.abort();
-  }, [isAuthControlled, pathname]);
 
   useEffect(() => {
     if (!isMenuOpen) return;

@@ -6,8 +6,14 @@ type ApiErrorResponse = {
   message?: string;
 };
 
-const createResponse = (data: unknown, status: number, setCookie: unknown) => {
-  const response = status === 204
+const noContentStatuses = new Set([204, 205, 304]);
+
+const createResponse = (
+  data: unknown,
+  status: number,
+  setCookie: unknown,
+) => {
+  const response = noContentStatuses.has(status)
     ? new NextResponse(null, { status })
     : NextResponse.json(data ?? null, { status });
   const cookies = Array.isArray(setCookie) ? setCookie : [setCookie];
@@ -24,7 +30,9 @@ const createResponse = (data: unknown, status: number, setCookie: unknown) => {
 export async function POST(request: NextRequest) {
   try {
     const response = await api.post("/auth/logout", undefined, {
-      headers: { cookie: request.headers.get("cookie") ?? "" },
+      headers: {
+        cookie: request.headers.get("cookie") ?? "",
+      },
     });
 
     return createResponse(

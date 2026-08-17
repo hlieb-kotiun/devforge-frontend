@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import css from './ArticlesItem.module.css'
 import type { Article } from '@/types/article';
+import { getAuthorName } from '@/lib/utils/article';
 import ButtonAddToBookmarks from '../ButtonAddToBookmarks/ButtonAddToBookmarks';
 
 interface ArticlesItemProps {
@@ -27,7 +28,7 @@ const ArticlesItem: React.FC<ArticlesItemProps> = ({ article, onLoadMore, isAuth
 
       <div className={css.popularCardContent}>
         <p className={css.popularCardAuthor}>
-            {article.ownerId?.name || 'Автор невідомий'}
+            {getAuthorName(article, 'Автор невідомий')}
         </p>
         <h3 className={css.popularCardTitle}>{article.title}</h3>
         <p className={css.popularCardDesc}>{article.desc}</p>

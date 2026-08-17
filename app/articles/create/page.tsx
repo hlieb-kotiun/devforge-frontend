@@ -12,7 +12,7 @@ const CreateArticlePage = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch("/api/auth/me", {
+    fetch("/api/users/me", {
       credentials: "include",
       signal: controller.signal,
     })
