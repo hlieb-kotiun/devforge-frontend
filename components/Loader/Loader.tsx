@@ -16,17 +16,18 @@ export const Loader = ({ label = "Loading", inline = false }: LoaderProps) => {
       role="status"
       aria-live="polite"
     >
-      <Oval
-        visible
-        height={48}
-        width={48}
-        color="var(--green-darker)"
-        secondaryColor="var(--green)"
-        strokeWidth={4}
-        strokeWidthSecondary={4}
-        ariaLabel={label}
-        wrapperClass={css.spinner}
-      />
+      <div className={css.spinner}>
+        <Oval
+          visible
+          height={48}
+          width={48}
+          color="var(--green-darker)"
+          secondaryColor="var(--green)"
+          strokeWidth={4}
+          strokeWidthSecondary={4}
+          ariaLabel={label}
+        />
+      </div>
     </div>
   );
 };

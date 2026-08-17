@@ -22,6 +22,7 @@
   display: grid;
   width: 72px;
   height: 72px;
+  flex: none;
   border-radius: 50%;
   background-color: var(--light-green);
   place-items: center;
