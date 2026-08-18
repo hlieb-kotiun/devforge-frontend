@@ -4,8 +4,12 @@ const SAVED_ARTICLES_URL = "/api/saved-articles";
 async function addArticleToSavedArticles(articleId: string) {
   const response = await fetch(`${SAVED_ARTICLES_URL}/${articleId}`, {
     method: 'POST',
+    credentials: 'include',
   });
   if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('Please log in to continue.');
+    }
     const errorData = await response.json().catch(() => ({}));
     throw new Error(errorData.message || 'Failed to add article to bookmarks');
   }
@@ -14,6 +18,7 @@ async function addArticleToSavedArticles(articleId: string) {
 async function removeArticleFromSavedArticles(articleId: string) {
   const response = await fetch(`${SAVED_ARTICLES_URL}/${articleId}`, {
     method: 'DELETE',
+    credentials: 'include',
   });
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
