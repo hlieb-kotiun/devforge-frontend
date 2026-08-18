@@ -64,18 +64,22 @@ const ButtonAddToBookmarks2 = ({
             onClick={toggleSaved}
             disabled={isSaving}
             aria-busy={isSaving}
-            className={`${css.card__btn} ${css.card__btn_icon} ${isSaved ? css.saved : ""}`}
+            className={`${css.card__btn} ${css.card__btn_icon} ${isSaved ? css.saved : ""} ${isSaving ? css.loading : ""}`}
             aria-label={isSaved ? "Remove from saved" : "Save article"}
           >
-            <svg
-              className={css.bookmarkIcon}
-              width="24"
-              height="24"
-              viewBox="0 0 32 32"
-              aria-hidden="true"
-            >
-              <use href="/sprite.svg#Generic=bookmark-alternative,%20Size=32px" />
-            </svg>
+            {isSaving ? (
+              <span className={css.spinner} aria-hidden="true" />
+            ) : (
+              <svg
+                className={css.bookmarkIcon}
+                width="24"
+                height="24"
+                viewBox="0 0 32 32"
+                aria-hidden="true"
+              >
+                <use href="/sprite.svg#Generic=bookmark-alternative,%20Size=32px" />
+              </svg>
+            )}
           </button>
         )}
       </div>
