@@ -70,27 +70,40 @@ export default function SaveArticleButton({
         className={styles.saveButton}
         onClick={handleSave}
         disabled={isLoading}
+        aria-busy={isLoading}
       >
-        <span>{isSaved ? "Saved" : "Save"}</span>
-
-        <span
-          className={styles.bookmarkIcon}
-          aria-hidden="true"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill={isSaved ? "currentColor" : "none"}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6.5 4.5C6.5 3.67 7.17 3 8 3H16C16.83 3 17.5 3.67 17.5 4.5V20L12 16.5L6.5 20V4.5Z"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+        {isLoading ? (
+          <>
+            <span
+              className={styles.loadingSpinner}
+              aria-hidden="true"
             />
-          </svg>
-        </span>
+            <span>Loading...</span>
+          </>
+        ) : (
+          <>
+            <span>{isSaved ? "Saved" : "Save"}</span>
+
+            <span
+              className={styles.bookmarkIcon}
+              aria-hidden="true"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill={isSaved ? "currentColor" : "none"}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.5 4.5C6.5 3.67 7.17 3 8 3H16C16.83 3 17.5 3.67 17.5 4.5V20L12 16.5L6.5 20V4.5Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </>
+        )}
       </button>
 
       {isErrorModalOpen && (
