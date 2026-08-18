@@ -11,13 +11,8 @@ type SaveArticleButtonProps = {
 export default function SaveArticleButton({
   articleId,
 }: SaveArticleButtonProps) {
-  const {
-    isSaved,
-    isSaving,
-    isLoginModalOpen,
-    closeLoginModal,
-    toggleSaved,
-  } = useToggleSavedArticle(articleId);
+  const { isSaved, isSaving, isLoginModalOpen, closeLoginModal, toggleSaved } =
+    useToggleSavedArticle(articleId);
 
   return (
     <>

@@ -152,3 +152,28 @@
   font-weight: 700;
   text-decoration: underline;
 }
+@media only screen and (min-width: 768px) {
+  .conteinerform {
+    width: 522px;
+    max-width: 522px;
+  }
+  .input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .form {
+    width: 458px;
+  }
+  .subtitle {
+    width: 278px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .conteinerform {
+    width: 392px;
+    max-width: 392px;
+  }
+  .form {
+    width: 328px;
+  }
+}

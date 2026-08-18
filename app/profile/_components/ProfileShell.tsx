@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSelectedLayoutSegment } from "next/navigation";
 import toast from "react-hot-toast";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import UserProfileInfo from "@/components/UserProfileInfo/UserProfileInfo";
@@ -10,6 +10,7 @@ import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 import { isUnauthorizedError } from "@/lib/api/apiError";
 import { getAvatarUrl } from "@/lib/utils/avatar";
 import ProfileTabs from "./ProfileTabs";
+import { ProfileArticlesProvider, useProfileArticles } from "./ProfileArticlesContext";
 import css from "../Profile.module.css";
 
 interface ProfileShellProps {
@@ -17,9 +18,13 @@ interface ProfileShellProps {
   articles: React.ReactNode;
 }
 
-const ProfileShell = ({ children, articles }: ProfileShellProps) => {
+const ProfileContent = ({ children, articles }: ProfileShellProps) => {
   const router = useRouter();
   const { data: user, isPending, error } = useCurrentUser();
+  const activeSegment = useSelectedLayoutSegment("articles");
+  const isSavedActive = activeSegment === "saved";
+
+  const { savedArticlesCount, createdArticlesCount } = useProfileArticles();
 
   const isUnauthorized = isUnauthorizedError(error);
 
@@ -40,6 +45,10 @@ const ProfileShell = ({ children, articles }: ProfileShellProps) => {
     return <Loader label="Loading profile" />;
   }
 
+  const displayArticlesCount = isSavedActive
+    ? (savedArticlesCount ?? 0)
+    : (createdArticlesCount ?? user?.articlesAmount ?? 0);
+
   return (
     <section className={css.section}>
       <div className="container">
@@ -54,7 +63,7 @@ const ProfileShell = ({ children, articles }: ProfileShellProps) => {
                 <UserProfileInfo
                   name={user.name || user.username || "User"}
                   avatarUrl={getAvatarUrl(user.avatarUrl, user.avatar)}
-                  articlesCount={user.articlesAmount}
+                  articlesCount={displayArticlesCount}
                 />
               </div>
 
@@ -70,6 +79,14 @@ const ProfileShell = ({ children, articles }: ProfileShellProps) => {
         </div>
       </div>
     </section>
+  );
+};
+
+const ProfileShell = (props: ProfileShellProps) => {
+  return (
+    <ProfileArticlesProvider>
+      <ProfileContent {...props} />
+    </ProfileArticlesProvider>
   );
 };
 
