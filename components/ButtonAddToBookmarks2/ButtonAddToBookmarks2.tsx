@@ -47,15 +47,21 @@ const ButtonAddToBookmarks2 = ({
             aria-label="Edit article"
           >
             <svg
+              className={css.editIcon}
               width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
               aria-hidden="true"
             >
-              <use href="/sprite.svg#icon-edit" />
+              <path 
+      d="M19.125 19.125L8.71154 19.125H4.875L4.875 15.281L12.8221 7.31853L14.4663 5.67111C15.5258 4.60963 17.2435 4.60963 18.3029 5.67111C19.3623 6.7326 19.3623 8.4536 18.3029 9.51508L16.6587 11.1625L8.71154 19.125M12.8221 7.31853L16.6587 11.1625" 
+      fill="none"
+      stroke="#374f42" 
+      stroke-width="1" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
             </svg>
           </button>
         ) : (
@@ -75,6 +81,8 @@ const ButtonAddToBookmarks2 = ({
                 width="24"
                 height="24"
                 viewBox="0 0 32 32"
+                fill="none"
+                stroke="currentColor"
                 aria-hidden="true"
               >
                 <use href="/sprite.svg#Generic=bookmark-alternative,%20Size=32px" />
