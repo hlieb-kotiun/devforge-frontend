@@ -56,7 +56,7 @@ const AuthorsList = () => {
   };
 
   if (isLoading) {
-    return <p className={styles.message}>Завантаження...</p>;
+    return <p className={styles.message}>Loading...</p>;
   }
 
   if (isError && !data) {

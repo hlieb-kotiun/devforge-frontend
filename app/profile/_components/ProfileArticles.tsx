@@ -10,6 +10,7 @@ import { getMyArticles, getSavedArticles } from "@/lib/api/profile";
 import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 import type { Article, ArticlesResponse } from "@/types/article";
 import ProfileArticlesView from "./ProfileArticlesView";
+import { useProfileArticles } from "./ProfileArticlesContext";
 
 const LIMIT = 6;
 
@@ -21,6 +22,8 @@ const ProfileArticles = ({ kind }: ProfileArticlesProps) => {
   const queryClient = useQueryClient();
   const { data: user } = useCurrentUser();
   const ownerId = user?._id;
+
+  const { setCreatedArticlesCount, setSavedArticlesCount } = useProfileArticles();
 
   const [pageCount, setPageCount] = useState(1);
 
@@ -66,6 +69,15 @@ const ProfileArticles = ({ kind }: ProfileArticlesProps) => {
   const isLoadingMore = results[pageCount - 1]?.isFetching ?? false;
   const error = results.find((result) => result.error)?.error;
 
+  useEffect(() => {
+    if (results[0]?.data?.total !== undefined) {
+      if (kind === "created") {
+        setCreatedArticlesCount(total);
+      } else {
+        setSavedArticlesCount(total);
+      }
+    }
+  }, [results, kind, total, setCreatedArticlesCount, setSavedArticlesCount])
   // Фоновий prefetch наступної сторінки — вимога ТЗ для динамічних списків.
   // Йде через queryClient, тож блокувального лоадера не показує.
   useEffect(() => {
