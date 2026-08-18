@@ -43,7 +43,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 async function createArticle(values: ArticleFormValues, username: string) {
   const formData = new FormData();
-  formData.append("img", values.img as File);
+  formData.append('img', values.img as File)
   formData.append("title", values.title.trim());
   formData.append("desc", values.desc.trim());
   formData.append("date", new Date().toISOString().slice(0, 10));
