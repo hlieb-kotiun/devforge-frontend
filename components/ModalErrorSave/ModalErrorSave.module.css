@@ -93,7 +93,7 @@
 
 @media screen and (max-width: 767px) {
     .modalErrorSave {
-        width: min(361px, calc(100vw - 32px));
+        width: min(338px, calc(100vw - 32px));
         height: 326px;
         padding: 56px 32px 32px;
     }
