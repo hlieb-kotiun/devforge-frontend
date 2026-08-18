@@ -49,8 +49,8 @@
 
 .card__btn_icon.saved:hover,
 .card__btn_icon.saved:focus-visible {
-  background-color: var(--white);
-  color: var(--green-darker);
+  background-color: var(--green-darker);
+  color: var(--white);
 }
 
 .card__btn:focus-visible {
@@ -76,7 +76,16 @@
 }
 
 .bookmarkIcon {
-  fill: currentColor;
+  display: block;
+  color: inherit;
+  fill: none;
+  stroke: currentColor;
+}
+
+.bookmarkIcon use {
+  fill: none;
+  stroke: currentColor;
+  color: inherit;
 }
 
 .editIcon {

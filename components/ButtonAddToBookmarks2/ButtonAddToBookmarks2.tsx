@@ -81,6 +81,8 @@ const ButtonAddToBookmarks2 = ({
                 width="24"
                 height="24"
                 viewBox="0 0 32 32"
+                fill="none"
+                stroke="currentColor"
                 aria-hidden="true"
               >
                 <use href="/sprite.svg#Generic=bookmark-alternative,%20Size=32px" />
