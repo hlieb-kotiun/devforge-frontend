@@ -62,6 +62,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-height: calc(2 * 1.45 * 1em);
 }
 
 .card__description {
@@ -77,6 +78,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-height: calc(2 * 1.45 * 1em);
 }
 
 .card__actions {
