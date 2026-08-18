@@ -7,9 +7,10 @@ import ButtonAddToBookmarks2 from "../ButtonAddToBookmarks2/ButtonAddToBookmarks
 
 interface ArticlesItem2Props {
   article: Article;
+  bookmarkActive?: boolean;
 }
 
-const ArticlesItem2 = ({ article }: ArticlesItem2Props) => {
+const ArticlesItem2 = ({ article, bookmarkActive }: ArticlesItem2Props) => {
   const authorName =
     getAuthorName(article, "Author").trim().split(" ")[0] || "Author";
 
@@ -43,7 +44,7 @@ const ArticlesItem2 = ({ article }: ArticlesItem2Props) => {
         >
           Learn more
         </Link>
-        <ButtonAddToBookmarks2 article={article} />
+        <ButtonAddToBookmarks2 article={article} active={bookmarkActive} />
       </div>
     </div>
   );
