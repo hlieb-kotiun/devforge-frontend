@@ -58,3 +58,22 @@ export function getSavedArticles(
     "Failed to load saved articles",
   );
 }
+
+const SAVED_IDS_PAGE_LIMIT = 50;
+const SAVED_IDS_MAX_PAGES = 20;
+
+export async function getAllSavedArticleIds(): Promise<string[]> {
+  const firstPage = await getSavedArticles(1, SAVED_IDS_PAGE_LIMIT);
+  const ids = firstPage.articles.map((article) => article._id);
+  const totalPages = Math.min(
+    Math.ceil((firstPage.total || ids.length) / SAVED_IDS_PAGE_LIMIT) || 1,
+    SAVED_IDS_MAX_PAGES,
+  );
+
+  for (let page = 2; page <= totalPages; page += 1) {
+    const response = await getSavedArticles(page, SAVED_IDS_PAGE_LIMIT);
+    ids.push(...response.articles.map((article) => article._id));
+  }
+
+  return [...new Set(ids)];
+}

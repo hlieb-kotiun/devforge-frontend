@@ -7,6 +7,7 @@ import css from "./PopularArticles.module.css";
 import type { Article } from "@/types/article";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import ArticlesItem2 from "../ArticlesItem2/ArticlesItem2";
 
 export default function PopularArticles() {
   const [articles, setArticles] = React.useState<Article[]>([]);
@@ -18,7 +19,7 @@ export default function PopularArticles() {
       setArticles(res.articles || res);
     };
     fetchData();
-  }, []);    
+  }, []);
 
   const handleLoadMore = (id: string) => {
     router.push(`/articles/${id}`);
@@ -38,12 +39,9 @@ export default function PopularArticles() {
         <ul className={css.popularList}>
           {Array.isArray(articles) &&
             articles.map((article: Article) => (
-              <ArticlesItem
-                key={article._id}
-                article={article}
-                onLoadMore={handleLoadMore} 
-                isAuthenticated={true}
-              />
+              <li key={article._id}>
+                <ArticlesItem2 article={article} />
+              </li>
             ))}
         </ul>
       </div>

@@ -1,14 +1,18 @@
 import type { Article } from "@/types/article";
-import ArticleCard from "@/components/ArticleCard/ArticleCard";
 import css from "./ArticlesList.module.css";
+import ArticlesItem2 from "../ArticlesItem2/ArticlesItem2";
 
 interface ArticlesListProps {
   articles: Article[];
-  /** Опційний екшен у футері кожної картки (напр. кнопка закладок). */
-  renderAction?: (article: Article) => React.ReactNode;
+  forceSaved?: boolean;
+  savedArticleIds?: string[];
 }
 
-const ArticlesList = ({ articles, renderAction }: ArticlesListProps) => {
+const ArticlesList = ({
+  articles,
+  forceSaved,
+  savedArticleIds,
+}: ArticlesListProps) => {
   if (articles.length === 0) {
     return <p className={css.empty}>No articles found.</p>;
   }
@@ -16,11 +20,14 @@ const ArticlesList = ({ articles, renderAction }: ArticlesListProps) => {
   return (
     <ul className={css.list}>
       {articles.map((article) => (
-        <ArticleCard
-          key={article._id}
-          article={article}
-          action={renderAction?.(article)}
-        />
+        <li key={article._id}>
+          <ArticlesItem2
+            article={article}
+            bookmarkActive={
+              forceSaved || savedArticleIds?.includes(article._id)
+            }
+          />
+        </li>
       ))}
     </ul>
   );

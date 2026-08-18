@@ -5,16 +5,16 @@ import type { Article } from "@/types/article";
 interface ProfileArticlesViewProps {
   articles: Article[];
   variant: "created" | "saved";
-  renderAction?: (article: Article) => React.ReactNode;
+  forceSaved?: boolean;
 }
 
 const ProfileArticlesView = ({
   articles,
   variant,
-  renderAction,
+  forceSaved,
 }: ProfileArticlesViewProps) => {
   if (articles.length > 0) {
-    return <ArticlesList articles={articles} renderAction={renderAction} />;
+    return <ArticlesList articles={articles} forceSaved={forceSaved} />;
   }
 
   const isCreated = variant === "created";
