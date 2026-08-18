@@ -79,7 +79,7 @@ export default function LoginForm() {
         <div className={css.conteinerform}>
           <h2 className={css.title}>Login</h2>
 
-          <Form>
+          <Form className={css.form}>
             <div className={css.fieldGroup}>
               <label htmlFor={`${fieldId}-email`} className={css.label}>
                 Enter your email address

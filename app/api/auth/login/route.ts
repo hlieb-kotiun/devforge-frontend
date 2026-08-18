@@ -18,15 +18,18 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     if (axios.isAxiosError<ApiErrorResponse>(error)) {
+      const status = error.response?.status;
+      if (status === 401) {
+        return NextResponse.json(
+          { message: "User is not registered" },
+          { status: error.response?.status ?? 500 },
+        );
+      }
+
       return NextResponse.json(
-        { message: error.response?.data?.message ?? "Login failed" },
-        { status: error.response?.status ?? 500 },
+        { message: "Something went wrong" },
+        { status: 500 },
       );
     }
-
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      { status: 500 },
-    );
   }
 }
