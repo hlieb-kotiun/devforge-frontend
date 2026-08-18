@@ -36,7 +36,7 @@
 
 .card__btn_icon.saved {
   color: var(--white);
-  background-color: var(--green-darker);
+  background-color: var(--green);
 }
 
 .card__btn:hover,
@@ -77,6 +77,12 @@
 
 .bookmarkIcon {
   fill: currentColor;
+}
+
+.editIcon {
+  display: block;
+  flex-shrink: 0;
+  color: var(--green-darker);
 }
 
 .spinner {
