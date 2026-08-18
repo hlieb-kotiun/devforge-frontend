@@ -43,7 +43,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 async function createArticle(values: ArticleFormValues, username: string) {
   const formData = new FormData();
-  formData.append("img", values.img as File);
+  formData.append('img', values.img as File)
   formData.append("title", values.title.trim());
   formData.append("desc", values.desc.trim());
   formData.append("date", new Date().toISOString().slice(0, 10));
@@ -53,12 +53,13 @@ async function createArticle(values: ArticleFormValues, username: string) {
     method: "POST",
     body: formData,
     credentials: "include",
-   });
-  
+  });
+
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
     throw new Error(data.message || "Unable to publish article");
-  }   
+  }
+  return response.json();
 }
 
 
@@ -67,16 +68,16 @@ export default function AddArticleForm({ user }: AddArticleFormProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-const mutation = useMutation({
-    mutationFn: (values: ArticleFormValues) => createArticle(values, user.username),
-    onSuccess: () => {
-      toast.success("Article published successfully!");
-      router.push("/articles");
-    },
-    onError: (error: Error) => {
-      toast.error(error.message);
-    },
-  });
+  const mutation = useMutation({
+  mutationFn: (values: ArticleFormValues) => createArticle(values, user.username),
+  onSuccess: (data) => {
+    toast.success("Article published successfully!");
+    router.push(`/articles/${data._id}`); // редірект на сторінку статті
+  },
+  onError: (error: Error) => {
+    toast.error(error.message);
+  },
+});
 
   const handleFileChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -108,7 +109,7 @@ const mutation = useMutation({
           <input
             ref={fileInputRef}
             type="file"
-            accept="image/jpeg,image/png,image/webp"
+            accept="img/jpeg,img/png,img/webp"
             className={styles.createArticleHiddenInput}
             onChange={(event) => handleFileChange(event, setFieldValue)}
           />
