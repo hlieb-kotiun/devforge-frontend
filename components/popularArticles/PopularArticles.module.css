@@ -82,8 +82,22 @@
     max-width: 704px;
     padding: 0;
   }
+
+  .popularContent {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin-bottom: 16px;
+  }
+
+  .popularTitle {
+    margin-bottom: 0;
+  }
+
   .popularLink {
-    display: none;
+    display: flex;
+    margin-left: auto;
+    padding: 13.5px 0;
   }
 
   .popularList {
@@ -98,12 +112,12 @@
 /* Desktop (1440px) */
 @media (min-width: 1440px) {
   .popularSection {
-    padding: 80px 108px;
+    padding: 80px 0;
   }
 
   .popularArticlesContainer {
-    max-width: 1224px;
-    padding: 0;
+    max-width: 1440px;
+    padding: 0 107px;
   }
 
   .popularContent {
@@ -118,11 +132,11 @@
     margin-bottom: 0;
   }
 
-  .popularLink {
+  /* .popularLink {
     display: flex;
     margin-left: auto;
     padding: 13.5px 0;
-  }
+  } */
 
   .popularList {
     display: flex;
