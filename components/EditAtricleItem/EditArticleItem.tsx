@@ -36,7 +36,7 @@ const validationSchema = Yup.object({
 async function updateArticle(values: ArticleFormValues, articleId: string) {
   let response: Response;
 
-  if (values.img) {
+  if (values.img instanceof File) {
     const formData = new FormData();
     formData.append("img", values.img);
     formData.append("title", values.title.trim());
@@ -48,17 +48,15 @@ async function updateArticle(values: ArticleFormValues, articleId: string) {
       credentials: "include",
     });
   } else {
-    const payload = {
-      title: values.title.trim(),
-      desc: values.desc.trim(),
-    };
-
     response = await fetch(`/api/articles/${articleId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        title: values.title.trim(),
+        desc: values.desc.trim(),
+      }),
       credentials: "include",
     });
   }
@@ -109,10 +107,12 @@ const queryClient = useQueryClient();
   const handleFileChange = (
     event: ChangeEvent<HTMLInputElement>,
     setFieldValue: (field: string, value: File | null) => void,
+    setFieldTouched: (field: string, isTouched?: boolean) => void,
   ) => {
     const file = event.target.files?.[0];
     if (file) {
       setFieldValue("img", file);
+      setFieldTouched("img", true);
       setPreviewUrl(URL.createObjectURL(file));
     }
   };
@@ -142,7 +142,7 @@ const queryClient = useQueryClient();
         validateOnBlur
         enableReinitialize
       >
-        {({ errors, touched, values, setFieldValue, handleBlur, isSubmitting }) => (
+        {({ errors, touched, values, setFieldValue, setFieldTouched, handleBlur, isSubmitting }) => (
           <Form className={styles.editArticleForm}>
             {/* Image upload */}
             <input
@@ -150,7 +150,7 @@ const queryClient = useQueryClient();
               type="file"
               accept="image/jpeg,image/png,image/webp"
               className={styles.editArticleHiddenInput}
-              onChange={(event) => handleFileChange(event, setFieldValue)}
+              onChange={(event) => handleFileChange(event, setFieldValue, setFieldTouched)}
             />
             <div className={styles.editArticlePhotoField}>
               <div
