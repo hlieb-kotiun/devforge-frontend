@@ -63,6 +63,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     ...recommendedArticles.map((item) => getUserById(item.ownerId)),
   ]);
 
+  const articleContent = article.article?.trim() || article.desc;
+  const paragraphs = articleContent
+    .split(/\s*\/n\s*|\r?\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+
   return (
     <main className={styles.page}>
       <div className={styles.container}>
@@ -82,8 +88,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         <div className={styles.content}>
           <div className={styles.articleText}>
-            {article.desc.split("/n").map((paragraph, index) => (
-              <p key={index}>{paragraph.trim()}</p>
+            {paragraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
             ))}
           </div>
 
