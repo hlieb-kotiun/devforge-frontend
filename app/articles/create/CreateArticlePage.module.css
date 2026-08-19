@@ -17,7 +17,7 @@
 
 @media (min-width: 768px) {
   .createArticleContainer {
-    padding: 48px 32px 64px;
+    padding: 48px 32px;
   }
 
   .createArticleTitle { margin-bottom: 32px; }
@@ -25,7 +25,7 @@
 
 @media (min-width: 1440px) {
   .createArticleContainer {
-    padding: 80px;
+    padding: 48px 107px;
   }
 
   .createArticleTitle { margin-bottom: 32px; }
