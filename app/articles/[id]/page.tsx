@@ -93,7 +93,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             ))}
           </div>
 
-          <div className={styles.infoBlock}>
+          <div className={styles.sidebar}>
+            <div className={styles.infoBlock}>
             <p className={styles.infoRow}>
               <span>Author</span>
               <span>{getAuthorName(author)}</span>
@@ -139,9 +140,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 </Link>
               ))}
             </div>
-          </div>
+            </div>
 
-          <SaveArticleButton articleId={article._id} />
+            <SaveArticleButton articleId={article._id} />
+          </div>
         </div>
       </div>
     </main>
