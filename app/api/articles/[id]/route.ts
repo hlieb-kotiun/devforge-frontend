@@ -2,6 +2,8 @@ import { type NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
+export const dynamic = "force-dynamic";
+
 function createUpstreamHeaders(request: NextRequest): Headers {
   const headers = new Headers();
   const contentType = request.headers.get("content-type");
