@@ -1,7 +1,12 @@
+:global(.appShell > main):has(.register_section) {
+  display: flex;
+}
+
 .register_section {
   display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: 0;
 }

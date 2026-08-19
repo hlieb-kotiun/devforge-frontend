@@ -1,14 +1,12 @@
 .section {
-  padding: 40px 16px;
-  width: 100%;
+  padding-top: 72px;
+  
 }
 
-.container {
+.AboutUsContainer {
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
-  width: 100%;
-  margin: 0 auto;
 }
 
 .textCard {
@@ -71,14 +69,14 @@
 /* Tablet (768px) */
 @media (min-width: 768px) {
   .section {
-    padding: 60px 32px;
+    padding-top: 72px;
   }
   
-  .container {
+  .AboutUsContainer {
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: 326px 398px;
     gap: 24px;
-    max-width: 704px;
+    max-width: 768px;
   }
 
   .textCard {
@@ -112,12 +110,12 @@
 /* Desktop (1440px) */
 @media (min-width: 1440px) {
   .section {
-    padding: 80px 108px;
+    padding-top: 72px;
   }
   
-  .container {
+  .AboutUsContainer {
     grid-template-columns: repeat(12, 1fr);
-    max-width: 1224px;
+    max-width: 1440px;
   }
 
   .textCard {

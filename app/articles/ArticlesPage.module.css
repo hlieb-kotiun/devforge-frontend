@@ -1,6 +1,6 @@
 .page {
   width: 100%;
-  padding: 24px 16px 64px;
+  padding: 48px 0 48px;
 }
 
 .header {
@@ -67,20 +67,23 @@
 }
 
 .loadMore {
-  display: block;
-  min-width: 140px;
-  margin: 32px auto 0;
-  padding: 11px 24px;
-  border: none;
-  border-radius: 999px;
-  background-color: var(--green);
-  color: var(--white);
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-  cursor: pointer;
-  transition: opacity 200ms ease;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 0 auto;
+    border-radius: 64px;
+    padding: 16px;
+    width: 100%;
+    max-width: 361px;
+    height: 57px;
+    background: var(--green);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    transition: background-color 0.2s ease;
+margin-top: 24px;
 }
 
 .loadMore:hover {
@@ -93,9 +96,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .page {
-    padding: 40px 32px 80px;
-  }
+
 
   .header {
     gap: 24px;
@@ -113,14 +114,11 @@
   }
 
   .loadMore {
-    margin-top: 40px;
+    max-width: 390px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .page {
-    padding: 56px 52px 96px;
-  }
 
   .header {
     gap: 28px;

@@ -94,8 +94,8 @@
 @media screen and (max-width: 767px) {
     .modalErrorSave {
         width: min(338px, calc(100vw - 32px));
-        height: 326px;
-        padding: 56px 32px 32px;
+        height: auto;
+        min-height: 326px;
     }
 
     .modalErrorSaveTitle {
@@ -112,12 +112,15 @@
         align-items: center;
         gap: 12px;
         width: 100%;
+        margin-bottom: 0;
     }
 
     .modalErrorSaveLoginButton,
     .modalErrorSaveRegisterButton {
-        width: min(297px, 100%);
+        width: min(274px, 100%);
         height: 46px;
         font-size: clamp(14px, 4vw, 16px);
+        flex-shrink: 1;
+        max-width: 100%;
     }
 }

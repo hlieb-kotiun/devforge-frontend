@@ -65,7 +65,7 @@ const ArticlesPage = () => {
 
   return (
     <main className={css.page}>
-      <div className="container">
+      <div className={'container'}>
         <div className={css.header}>
           <SectionTitle>Articles</SectionTitle>
 

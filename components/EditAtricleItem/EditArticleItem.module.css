@@ -1,19 +1,34 @@
-.createArticleHiddenInput {
+/* Section wrapper (full width background/padding) */
+.sectionWrapper {
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+
+.editArticlePageTitle {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: var(--black);
+}
+
+.editArticleHiddenInput {
     display: none;
 }
 
-.createArticleForm {
+.editArticleForm {
     display: grid;
-    gap: 24px;
+    gap: 16px;
     grid-template-columns: 1fr;
     grid-template-areas: "photo" "title" "textarea" "button";
 }
 
-.createArticlePhotoField {
+.editArticlePhotoField {
     grid-area: photo;
 }
 
-.createArticlePhotoBox {
+.editArticlePhotoBox {
     aspect-ratio: 343 / 222;
     background-color: var(--light-gray);
     border-radius: 12px;
@@ -23,44 +38,44 @@
     cursor: pointer;
     overflow: hidden;
     transition: opacity 0.2s ease;
+    width: 100%;
 }
 
-.createArticlePhotoBox:hover {
+.editArticlePhotoBox:hover {
     opacity: 0.85;
 }
 
-.createArticleCameraIcon {
+.editArticleCameraIcon {
     width: 98px;
     height: 82px;
     fill: none;
 }
 
-.createArticlePreviewImage {
+.editArticlePreviewImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.createArticleTitleField {
+.editArticleTitleField {
     grid-area: title;
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.createArticleTextField {
+.editArticleTextField {
     grid-area: textarea;
-    height: 393px;
 }
 
-.createArticleLabel {
-    font-size: 18px;
+.editArticleLabel {
+    font-size: 14px;
     font-weight: 400;
     color: var(--black);
 }
 
-.createArticleInput,
-.createArticleTextarea {
+.editArticleInput,
+.editArticleTextarea {
     width: 100%;
     font: inherit;
     font-size: 18px;
@@ -71,29 +86,29 @@
     transition: border-color 0.2s ease;
 }
 
-.createArticleInput {
+.editArticleInput {
     min-height: 48px;
-    padding: 11.5px 12px;
+    padding: 10px 16px;
 }
 
-.createArticleTextarea {
-    min-height: 393px;
-    padding: 12px;
-    resize: none;
+.editArticleTextarea {
+    min-height: 374px;
+    padding: 12px 10px;
+    resize: vertical;
 }
 
-.createArticleInput:focus,
-.createArticleTextarea:focus {
+.editArticleInput:focus,
+.editArticleTextarea:focus {
     border-color: var(--green);
 }
 
-.createArticleError {
+.editArticleError {
     margin: 4px 0 0;
     color: var(--red);
     font-size: 12px;
 }
 
-.createArticleSubmitButton {
+.editArticleSubmitButton {
     grid-area: button;
     font: inherit;
     font-weight: 700;
@@ -106,44 +121,41 @@
     transition: background-color 0.2s ease;
 }
 
-.createArticleSubmitButton:hover {
+.editArticleSubmitButton:hover {
     background-color: var(--green-darker);
 }
 
-.createArticleSubmitButton:disabled {
+.editArticleSubmitButton:disabled {
     cursor: not-allowed;
     opacity: 0.65;
 }
 
 @media (min-width: 768px) {
-    .createArticleForm {
+    .editArticleForm {
         column-gap: 24px;
-        row-gap: 24px;
+        row-gap: 16px;
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "photo title" "textarea textarea" "button button";
-    }
-
-    .createArticleTextarea {
-        min-height: 393px;
     }
 }
 
 @media (min-width: 1440px) {
-    .createArticleForm {
-        max-width: 1226px;
+    .editArticleForm {
         column-gap: 24px;
-        row-gap: 32px;
-        grid-template-columns: minmax(0, 809px) 391px;
-        grid-template-areas: "title photo" "textarea photo" "button .";
+        row-gap: 16px;
+        grid-template-columns: 1fr 384px;
+        grid-template-areas:
+            "title photo"
+            "textarea photo"
+            "button photo";
     }
 
-    .createArticlePhotoBox {
-        height: auto;
-        aspect-ratio: 391 / 312;
-        margin-top: 32px;
+    .editArticlePhotoBox {
+        height: 276px;
+        aspect-ratio: 384 / 276;
     }
 
-    .createArticleTextarea {
-        min-height: 393px;
+    .editArticleTextarea {
+        min-height: 384px;
     }
 }
