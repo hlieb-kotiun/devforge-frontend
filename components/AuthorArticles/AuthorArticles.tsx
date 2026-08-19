@@ -86,7 +86,7 @@ useEffect(() => {
   return (
     <div ref={listRef}>
       {isLoading ? (
-        <p className={styles.message}>Завантаження...</p>
+        <p className={styles.message}>Loading...</p>
       ) : (
         <ArticlesList articles={articles} />
       )}
@@ -98,7 +98,7 @@ useEffect(() => {
           onClick={handleLoadMore}
           disabled={isFetchingNextPage}
         >
-          {isFetchingNextPage ? "Завантаження..." : "Load More"}
+          {isFetchingNextPage ? "Loading..." : "Load More"}
         </button>
       )}
     </div>
