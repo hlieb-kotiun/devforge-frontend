@@ -73,6 +73,14 @@
   gap: 24px;
 }
 
+.sidebar {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 /* =========================================================
    ARTICLE TEXT
    Figma:
@@ -86,6 +94,7 @@
   margin: 0;
 
   white-space: pre-line;
+  overflow-wrap: anywhere;
 
   font-size: 16px;
   font-weight: 400;
@@ -425,7 +434,7 @@
 
     display: grid;
     grid-template-columns: 808px 393px;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto;
     column-gap: 24px;
     row-gap: 24px;
 
@@ -436,7 +445,7 @@
     width: 808px;
 
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 1;
   }
 
   /* Figma:
@@ -447,11 +456,15 @@
      gap 15
   */
 
-  .infoBlock {
+  .sidebar {
     width: 393px;
 
     grid-column: 2;
     grid-row: 1;
+  }
+
+  .infoBlock {
+    width: 393px;
 
     padding: 32px 32px 40px;
     gap: 15px;
