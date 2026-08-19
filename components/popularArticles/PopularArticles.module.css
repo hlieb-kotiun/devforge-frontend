@@ -1,11 +1,11 @@
 .popularSection {
-  padding: 40px 16px;
+  padding: 40px 0 0 0;
   width: 100%;
 }
 
 .popularArticlesContainer {
   width: 100%;
-  padding: 0;
+  padding: 0 16px;
 }
 
 .popularContent {
@@ -68,22 +68,35 @@
 .popularList {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding-bottom: 72px;
+  gap: 24px;  
 }
 
 /* Tablet (768px) */
 @media (min-width: 768px) {
   .popularSection {
-    padding: 60px 32px;
+    padding: 60px 0 0 0;
   }
 
   .popularArticlesContainer {
     max-width: 704px;
-    padding: 0;
+    padding: 0 32px;
   }
+
+  .popularContent {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin-bottom: 16px;
+  }
+
+  .popularTitle {
+    margin-bottom: 0;
+  }
+
   .popularLink {
-    display: none;
+    display: flex;
+    margin-left: auto;
+    padding: 13.5px 0;
   }
 
   .popularList {
@@ -98,12 +111,12 @@
 /* Desktop (1440px) */
 @media (min-width: 1440px) {
   .popularSection {
-    padding: 80px 108px;
+    padding: 80px 0 0 0;
   }
 
   .popularArticlesContainer {
-    max-width: 1224px;
-    padding: 0;
+    max-width: 1440px;
+    padding: 0 107px;
   }
 
   .popularContent {
@@ -116,13 +129,7 @@
   .popularTitle {
     font-size: 40px;
     margin-bottom: 0;
-  }
-
-  .popularLink {
-    display: flex;
-    margin-left: auto;
-    padding: 13.5px 0;
-  }
+  }  
 
   .popularList {
     display: flex;
@@ -130,5 +137,9 @@
     gap: 24px;
     padding-bottom: 0;
     width: 100%;
+  }
+
+  .popularList li:last-child {
+    display: none;
   }
 }
