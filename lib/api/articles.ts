@@ -16,7 +16,7 @@ export type Article = {
   img: string;
   title: string;
   desc: string;
-  article: string;
+  article?: string;
   rate: number;
   ownerId: ArticleOwner;
   date: string;

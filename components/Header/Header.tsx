@@ -69,6 +69,10 @@ const Header = ({
   }, [isMenuOpen]);
 
   const closeMenu = () => setIsMenuOpen(false);
+  const openLogoutModal = () => {
+    closeMenu();
+    setIsLogoutModalOpen(true);
+  };
 
   return (
     <header
@@ -137,7 +141,8 @@ const Header = ({
             <UserBar
               name={currentAuthState.userName}
               avatar={currentAuthState.userAvatar}
-              onLogout={() => setIsLogoutModalOpen(true)}
+              onLogout={openLogoutModal}
+              onProfileNavigate={closeMenu}
             />
           )}
         </div>
