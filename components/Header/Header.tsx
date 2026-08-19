@@ -142,6 +142,7 @@ const Header = ({
               name={currentAuthState.userName}
               avatar={currentAuthState.userAvatar}
               onLogout={openLogoutModal}
+              onProfileNavigate={closeMenu}
             />
           )}
         </div>

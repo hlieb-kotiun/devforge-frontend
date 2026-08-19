@@ -9,7 +9,7 @@ export interface Article {
   img: string;
   title: string;
   desc: string;
-  article: string;
+  article?: string;
   rate: number;
   // Бек populate-ить ownerId не в усіх ендпоїнтах, тож може прийти сирий id.
   ownerId: string | ArticleOwner;

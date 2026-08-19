@@ -29,10 +29,7 @@ function getRandomArticles(
 
   const result: Article[] = [];
 
-  while (
-    availableArticles.length > 0 &&
-    result.length < amount
-  ) {
+  while (availableArticles.length > 0 && result.length < amount) {
     const randomIndex = randomInt(availableArticles.length);
 
     result.push(availableArticles[randomIndex]);
@@ -42,16 +39,11 @@ function getRandomArticles(
   return result;
 }
 
-function getAuthorName(user: {
-  name?: string;
-  username?: string;
-}) {
+function getAuthorName(user: { name?: string; username?: string }) {
   return user.name || user.username || "Unknown author";
 }
 
-export default async function ArticlePage({
-  params,
-}: ArticlePageProps) {
+export default async function ArticlePage({ params }: ArticlePageProps) {
   const { id } = await params;
 
   const [article, articlesResponse] = await Promise.all([
@@ -68,10 +60,14 @@ export default async function ArticlePage({
   const [author, ...recommendedAuthors] = await Promise.all([
     getUserById(article.ownerId),
 
-    ...recommendedArticles.map((item) =>
-      getUserById(item.ownerId),
-    ),
+    ...recommendedArticles.map((item) => getUserById(item.ownerId)),
   ]);
+
+  const articleContent = article.article?.trim() || article.desc;
+  const paragraphs = articleContent
+    .split(/\s*\/n\s*|\r?\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
 
   return (
     <main className={styles.page}>
@@ -92,11 +88,9 @@ export default async function ArticlePage({
 
         <div className={styles.content}>
           <div className={styles.articleText}>
-            {article.article
-              .split("\n")
-              .map((paragraph, index) => (
-                <p key={index}>{paragraph.trim()}</p>
-              ))}
+            {paragraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           </div>
 
           <div className={styles.infoBlock}>
@@ -124,10 +118,7 @@ export default async function ArticlePage({
                   <div className={styles.cardTop}>
                     <h3>{item.title}</h3>
 
-                    <span
-                      className={styles.arrowButton}
-                      aria-hidden="true"
-                    >
+                    <span className={styles.arrowButton} aria-hidden="true">
                       <svg
                         viewBox="0 0 24 24"
                         fill="none"
@@ -144,11 +135,7 @@ export default async function ArticlePage({
                     </span>
                   </div>
 
-                  <p>
-                    {getAuthorName(
-                      recommendedAuthors[index],
-                    )}
-                  </p>
+                  <p>{getAuthorName(recommendedAuthors[index])}</p>
                 </Link>
               ))}
             </div>

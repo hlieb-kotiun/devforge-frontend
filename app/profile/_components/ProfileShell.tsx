@@ -64,6 +64,7 @@ const ProfileContent = ({ children, articles }: ProfileShellProps) => {
                   name={user.name || user.username || "User"}
                   avatarUrl={getAvatarUrl(user.avatarUrl, user.avatar)}
                   articlesCount={displayArticlesCount}
+                  avatarHref="/photo?returnTo=/profile"
                 />
               </div>
 
