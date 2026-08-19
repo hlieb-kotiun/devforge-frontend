@@ -1,14 +1,15 @@
 .section {
   width: 100%;
-  padding: 40px 16px;
+  padding: 72px 0 72px 0;
 }
 
 .headingRow {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .title {
@@ -69,8 +70,7 @@
 .creatorsList {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 16px;
-  row-gap: 24px;
+  gap: 16px;
 }
 
 .creatorCard {
@@ -78,7 +78,6 @@
   flex-direction: column;
   align-items: center;
   min-width: 0;
-  padding: 12px 0;
 }
 
 .creatorLink {
@@ -124,11 +123,16 @@
 
 @media (min-width: 768px) {
   .section {
-    padding: 60px 32px;
-  }
+      padding: 72px 0 72px 0;
+    }
 
   .topCreatorsContainer {
-    padding: 0 32px;
+    margin: 0 auto;
+  }
+
+  .headingRow {
+    flex-direction: row;
+    align-items: center;
   }
 
   .title {
@@ -152,13 +156,7 @@
 }
 
 @media (min-width: 1440px) {
-  .section {
-    padding: 80px 108px;
-  }
 
-  .topCreatorsContainer {
-    padding: 0 108px;
-  }
 
   .headingRow {
     margin-bottom: 16px;
