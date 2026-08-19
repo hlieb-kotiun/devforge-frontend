@@ -1,17 +1,23 @@
 'use client';
 
 import { useState, useRef, ChangeEvent } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { CURRENT_USER_QUERY_KEY } from '@/lib/hooks/useCurrentUser';
+import { useLoaderStore } from '@/lib/store/globalLoaderStore';
 import styles from './UploadForm.module.css';
 
 interface FormValues {
   file: File | null;
 }
+
+type UploadFormProps = {
+  redirectTo?: '/articles' | '/profile';
+};
 
 const validationSchema = Yup.object({
   file: Yup.mixed<File>()
@@ -46,21 +52,31 @@ async function uploadAvatarApi(file: File): Promise<unknown> {
   return contentType.includes('application/json') ? response.json() : null;
 }
 
-export default function UploadForm() {
+export default function UploadForm({
+  redirectTo = '/articles',
+}: UploadFormProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const showLoader = useLoaderStore((state) => state.showLoader);
+  const hideLoader = useLoaderStore((state) => state.hideLoader);
 
   const mutation = useMutation({
     mutationFn: uploadAvatarApi,
+    onMutate: () => {
+      showLoader();
+    },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: CURRENT_USER_QUERY_KEY });
       toast.success('Photo uploaded successfully!');
-      router.push('/articles');
+      router.push(redirectTo);
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Something went wrong');
+    },
+    onSettled: () => {
+      hideLoader();
     },
   });
 
@@ -129,10 +145,13 @@ export default function UploadForm() {
                 }}
               >
                 {previewUrl ? (
-                  <img
+                  <Image
                     src={previewUrl}
                     alt="Avatar preview"
+                    width={136}
+                    height={136}
                     className={styles.previewImage}
+                    unoptimized
                   />
                 ) : (
                   <div className={styles.cameraCircle}>

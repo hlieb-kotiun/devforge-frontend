@@ -54,18 +54,23 @@ export const TopCreators = () => {
 
               return (
                 <li key={creator._id} className={styles.creatorCard}>
-                  <div className={styles.imageWrapper}>
-                    <Image
-                      src={avatarUrl}
-                      alt={`${name}, Harmoniq creator`}
-                      fill
-                      sizes="(min-width: 375px) 160px, calc((100vw - 48px) / 2)"
-                      className={styles.creatorImage}
-                      unoptimized={avatarUrl === AVATAR_PLACEHOLDER}
-                    />
-                  </div>
+                  <Link
+                    href={`/authors/${creator._id}`}
+                    className={styles.creatorLink}
+                  >
+                    <div className={styles.imageWrapper}>
+                      <Image
+                        src={avatarUrl}
+                        alt={`${name}, Harmoniq creator`}
+                        fill
+                        sizes="(min-width: 375px) 160px, calc((100vw - 48px) / 2)"
+                        className={styles.creatorImage}
+                        unoptimized={avatarUrl === AVATAR_PLACEHOLDER}
+                      />
+                    </div>
 
-                  <h3 className={styles.creatorName}>{name}</h3>
+                    <h3 className={styles.creatorName}>{name}</h3>
+                  </Link>
                 </li>
               );
             })}

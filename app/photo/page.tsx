@@ -12,11 +12,20 @@ export const metadata: Metadata = {
   },
 };
 
-const UploadPhoto = () => {
+interface UploadPhotoProps {
+  searchParams: Promise<{
+    returnTo?: string | string[];
+  }>;
+}
+
+const UploadPhoto = async ({ searchParams }: UploadPhotoProps) => {
+  const { returnTo } = await searchParams;
+  const redirectTo = returnTo === "/profile" ? "/profile" : "/articles";
+
   return (
     <section className={css.page}>
       <div className={`container ${css.content}`}>
-        <UploadForm />
+        <UploadForm redirectTo={redirectTo} />
       </div>
     </section>
   );

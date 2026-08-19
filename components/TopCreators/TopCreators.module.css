@@ -81,6 +81,19 @@
   padding: 12px 0;
 }
 
+.creatorLink {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.creatorLink:focus-visible {
+  border-radius: 8px;
+  outline: 2px solid var(--green-darker);
+  outline-offset: 4px;
+}
+
 .imageWrapper {
   position: relative;
   width: min(160px, 100%);
@@ -92,6 +105,11 @@
 
 .creatorImage {
   object-fit: cover;
+  transition: opacity 200ms ease;
+}
+
+.creatorLink:hover .creatorImage {
+  opacity: 0.85;
 }
 
 .creatorName {
@@ -170,7 +188,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .allCreatorsLink,
-  .linkIcon {
+  .linkIcon,
+  .creatorImage {
     transition: none;
   }
 }
