@@ -4,7 +4,7 @@
 
 .createArticleForm {
     display: grid;
-    gap: 16px;
+    gap: 24px;
     grid-template-columns: 1fr;
     grid-template-areas: "photo" "title" "textarea" "button";
 }
@@ -50,10 +50,11 @@
 
 .createArticleTextField {
     grid-area: textarea;
+    height: 393px;
 }
 
 .createArticleLabel {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     color: var(--black);
 }
@@ -72,13 +73,13 @@
 
 .createArticleInput {
     min-height: 48px;
-    padding: 10px 16px;
+    padding: 11.5px 12px;
 }
 
 .createArticleTextarea {
-    min-height: 374px;
-    padding: 12px 10px;
-    resize: vertical;
+    min-height: 393px;
+    padding: 12px;
+    resize: none;
 }
 
 .createArticleInput:focus,
@@ -117,31 +118,32 @@
 @media (min-width: 768px) {
     .createArticleForm {
         column-gap: 24px;
-        row-gap: 16px;
+        row-gap: 24px;
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "photo title" "textarea textarea" "button button";
     }
 
     .createArticleTextarea {
-        min-height: 374px;
+        min-height: 393px;
     }
 }
 
 @media (min-width: 1440px) {
     .createArticleForm {
-        max-width: 1200px;
+        max-width: 1226px;
         column-gap: 24px;
-        row-gap: 16px;
-        grid-template-columns: minmax(0, 792px) 384px;
+        row-gap: 32px;
+        grid-template-columns: minmax(0, 809px) 391px;
         grid-template-areas: "title photo" "textarea photo" "button .";
     }
 
     .createArticlePhotoBox {
         height: auto;
-        aspect-ratio: 384 / 276;
+        aspect-ratio: 391 / 312;
+        margin-top: 32px;
     }
 
     .createArticleTextarea {
-        min-height: 384px;
+        min-height: 393px;
     }
 }
