@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { getPopularArticles } from "@/lib/api";
-import ArticlesItem from "../ArticlesItem/ArticlesItem";
+import { getPopularArticles } from "@/lib/api"; 
 import css from "./PopularArticles.module.css";
 import type { Article } from "@/types/article";
 import { useRouter } from "next/navigation";
@@ -38,7 +37,7 @@ export default function PopularArticles() {
 
         <ul className={css.popularList}>
           {Array.isArray(articles) &&
-            articles.map((article: Article) => (
+            articles.map((article: Article,) => (
               <li key={article._id}>
                 <ArticlesItem2 article={article} />
               </li>
