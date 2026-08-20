@@ -1,12 +1,12 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 5vw, 26.5px);
+  gap: 26px;
   box-sizing: border-box;
   width: 100%;
-  max-width: min(361px, 100%);
+  max-width: min(360px, 100%);
   min-width: 0;
-  padding: clamp(8px, 3vw, 12px);
+  padding: 8px;
   background: var(--light-green);
   border-radius: 32px;
   overflow: hidden;
@@ -35,13 +35,6 @@
   width: 100%;
 }
 
-.card__author,
-.card__title,
-.card__description {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
 .card__author {
   font-family: "Manrope", sans-serif;
   font-weight: 700;
@@ -52,10 +45,9 @@
 .card__title {
   font-family: "Manrope", sans-serif;
   font-weight: 700;
-  font-size: clamp(20px, 5.5vw, 24px);
+  font-size: 24px;
   color: var(--black);
   margin: 0;
-  line-height: 1.45;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -63,6 +55,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   min-height: calc(2 * 1.45 * 1em);
+  word-wrap: break-word;
 }
 
 .card__description {
@@ -71,14 +64,14 @@
   font-size: 16px;
   line-height: 1.55;
   color: var(--black);
-  margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 2; 
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-height: calc(2 * 1.45 * 1em);
+  min-height: calc(2 * 1.55 * 1em);
+  word-wrap: break-word;
 }
 
 .card__actions {
@@ -113,7 +106,7 @@
   padding: 0 12px;
   font-family: "Manrope", sans-serif;
   font-weight: 700;
-  font-size: clamp(14px, 4vw, 16px);
+  font-size: 14px;
   color: var(--green-darker);
   text-align: center;
   text-decoration: none;
