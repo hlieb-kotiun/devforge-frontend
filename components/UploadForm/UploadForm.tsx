@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
-import { CURRENT_USER_QUERY_KEY } from '@/lib/hooks/useCurrentUser';
+import { useCurrentUser, CURRENT_USER_QUERY_KEY } from '@/lib/hooks/useCurrentUser';
 import { useLoaderStore } from '@/lib/store/globalLoaderStore';
 import styles from './UploadForm.module.css';
 
@@ -58,9 +58,14 @@ export default function UploadForm({
   const router = useRouter();
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  const { data: user } = useCurrentUser();
+  
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const showLoader = useLoaderStore((state) => state.showLoader);
   const hideLoader = useLoaderStore((state) => state.hideLoader);
+
+  const displayImage = previewUrl || user?.avatar || user?.avatarUrl || null;
 
   const mutation = useMutation({
     mutationFn: uploadAvatarApi,
@@ -90,96 +95,96 @@ export default function UploadForm({
 
   return (
     <div className={styles.wrapper}>
-    <div className={styles.card}>
-      <button
-        type="button"
-        className={styles.closeButton}
-        onClick={handleClose}
-        aria-label="Close"
-      >
-        <svg className={styles.closeIcon}>
-          <use href="/sprite.svg#Controls=close, Type=stroke, Size=32px" />
-        </svg>
-      </button>
+      <div className={styles.card}>
+        <button
+          type="button"
+          className={styles.closeButton}
+          onClick={handleClose}
+          aria-label="Close"
+        >
+          <svg className={styles.closeIcon}>
+            <use href="/sprite.svg#Controls=close, Type=stroke, Size=32px" />
+          </svg>
+        </button>
 
-      <h1 className={styles.title}>Upload your photo</h1>
+        <h1 className={styles.title}>Upload your photo</h1>
 
-      <Formik<FormValues>
-        initialValues={{ file: null }}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          if (values.file) {
-            mutation.mutate(values.file);
-          }
-        }}
-      >
-        {({ setFieldValue, errors, touched, values }) => {
-          const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-            const selectedFile = e.target.files?.[0];
-            if (selectedFile) {
-              setFieldValue('file', selectedFile);
-              setPreviewUrl(URL.createObjectURL(selectedFile));
+        <Formik<FormValues>
+          initialValues={{ file: null }}
+          validationSchema={validationSchema}
+          onSubmit={(values) => {
+            if (values.file) {
+              mutation.mutate(values.file);
             }
-          };
+          }}
+        >
+          {({ setFieldValue, errors, touched, values }) => {
+            const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+              const selectedFile = e.target.files?.[0];
+              if (selectedFile) {
+                setFieldValue('file', selectedFile);
+                setPreviewUrl(URL.createObjectURL(selectedFile));
+              }
+            };
 
-          return (
-            <Form className={styles.form}>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                aria-label="Upload your profile photo"
-                className={styles.hiddenInput}
-                onChange={handleFileChange}
-              />
+            return (
+              <Form className={styles.form}>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  aria-label="Upload your profile photo"
+                  className={styles.hiddenInput}
+                  onChange={handleFileChange}
+                />
 
-              <div
-                className={`${styles.avatarContainer} ${
-                  previewUrl ? styles.avatarContainerFilled : ''
-                }`}
-                onClick={handleCircleClick}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') handleCircleClick();
-                }}
-              >
-                {previewUrl ? (
-                  <Image
-                    src={previewUrl}
-                    alt="Avatar preview"
-                    width={136}
-                    height={136}
-                    className={styles.previewImage}
-                    unoptimized
-                  />
-                ) : (
-                  <div className={styles.cameraCircle}>
-                    <svg className={styles.cameraIcon}>
-                      <use href="/sprite.svg#cameraIcon" />
-                    </svg>
-                  </div>
+                <div
+                  className={`${styles.avatarContainer} ${
+                    displayImage ? styles.avatarContainerFilled : ''
+                  }`}
+                  onClick={handleCircleClick}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') handleCircleClick();
+                  }}
+                >
+                  {displayImage ? (
+                    <Image
+                      src={displayImage}
+                      alt="Avatar preview"
+                      width={136}
+                      height={136}
+                      className={styles.previewImage}
+                      unoptimized
+                    />
+                  ) : (
+                    <div className={styles.cameraCircle}>
+                      <svg className={styles.cameraIcon}>
+                        <use href="/sprite.svg#cameraIcon" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+
+                {errors.file && touched.file && (
+                  <p className={styles.errorMessage}>{errors.file}</p>
                 )}
-              </div>
 
-              {errors.file && touched.file && (
-                <p className={styles.errorMessage}>{errors.file}</p>
-              )}
-
-              <button
-                type="submit"
-                disabled={!values.file || mutation.isPending}
-                className={`${styles.saveButton} ${
-                  values.file ? styles.saveButtonActive : ''
-                }`}
-              >
-                {mutation.isPending ? 'Saving...' : 'Save'}
-              </button>
-            </Form>
-          );
-        }}
-      </Formik>
+                <button
+                  type="submit"
+                  disabled={!values.file || mutation.isPending}
+                  className={`${styles.saveButton} ${
+                    values.file ? styles.saveButtonActive : ''
+                  }`}
+                >
+                  {mutation.isPending ? 'Saving...' : 'Save'}
+                </button>
+              </Form>
+            );
+          }}
+        </Formik>
       </div>
-      </div>
+    </div>
   );
 }
