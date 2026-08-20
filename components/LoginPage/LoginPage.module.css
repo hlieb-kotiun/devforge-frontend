@@ -1,26 +1,27 @@
-:global(.appShell > main):has(.register_section) {
+:global(.appShell > main):has(.loginSection) {
   display: flex;
 }
 
-.register_section {
+.loginSection {
   display: flex;
   flex: 1;
   justify-content: center;
   align-items: center;
   width: 100%;
   min-height: 0;
-  padding: 85px 0px;
+  padding: 85px 0;
   box-sizing: border-box;
 }
 
 @media only screen and (min-width: 768px) {
-  .register_section {
-    padding: 120px 0px;
+  .loginSection {
+    padding: 232px 0;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .register_section {
-    padding: 50px 0px;
+  .loginSection {
+    padding-top: 172px;
+    padding-bottom: 152px;
   }
 }
