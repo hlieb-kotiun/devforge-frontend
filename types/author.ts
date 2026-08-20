@@ -1,6 +1,7 @@
 export type Author = {
   _id: string;
   name: string;
+  username?: string;
   avatarUrl: string;
   articlesAmount?: number;
 };

@@ -10,7 +10,8 @@ type AuthorsItemProps = {
 };
 
 const AuthorsItem = ({ author, ref }: AuthorsItemProps) => {
-  const name = author.name?.split(" ")[0] ?? "Unknown";
+  const displayName = author.name || author.username || "Unknown";
+  const name = displayName.split(" ")[0];
   const avatarSrc = getAvatarUrl(author.avatarUrl);
 
   return (
@@ -18,7 +19,7 @@ const AuthorsItem = ({ author, ref }: AuthorsItemProps) => {
       <Link href={`/authors/${author._id}`} className={styles.link}>
         <Image
           src={avatarSrc}
-          alt={author.name ?? "Author avatar"}
+          alt={displayName}
           width={262}
           height={262}
           className={styles.avatar}
