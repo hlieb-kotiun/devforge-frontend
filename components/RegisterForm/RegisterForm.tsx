@@ -222,8 +222,19 @@ export default function RegisterForm() {
               type="submit"
               className={css.submitButton}
               disabled={isSubmitting}
+              aria-busy={isSubmitting}
             >
-              {isSubmitting ? "Creating..." : "Create account"}
+              {isSubmitting ? (
+                <>
+                  <span
+                    className={css.loadingSpinner}
+                    aria-hidden="true"
+                  />
+                  <span>Creating...</span>
+                </>
+              ) : (
+                <span>Create account</span>
+              )}
             </button>
           </Form>
 
