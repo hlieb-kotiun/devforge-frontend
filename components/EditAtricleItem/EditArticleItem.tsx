@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 import styles from "./EditArticleItem.module.css";
 import type { Article } from "@/lib/api/articles";
+import axios from "axios";
 
 interface ArticleFormValues {
   img: File | null;
@@ -42,22 +43,24 @@ async function updateArticle(values: ArticleFormValues, articleId: string) {
     formData.append("title", values.title.trim());
     formData.append("desc", values.desc.trim());
 
-    response = await fetch(`/api/articles/${articleId}`, {
-      method: "PATCH",
-      body: formData,
-      credentials: "include",
+    response = await axios.patch(`/api/articles/${articleId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      withCredentials: true,
     });
   } else {
-    response = await fetch(`/api/articles/${articleId}`, {
-      method: "PATCH",
+    response = await axios.patch(
+      `/api/articles/${articleId}`,
+      {
+        title: values.title.trim(),
+        desc: values.desc.trim(),
+      },
+    {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        title: values.title.trim(),
-        desc: values.desc.trim(),
-      }),
-      credentials: "include",
+      withCredentials: true,
     });
   }
 
