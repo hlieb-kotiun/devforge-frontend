@@ -134,7 +134,7 @@
   .menuPanel {
     right: auto;
     left: 50%;
-    width: 100vw;
+    width: min(393px, 100vw);
     transform: translateX(-50%);
   }
 }
@@ -149,12 +149,12 @@
     display: inline-flex;
   }
   .menuPanel {
-    right: 0;
-    left: 0;
-    width: auto;
+    right: auto;
+    left: 50%;
+    width: min(768px, 100vw);
     height: 295px;
     padding: 32px 32px 16px;
-    transform: none;
+    transform: translateX(-50%);
   }
   .authorizedHeader .menuPanel {
     height: 295px;
@@ -181,10 +181,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: auto;
     height: auto;
     margin-left: auto;
     padding: 0;
     background: transparent;
+    transform: none;
   }
   .menuPanel nav {
     margin-left: auto;
