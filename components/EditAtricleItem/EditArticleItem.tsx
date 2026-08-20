@@ -35,7 +35,7 @@ const validationSchema = Yup.object({
 });
 
 async function updateArticle(values: ArticleFormValues, articleId: string) {
-  let response: Response;
+  let response;
 
   if (values.img instanceof File) {
     const formData = new FormData();
@@ -64,12 +64,7 @@ async function updateArticle(values: ArticleFormValues, articleId: string) {
     });
   }
 
-  if (!response.ok) {
-    const data = await response.json();
-    throw new Error(data.message || "Unable to update article");
-  }
-
-  return response.json();
+  return response.data;
 }
 
 export default function EditArticleItem({ article }: EditArticleItemProps) {
