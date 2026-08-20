@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useAuthStore } from "@/lib/store/authStore";
+import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
-  const isAuthenticated = useAuthStore(
-    (state) => state.isAuthenticated,
-  );
+  const { data: user } = useCurrentUser();
+  const isAuthenticated = Boolean(user);
 
   return (
     <div className={styles.heroWrapper}>
