@@ -2,13 +2,6 @@
   padding: 28px 0 64px;
 }
 
-.content {
-  padding: 0 16px;
-  min-width: 320px;
-  max-width: 375px;
-  margin: 0 auto;
-}
-
 .title {
   margin-bottom: 28px;
 }
@@ -62,11 +55,6 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .content {
-    padding: 0 32px;
-    max-width: 768px;
-  }
-
   .tabs {
     gap: 38px;
   }
@@ -76,12 +64,6 @@
   .section {
     padding-top: 52px;
     padding-bottom: 94px;
-  }
-
-  .content {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0;
   }
 
   .title {
