@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       const status = error.response?.status;
       if (status === 401) {
         return NextResponse.json(
-          { message: "User is not registered" },
+          { message: "Incorrect email or password" },
           { status: error.response?.status ?? 500 },
         );
       }
