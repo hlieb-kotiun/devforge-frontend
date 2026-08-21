@@ -26,9 +26,10 @@
 
 .title {
   width: 100%;
+  margin: 0;
   height: 132px;
   margin: 0;
-
+  
   font-size: 32px;
   font-weight: 700;
   line-height: 100%;
@@ -269,38 +270,19 @@
 }
 
 /* =========================================================
-   SAVE — MOBILE
-   Figma:
-   W 361
-   H 57
-   padding 16
-   radius 64
-   body/lg/SemiBold
-   18px / 700
-   ========================================================= */
-
-/* =========================================================
-   BOOKMARK
-   Figma:
-   component design size 32
-   rendered box 24 × 24
-   ========================================================= */
-
-/* =========================================================
    TABLET — 768px
    ========================================================= */
 
 @media screen and (min-width: 768px) {
   .container {
-    width: 768px;
+    max-width: 768px;
     padding: 0 32px;
   }
 
   /* Figma: 704 × 110 */
 
   .title {
-    width: 704px;
-    height: 110px;
+    max-width: 704px;
 
     font-size: 40px;
     font-weight: 600;
@@ -310,21 +292,21 @@
   /* Figma: 704 × 358.32 */
 
   .imageWrapper {
-    width: 704px;
+    max-width: 704px;
     height: 358.32px;
 
     margin-top: 32px;
   }
 
   .content {
-    width: 704px;
+    max-width: 704px;
 
     margin-top: 32px;
     gap: 24px;
   }
 
   .articleText {
-    width: 704px;
+    max-width: 704px;
   }
 
   /* Figma:
@@ -335,34 +317,32 @@
   */
 
   .infoBlock {
-    width: 704px;
+    max-width: 704px;
 
     padding: 32px 32px 40px;
     gap: 15px;
   }
 
   .infoRow {
-    width: 640px;
-    height: 22px;
+    max-width: 640px;
   }
 
   .recommendationsTitle {
-    width: 640px;
-    height: 33px;
+    max-width: 640px;
 
     font-size: 24px;
     font-weight: 600;
   }
 
   .recommendations {
-    width: 640px;
+    max-width: 640px;
     gap: 15px;
   }
 
   /* Figma: 640 × 105 */
 
   .recommendationCard {
-    width: 640px;
+    max-width: 640px;
     min-height: 105px;
 
     padding: 16px;
@@ -390,8 +370,8 @@
 
 @media screen and (min-width: 1440px) {
   .container {
-    width: 1226px;
-    padding: 0;
+    max-width: 1440px;
+    padding: 0 108px;
   }
 
   /* Figma desktop:
@@ -401,8 +381,7 @@
   */
 
   .title {
-    width: 1225px;
-    height: 55px;
+    max-width: 1225px;
 
     font-size: 40px;
     font-weight: 700;
@@ -414,7 +393,7 @@
   */
 
   .imageWrapper {
-    width: 1226px;
+    max-width: 1226px;
     height: 624px;
 
     margin-top: 32px;
@@ -430,12 +409,12 @@
   */
 
   .content {
-    width: 1225px;
+    max-width: 1225px;
 
     margin-top: 32px;
 
     display: grid;
-    grid-template-columns: 808px 393px;
+    grid-template-columns: minmax(0, 808px) minmax(0, 393px);
     grid-template-rows: auto;
     column-gap: 24px;
     row-gap: 24px;
@@ -444,7 +423,8 @@
   }
 
   .articleText {
-    width: 808px;
+    max-width: 808px;
+    width: 100%;
 
     grid-column: 1;
     grid-row: 1;
@@ -459,35 +439,36 @@
   */
 
   .sidebar {
-    width: 393px;
+    max-width: 393px;
+    width: 100%;
 
     grid-column: 2;
     grid-row: 1;
   }
 
   .infoBlock {
-    width: 393px;
+    max-width: 393px;
 
     padding: 32px 32px 40px;
     gap: 15px;
   }
 
   .infoRow {
-    width: 329px;
+    max-width: 329px;
   }
 
   .recommendationsTitle {
-    width: 329px;
+    max-width: 329px;
   }
 
   .recommendations {
-    width: 329px;
+    max-width: 329px;
   }
 
   /* Figma desktop cards: 329 × 109 */
 
   .recommendationCard {
-    width: 329px;
+    max-width: 329px;
     min-height: 109px;
 
     padding: 16px;
@@ -502,6 +483,4 @@
     font-size: 16px;
     font-weight: 700;
   }
-
-  /* Figma desktop Save: 393 × 57 */
 }
