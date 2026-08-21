@@ -98,7 +98,7 @@ const ProfileArticles = ({ kind }: ProfileArticlesProps) => {
   }, [error]);
 
   // Фокус і скрол на першу нову картку. Через DOM, щоб не додавати проп
-  // у спільний ArticleCard.
+  // у спільний ArticlesItem2.
   useEffect(() => {
     const prevCount = prevCountRef.current;
     prevCountRef.current = items.length;

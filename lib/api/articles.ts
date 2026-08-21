@@ -56,9 +56,13 @@ export async function getArticles(
   return response.json();
 }
 export async function getUserById(
-  owner: ArticleOwner,
-): Promise<User> {
-  const id = typeof owner === "string" ? owner : owner._id;
+  owner: ArticleOwner | undefined,
+): Promise<User | null> {
+  const id = typeof owner === "string" ? owner : owner?._id;
+
+  if (!id) {
+    return null;
+  }
 
   const response = await fetch(
     `${API_URL}/users/${id}`,
@@ -68,7 +72,8 @@ export async function getUserById(
   );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch user");
+    console.error(`Failed to fetch user ${id}: ${response.status}`);
+    return null;
   }
 
   return response.json();

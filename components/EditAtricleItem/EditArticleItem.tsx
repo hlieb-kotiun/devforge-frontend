@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 import styles from "./EditArticleItem.module.css";
 import type { Article } from "@/lib/api/articles";
+import { getArticleImageSrc } from "@/lib/utils/article";
 import axios from "axios";
 
 interface ArticleFormValues {
@@ -71,11 +72,9 @@ export default function EditArticleItem({ article }: EditArticleItemProps) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const initialImageUrl = article.img?.startsWith("http")
-    ? article.img
-    : `${process.env.NEXT_PUBLIC_API_URL ?? ""}${article.img}`;
-
-  const [previewUrl, setPreviewUrl] = useState<string | null>(initialImageUrl || null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(
+    getArticleImageSrc(article.img),
+  );
 
   const initialValues: ArticleFormValues = {
     img: null,

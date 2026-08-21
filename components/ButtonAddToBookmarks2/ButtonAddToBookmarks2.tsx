@@ -27,7 +27,7 @@ const ButtonAddToBookmarks2 = ({
   } = useToggleSavedArticle(article._id, active);
 
   const ownerId =
-    typeof article.ownerId === "string" ? article.ownerId : article.ownerId._id;
+    typeof article.ownerId === "string" ? article.ownerId : article.ownerId?._id;
 
   const isOwner =
     isAuthenticated && Boolean(currentUser?._id && currentUser._id === ownerId);

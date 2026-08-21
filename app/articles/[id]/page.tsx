@@ -9,6 +9,7 @@ import {
   getUserById,
   type Article,
 } from "@/lib/api/articles";
+import { getArticleImageSrc } from "@/lib/utils/article";
 
 import styles from "./ArticlePage.module.css";
 
@@ -39,8 +40,8 @@ function getRandomArticles(
   return result;
 }
 
-function getAuthorName(user: { name?: string; username?: string }) {
-  return user.name || user.username || "Unknown author";
+function getAuthorName(user: { name?: string; username?: string } | null) {
+  return user?.name || user?.username || "Unknown author";
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
@@ -63,11 +64,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     ...recommendedArticles.map((item) => getUserById(item.ownerId)),
   ]);
 
-  const articleContent = article.article?.trim() || article.desc;
+  const articleContent = article.article?.trim() || article.desc || "";
   const paragraphs = articleContent
     .split(/\s*\/n\s*|\r?\n/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
+
+  const imageSrc = getArticleImageSrc(article.img);
 
   return (
     <main className={styles.page}>
@@ -75,15 +78,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <h1 className={styles.title}>{article.title}</h1>
 
         <div className={styles.imageWrapper}>
-          <Image
-            src={article.img}
-            alt={article.title}
-            fill
-            sizes="(min-width: 1440px) 1226px, (min-width: 768px) 704px, 361px"
-            priority
-            unoptimized
-            className={styles.image}
-          />
+          {imageSrc && (
+            <Image
+              src={imageSrc}
+              alt={article.title}
+              fill
+              sizes="(min-width: 1440px) 1226px, (min-width: 768px) 704px, 361px"
+              priority
+              unoptimized
+              className={styles.image}
+            />
+          )}
         </div>
 
         <div className={styles.content}>

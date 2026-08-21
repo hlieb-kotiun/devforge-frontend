@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Article } from "@/types/article";
-import { getAuthorName } from "@/lib/utils/article";
+import { getArticleImageSrc, getAuthorName } from "@/lib/utils/article";
 import css from "./ArticlesItem2.module.css";
 import ButtonAddToBookmarks2 from "../ButtonAddToBookmarks2/ButtonAddToBookmarks2";
 
@@ -14,21 +14,21 @@ const ArticlesItem2 = ({ article, bookmarkActive }: ArticlesItem2Props) => {
   const authorName =
     getAuthorName(article, "Author").trim().split(" ")[0] || "Author";
 
-  const imageSrc = article.img.startsWith("http")
-    ? article.img
-    : `${process.env.NEXT_PUBLIC_API_URL ?? ""}${article.img}`;
+  const imageSrc = getArticleImageSrc(article.img);
 
   return (
     <div className={css.card}>
       <div className={css.card__imageWrapper}>
-        <Image
-          src={imageSrc}
-          alt={article.title}
-          fill
-          sizes="(max-width: 375px) 100vw, 361px"
-          unoptimized
-          className={css.card__image}
-        />
+        {imageSrc && (
+          <Image
+            src={imageSrc}
+            alt={article.title}
+            fill
+            sizes="(max-width: 375px) 100vw, 361px"
+            unoptimized
+            className={css.card__image}
+          />
+        )}
       </div>
 
       <div className={css.card__content}>
